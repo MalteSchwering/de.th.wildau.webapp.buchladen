@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./layout.xhtml">
+
+    <ui:define name="content">
+        <h2>Anmeldung</h2>
+        <form method="post" action="j_security_check">
+            E-Mail: <input type="text" name="j_username"></input>
+            Passwort: <input type="password" name="j_password"></input>
+            <input type="submit" value="Anmelden"></input>
+            <input type="reset" value="Zurücksetzen"></input>
+        </form>
+    </ui:define>
+
+</ui:composition>

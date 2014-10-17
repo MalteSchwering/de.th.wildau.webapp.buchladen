@@ -24,15 +24,17 @@
                 <ui:insert name="left">
                     <ul>
                         <li><h:link value="Startseite" outcome="index"></h:link></li>
-                        <li><h:link value="Benutzerprofil" outcome="index"></h:link></li>
+                        <li><h:link value="Benutzerprofil" outcome="userprofil"></h:link></li>
                         <ul>
                             <li><h:link value="bisherige Bestellungen" outcome="index"></h:link></li>
                             <li><h:link value="Adressdaten" outcome="index"></h:link></li>
                             <li><h:link value="Zahlungsdaten" outcome="index"></h:link></li>
                         </ul>
                         <li><h:link value="Warenkorb" outcome="index"></h:link></li>
-                        <li><h:link value="Anmelden" outcome="index"></h:link></li>
+                        <li><h:link value="Anmelden" outcome="login"></h:link></li>
+                        <li><h:form><h:commandLink action="#{logoutManagedBean.logout()}" value="Abmelden"></h:commandLink></h:form></li>
                         <li><h:link value="Registrieren" outcome="index"></h:link></li>
+                        <li><h:link value="Admin" outcome="admin"></h:link></li>
                     </ul>
                 </ui:insert>
             </div>
@@ -42,8 +44,7 @@
         </div>
         <div id="bottom">
             <ui:insert name="bottom">
-                <hr></hr>
-                <i>Made by Malte Schwering &amp; Jan Gabler</i>
+                &nbsp;
             </ui:insert>
         </div>
 
