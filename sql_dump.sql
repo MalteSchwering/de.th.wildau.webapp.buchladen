@@ -1,0 +1,146 @@
+-- ##################################################
+-- CREATE DATABASE
+-- ##################################################
+create schema bookstore;
+
+-- ##################################################
+-- CREATE TABLES
+-- ##################################################
+create table registered_user
+(
+  email_address varchar(255) not null constraint pk_registered_user primary key,
+  password varchar(255),
+  first_name varchar(255),
+  last_name varchar(255),
+  street varchar(255),
+  house_number varchar(10),
+  zip_code varchar(5),
+  city varchar(255)
+);
+create table user_group
+(
+  id int not null generated always as identity constraint pk_user_group primary key,
+  fk_registered_user_email varchar(255) constraint fk_user_group_to_registered_user references registered_user on delete cascade on update restrict,
+  group_name varchar(255)
+);
+create table user_role
+(
+  id int not null generated always as identity constraint pk_user_role primary key,
+  fk_registered_user_email varchar(255) constraint fk_user_role_to_registered_user references registered_user on delete cascade on update restrict,
+  role_name varchar(255)
+);
+create table payment_transfer
+(
+  id int not null generated always as identity constraint pk_payment_transfer primary key,
+  fk_registered_user_email varchar(255) constraint fk_payment_transfer_to_registered_user references registered_user on delete cascade on update restrict,
+  iban varchar(22),
+  bic varchar(11),
+  account_holder varchar(255)
+);
+create table payment_credit_card
+(
+  id int not null generated always as identity constraint pk_payment_credit_card primary key,
+  fk_registered_user_email varchar(255) constraint fk_payment_credit_card_to_registered_user references registered_user on delete cascade on update restrict,
+  credit_card_number varchar(16),
+  card_validation_code varchar(3),
+  card_holder varchar(255),
+  expiration_month int,
+  expiration_year int
+);
+create table publisher
+(
+  id int not null generated always as identity constraint pk_publisher primary key,
+  publisher_name varchar(255)
+);
+create table author
+(
+  id int not null generated always as identity constraint pk_author primary key,
+  first_name varchar(255),
+  last_name varchar(255)
+);
+create table book
+(
+  isbn_13 varchar(13) not null constraint pk_book primary key,
+  fk_publisher_id int constraint fk_book_to_publisher references publisher on delete cascade on update restrict,
+  fk_author_id int constraint fk_book_to_author references author on delete cascade on update restrict,
+  title varchar(255),
+  edition int,
+  number_of_pages int,
+  price double,
+  quantity int
+);
+create table comment
+(
+  id int not null generated always as identity constraint pk__comment primary key,
+  fk_book_isbn_13 varchar(13) constraint fk_comment_to_book references book on delete cascade on update restrict,
+  fk_registered_user_email varchar(255) constraint fk_comment_to_registered_user references registered_user on delete cascade on update restrict,
+  comment_text varchar(250)
+);
+create table book_order
+(
+  id int not null generated always as identity constraint pk_order primary key,
+  fk_registered_user_email varchar(255) constraint fk_order_to_registered_user references registered_user on delete cascade on update restrict,
+  fk_payment_credit_card int constraint fk_order_to_payment_credit_card references payment_credit_card on delete cascade on update restrict,
+  fk_payment_transfer int constraint fk_order_to_payment_transfer references payment_transfer on delete cascade on update restrict
+);
+create table book_order_detail
+(
+  id int not null generated always as identity constraint pk_book_order_detail primary key,
+  fk_book_order_id int constraint fk_book_order_detail_to_book_order references book_order on delete cascade on update restrict,
+  fk_book_isbn_13 varchar(13) constraint fk_book_order_detail_to_book references book on delete cascade on update restrict
+);
+
+-- ##################################################
+-- INSERT (DUMMY) DATA INTO TABLES
+-- ##################################################
+insert into registered_user values
+('max.mustermann@beispiel.de', '000', 'Max', 'Mustermann', 'Abc Str.', '1', '12345', 'Berlin'),
+('jan.gabler@beispiel.de', '000', 'Jan', 'Gabler', 'Def Str.', '2', '12345', 'Berlin'),
+('malte.schwering@beispiel.de', '000', 'Malte', 'Schwering', 'Ghi Str.', '3', '12345', 'Berlin');
+insert into user_group (fk_registered_user_email, group_name) values
+('max.mustermann@beispiel.de', 'Abt1'),
+('jan.gabler@beispiel.de', 'Abt2'),
+('malte.schwering@beispiel.de', 'Abt3');
+insert into user_role (fk_registered_user_email, role_name) values
+('max.mustermann@beispiel.de', 'user'),
+('jan.gabler@beispiel.de', 'admin'),
+('malte.schwering@beispiel.de', 'admin');
+insert into payment_transfer (fk_registered_user_email, iban, bic, account_holder) values
+('max.mustermann@beispiel.de', 'DE11111111111111111111', '11111111111', 'Max Mustermann'),
+('jan.gabler@beispiel.de', 'DE22222222222222222222', '22222222222', 'Jan Gabler'),
+('malte.schwering@beispiel.de', 'DE33333333333333333333', '33333333333', 'Malte Schwering');
+insert into payment_credit_card (fk_registered_user_email, credit_card_number, card_validation_code, card_holder, expiration_month, expiration_year) values
+('max.mustermann@beispiel.de', '1111111111111111', '111', 'Max Mustermann', 1, 2021),
+('jan.gabler@beispiel.de', '2222222222222222', '222', 'Jan Gabler', 2, 2022),
+('malte.schwering@beispiel.de', '3333333333333333', '333', 'Malte Schwering', 3, 2023);
+insert into publisher (publisher_name) values
+('Verlag A'),
+('Verlag B'),
+('Verlag C');
+insert into author (first_name, last_name) values
+('A.', 'Müller'),
+('B.', 'Meier'),
+('C.', 'Schulze');
+insert into book values
+();
+insert into comment (fk_book_isbn_13, fk_registered_user_email, comment_text) values
+();
+insert into book_order (fk_registered_user_email, fk_payment_credit_card, fk_payment_transfer) values
+();
+insert into book_order_detail (fk_book_order_id, fk_book_isbn_13) values
+();
+
+-- ##################################################
+-- DROP TABLES
+-- ##################################################
+drop table book_order_detail;
+drop table book_order;
+drop table comment;
+drop table book;
+drop table author;
+drop table publisher;
+drop table payment_credit_card;
+drop table payment_transfer;
+drop table user_role;
+drop table user_group;
+drop table registered_user;
