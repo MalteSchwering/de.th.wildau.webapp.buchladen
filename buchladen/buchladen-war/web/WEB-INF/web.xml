@@ -58,8 +58,8 @@
         <auth-method>FORM</auth-method>
         <realm-name>bookstore-realm</realm-name>
         <form-login-config>
-            <form-login-page>/public/login.xhtml</form-login-page>
-            <form-error-page>/public/error.xhtml</form-error-page>
+            <form-login-page>/faces/public/login.xhtml</form-login-page>
+            <form-error-page>/faces/public/error.xhtml</form-error-page>
         </form-login-config>
     </login-config>
     <security-role>
