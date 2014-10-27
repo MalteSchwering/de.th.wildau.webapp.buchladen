@@ -19,18 +19,18 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
+        <welcome-file>faces/public/index.xhtml</welcome-file>
     </welcome-file-list>
     <error-page>
         <error-code>403</error-code>
-        <location>/403.xhtml</location>
+        <location>/public/403.xhtml</location>
     </error-page>
     <security-constraint>
         <display-name>Constraint1</display-name>
         <web-resource-collection>
-            <web-resource-name>userprofil</web-resource-name>
+            <web-resource-name>user</web-resource-name>
             <description/>
-            <url-pattern>/faces/userprofil.xhtml</url-pattern>
+            <url-pattern>/faces/authorized/user/*</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
         </web-resource-collection>
@@ -45,7 +45,7 @@
         <web-resource-collection>
             <web-resource-name>admin</web-resource-name>
             <description/>
-            <url-pattern>/faces/admin.xhtml</url-pattern>
+            <url-pattern>/faces/authorized/admin/*</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
         </web-resource-collection>
@@ -56,10 +56,10 @@
     </security-constraint>
     <login-config>
         <auth-method>FORM</auth-method>
-        <realm-name>jdbc-realm</realm-name>
+        <realm-name>bookstore-realm</realm-name>
         <form-login-config>
-            <form-login-page>/faces/login.xhtml</form-login-page>
-            <form-error-page>/faces/error.xhtml</form-error-page>
+            <form-login-page>/public/login.xhtml</form-login-page>
+            <form-error-page>/public/error.xhtml</form-error-page>
         </form-login-config>
     </login-config>
     <security-role>
