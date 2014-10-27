@@ -29,3 +29,4 @@ nb-configuration.xml
 /buchladen/nbproject/project.properties
 /buchladen/buchladen-ejb/nbproject/project.properties
 /buchladen/buchladen-war/nbproject/project.properties
+/buchladen-ejb-remote-interface/nbproject/private/
