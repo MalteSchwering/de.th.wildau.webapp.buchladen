@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="buchladen-ejb-remote-interfacePU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>de.th.wildau.webapp.buchladen.entities.PublisherEntity</class>
+    <class>de.th.wildau.webapp.buchladen.entities.UserGroupEntity</class>
+    <class>de.th.wildau.webapp.buchladen.entities.BookingOrderEntity</class>
+    <class>de.th.wildau.webapp.buchladen.entities.AuthorEntity</class>
+    <class>de.th.wildau.webapp.buchladen.entities.BookingOrderDetailEntity</class>
+    <class>de.th.wildau.webapp.buchladen.entities.PaymentTransferEntity</class>
+    <class>de.th.wildau.webapp.buchladen.entities.CommentEntity</class>
+    <class>de.th.wildau.webapp.buchladen.entities.PaymentCreditCardEntity</class>
+    <class>de.th.wildau.webapp.buchladen.entities.RegisteredUserGroupMappingEntity</class>
+    <class>de.th.wildau.webapp.buchladen.entities.RegisteredUserEntity</class>
+    <class>de.th.wildau.webapp.buchladen.entities.BookEntity</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:derby://194.95.44.172:1527/bookstore"/>
+      <property name="javax.persistence.jdbc.password" value="miguben1%421337"/>
+      <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
+      <property name="javax.persistence.jdbc.user" value="nbuser"/>
+    </properties>
+  </persistence-unit>
+</persistence>
