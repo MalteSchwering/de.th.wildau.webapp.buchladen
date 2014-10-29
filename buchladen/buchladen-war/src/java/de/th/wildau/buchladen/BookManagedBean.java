@@ -9,7 +9,10 @@ import de.th.wildau.webapp.buchladen.entities.BookEntity;
 import de.th.wildau.webapp.buchladen.facades.BookEntityFacadeRemote;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -28,6 +31,17 @@ public class BookManagedBean implements Serializable {
     
     public List<BookEntity> getBookEntities() {
         return bookEntityFacade.findAll();
+    }
+    
+    public BookEntity getBookEntity() {
+        return bookEntityFacade.find(this.getId());
+    }
+    
+    public int getId() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        ExternalContext extContext = context.getExternalContext();
+        Map<String, String> params = extContext.getRequestParameterMap();
+        return Integer.parseInt(params.get("id"));
     }
     
 }

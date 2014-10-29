@@ -35,7 +35,9 @@
             <h:column>
                 <f:facet name="header">&nbsp;</f:facet>
                 <h:form>
-                    <h:commandButton value="Details"></h:commandButton>
+                    <h:link outcome="detail" value="Details">
+                        <f:param name="id" value="#{book.id}"></f:param>
+                    </h:link>
                 </h:form>
             </h:column>
             <h:column>
