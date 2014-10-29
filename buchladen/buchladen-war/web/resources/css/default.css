@@ -27,3 +27,11 @@ a:link:hover, a:visited:hover  {
   font-weight : bold;
   text-decoration : underline;
 }
+
+form {
+    margin: 0;
+}
+
+th, td {
+    padding: 5px 10px;
+}
