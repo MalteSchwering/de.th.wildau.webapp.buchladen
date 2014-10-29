@@ -66,6 +66,8 @@ create table book
   fk_author_id int constraint fk_book_to_author references author on delete cascade on update restrict,
   title varchar(255),
   edition int,
+  year_of_release int,
+  language varchar(255),
   number_of_pages int,
   price double,
   quantity int
@@ -130,10 +132,10 @@ insert into author (first_name, last_name) values
 ('A.', 'Müller'),
 ('B.', 'Meier'),
 ('C.', 'Schulze');
-insert into book (isbn_13, fk_publisher_id, fk_author_id, title, edition, number_of_pages, price, quantity) values
-('1111111111111', 1, 1, 'Buchtitel A', 1, 111, 11.00, 111),
-('2222222222222', 2, 2, 'Buchtitel B', 2, 222, 22.00, 222),
-('3333333333333', 3, 3, 'Buchtitel C', 3, 333, 33.00, 333);
+insert into book (isbn_13, fk_publisher_id, fk_author_id, title, edition, year_of_release, language, number_of_pages, price, quantity) values
+('1111111111111', 1, 1, 'Buchtitel A', 1, 2001, 'Deutsch', 111, 11.00, 111),
+('2222222222222', 2, 2, 'Buchtitel B', 2, 2002, 'Englisch', 222, 22.00, 222),
+('3333333333333', 3, 3, 'Buchtitel C', 3, 2003, 'Französisch', 333, 33.00, 333);
 insert into comment (fk_book_id, fk_registered_user_id, comment_text) values
 (1, 1, 'Kommentar A'),
 (2, 2, 'Kommentar B'),
