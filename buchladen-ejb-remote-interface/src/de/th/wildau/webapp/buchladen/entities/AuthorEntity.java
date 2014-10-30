@@ -17,6 +17,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -39,8 +40,10 @@ public class AuthorEntity implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
+    @Size(max = 255)
     @Column(name = "FIRST_NAME")
     private String firstName;
+    @Size(max = 255)
     @Column(name = "LAST_NAME")
     private String lastName;
     @OneToMany(mappedBy = "fkAuthorId")

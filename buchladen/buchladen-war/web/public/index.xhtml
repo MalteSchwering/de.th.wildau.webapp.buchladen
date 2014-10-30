@@ -27,6 +27,10 @@
                 <h:outputText value="#{book.fkPublisherId.publisherName}"></h:outputText>
             </h:column>
             <h:column>
+                <f:facet name="header">Sprache</f:facet>
+                <h:outputText value="#{book.language}"></h:outputText>
+            </h:column>
+            <h:column>
                 <f:facet name="header">Preis</f:facet>
                 <h:outputText value="#{book.price}">
                     <f:convertNumber type="currency" currencySymbol="€" locale="de-DE"></f:convertNumber>

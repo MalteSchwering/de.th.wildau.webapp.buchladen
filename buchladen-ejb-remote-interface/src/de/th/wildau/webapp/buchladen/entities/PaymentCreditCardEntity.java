@@ -19,6 +19,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -44,10 +45,13 @@ public class PaymentCreditCardEntity implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
+    @Size(max = 16)
     @Column(name = "CREDIT_CARD_NUMBER")
     private String creditCardNumber;
+    @Size(max = 3)
     @Column(name = "CARD_VALIDATION_CODE")
     private String cardValidationCode;
+    @Size(max = 255)
     @Column(name = "CARD_HOLDER")
     private String cardHolder;
     @Column(name = "EXPIRATION_MONTH")

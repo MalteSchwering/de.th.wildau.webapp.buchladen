@@ -19,6 +19,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -35,6 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "BookEntity.findByIsbn13", query = "SELECT b FROM BookEntity b WHERE b.isbn13 = :isbn13"),
     @NamedQuery(name = "BookEntity.findByTitle", query = "SELECT b FROM BookEntity b WHERE b.title = :title"),
     @NamedQuery(name = "BookEntity.findByEdition", query = "SELECT b FROM BookEntity b WHERE b.edition = :edition"),
+    @NamedQuery(name = "BookEntity.findByYearOfRelease", query = "SELECT b FROM BookEntity b WHERE b.yearOfRelease = :yearOfRelease"),
+    @NamedQuery(name = "BookEntity.findByLanguage", query = "SELECT b FROM BookEntity b WHERE b.language = :language"),
     @NamedQuery(name = "BookEntity.findByNumberOfPages", query = "SELECT b FROM BookEntity b WHERE b.numberOfPages = :numberOfPages"),
     @NamedQuery(name = "BookEntity.findByPrice", query = "SELECT b FROM BookEntity b WHERE b.price = :price"),
     @NamedQuery(name = "BookEntity.findByQuantity", query = "SELECT b FROM BookEntity b WHERE b.quantity = :quantity")})
@@ -45,12 +48,19 @@ public class BookEntity implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
+    @Size(max = 13)
     @Column(name = "ISBN_13")
     private String isbn13;
+    @Size(max = 255)
     @Column(name = "TITLE")
     private String title;
     @Column(name = "EDITION")
     private Integer edition;
+    @Column(name = "YEAR_OF_RELEASE")
+    private Integer yearOfRelease;
+    @Size(max = 255)
+    @Column(name = "LANGUAGE")
+    private String language;
     @Column(name = "NUMBER_OF_PAGES")
     private Integer numberOfPages;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -106,6 +116,22 @@ public class BookEntity implements Serializable {
 
     public void setEdition(Integer edition) {
         this.edition = edition;
+    }
+
+    public Integer getYearOfRelease() {
+        return yearOfRelease;
+    }
+
+    public void setYearOfRelease(Integer yearOfRelease) {
+        this.yearOfRelease = yearOfRelease;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
 
     public Integer getNumberOfPages() {
