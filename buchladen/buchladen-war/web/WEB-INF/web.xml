@@ -26,7 +26,37 @@
         <location>/public/403.xhtml</location>
     </error-page>
     <security-constraint>
-        <display-name>Constraint1</display-name>
+        <display-name>restriction</display-name>
+        <web-resource-collection>
+            <web-resource-name>all</web-resource-name>
+            <description/>
+            <url-pattern>/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>public</display-name>
+        <web-resource-collection>
+            <web-resource-name>webpages</web-resource-name>
+            <description/>
+            <url-pattern>/faces/public/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>stylesheets</web-resource-name>
+            <description/>
+            <url-pattern>/faces/javax.faces.resource/css/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+    </security-constraint>
+    <security-constraint>
+        <display-name>user</display-name>
         <web-resource-collection>
             <web-resource-name>user</web-resource-name>
             <description/>
@@ -41,7 +71,7 @@
         </auth-constraint>
     </security-constraint>
     <security-constraint>
-        <display-name>Constraint2</display-name>
+        <display-name>admin</display-name>
         <web-resource-collection>
             <web-resource-name>admin</web-resource-name>
             <description/>

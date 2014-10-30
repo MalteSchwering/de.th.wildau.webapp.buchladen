@@ -27,6 +27,10 @@
                 <h:outputText value="#{book.fkPublisherId.publisherName}"></h:outputText>
             </h:column>
             <h:column>
+                <f:facet name="header">Sprache</f:facet>
+                <h:outputText value="#{book.language}"></h:outputText>
+            </h:column>
+            <h:column>
                 <f:facet name="header">Preis</f:facet>
                 <h:outputText value="#{book.price}">
                     <f:convertNumber type="currency" currencySymbol="€" locale="de-DE"></f:convertNumber>
@@ -35,7 +39,9 @@
             <h:column>
                 <f:facet name="header">&nbsp;</f:facet>
                 <h:form>
-                    <h:commandButton value="Details"></h:commandButton>
+                    <h:link outcome="detail" value="Details">
+                        <f:param name="id" value="#{book.id}"></f:param>
+                    </h:link>
                 </h:form>
             </h:column>
             <h:column>
