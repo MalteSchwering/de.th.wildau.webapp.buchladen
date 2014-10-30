@@ -8,6 +8,11 @@
             <web-module-libraries>
                 <library dirs="100">
                     <file>${reference.buchladen-ejb.dist}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${reference.buchladen-ejb-remote-interface.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>
             <web-module-additional-libraries/>
@@ -26,6 +31,14 @@
                 <target>dist</target>
                 <clean-target>clean</clean-target>
                 <id>dist</id>
+            </reference>
+            <reference>
+                <foreign-project>buchladen-ejb-remote-interface</foreign-project>
+                <artifact-type>jar</artifact-type>
+                <script>build.xml</script>
+                <target>jar</target>
+                <clean-target>clean</clean-target>
+                <id>jar</id>
             </reference>
         </references>
     </configuration>
