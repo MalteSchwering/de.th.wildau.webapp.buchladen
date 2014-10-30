@@ -5,6 +5,8 @@
  */
 package de.th.wildau.webapp.buchladen.sessions;
 
+import de.th.wildau.webapp.buchladen.entities.BookEntity;
+import java.util.List;
 import javax.ejb.Remote;
 
 /**
@@ -14,4 +16,11 @@ import javax.ejb.Remote;
 @Remote
 public interface CartSessionBeanRemote {
     
+    void addBook(int id);
+    
+    void removeBook(int id);
+    
+    List<BookEntity> getContent();
+    
+    int count();
 }
