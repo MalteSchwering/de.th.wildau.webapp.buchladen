@@ -47,7 +47,8 @@
             <h:column>
                 <f:facet name="header">&nbsp;</f:facet>
                 <h:form>
-                    <h:commandButton value="In den Warenkorb"></h:commandButton>
+                    <h:commandButton action="#{cartManagedBean.addBook(book.id)}" value="In den Warenkorb">
+                    </h:commandButton>
                 </h:form>
             </h:column>
         </h:dataTable>
