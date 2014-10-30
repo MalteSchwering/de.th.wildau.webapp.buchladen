@@ -23,10 +23,5 @@ nb-configuration.xml
 /buchladen/nbproject/private/
 /buchladen/buchladen-war/nbproject/private/
 /buchladen/buchladen-ejb/nbproject/private/
-
-### Mac Configuration for Netbeans ###
-
-/buchladen/nbproject/project.properties
-/buchladen/buchladen-ejb/nbproject/project.properties
-/buchladen/buchladen-war/nbproject/project.properties
 /buchladen-ejb-remote-interface/nbproject/private/
+/buchladen/buchladen-war/nbproject/faces-config.NavData
