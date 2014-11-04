@@ -8,11 +8,13 @@
 
     <ui:define name="content">
         <h2>Registrierung</h2>
+        <h:messages class="errorMsg"></h:messages>
         <h:form>
             <h:panelGrid columns="4">
                 <h:outputLabel value="E-Mail Adresse*: " for="email_address"></h:outputLabel>
                 <h:inputText id="email_address" value="#{registeredUserManagedBean.emailAddress}">
                     <f:validateRequired></f:validateRequired>
+                    <f:validator validatorId="EmailAddressValidator"></f:validator>
                 </h:inputText>
                 <h:outputLabel value="Passwort*: " for="password"></h:outputLabel>
                 <h:inputSecret id="password" value="#{registeredUserManagedBean.password}">

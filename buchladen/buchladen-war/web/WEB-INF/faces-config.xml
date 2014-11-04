@@ -49,4 +49,10 @@
         <managed-bean-class>de.th.wildau.buchladen.RegisteredUserManagedBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    <validator>
+	<description></description>
+	<display-name>EmailAddressValidator</display-name>
+	<validator-id>EmailAddressValidator</validator-id>
+	<validator-class>de.th.wildau.webapp.buchladen.validator.EmailAddressValidator</validator-class>
+    </validator>
 </faces-config>
