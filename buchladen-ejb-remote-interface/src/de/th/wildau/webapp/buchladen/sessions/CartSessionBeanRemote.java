@@ -23,4 +23,6 @@ public interface CartSessionBeanRemote {
     List<BookEntity> getContent();
     
     int count();
+    
+    double getTotal();
 }

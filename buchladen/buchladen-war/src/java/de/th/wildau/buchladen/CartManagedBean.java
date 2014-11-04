@@ -9,19 +9,12 @@ import de.th.wildau.webapp.buchladen.entities.BookEntity;
 import de.th.wildau.webapp.buchladen.sessions.CartSessionBeanRemote;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 
 /**
  *
  * @author Jan
  */
-//@ManagedBean
-//@SessionScoped
 public class CartManagedBean implements Serializable {
     @EJB
     private CartSessionBeanRemote cartSessionBean;
@@ -46,5 +39,9 @@ public class CartManagedBean implements Serializable {
     
     public int count() {
         return this.cartSessionBean.count();
+    }
+    
+    public double getTotal() {
+        return this.cartSessionBean.getTotal();
     }
 }

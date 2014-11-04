@@ -23,6 +23,12 @@
                 <i><h:outputText value=" von #{cartItem.fkAuthorId.firstName} #{cartItem.fkAuthorId.lastName}"></h:outputText></i>
             </h:column>
             <h:column>
+                <f:facet name="header">Preis</f:facet>
+                <h:outputText value="#{cartItem.price}">
+                    <f:convertNumber type="currency" currencySymbol="€" locale="de-DE"></f:convertNumber>
+                </h:outputText>
+            </h:column>
+            <h:column>
                 <f:facet name="header">&nbsp;</f:facet>
                 <h:form>
                     <h:commandButton action="#{cartManagedBean.removeBook(cartItem.id)}" value="löschen">
@@ -30,6 +36,14 @@
                 </h:form>
             </h:column>
         </h:dataTable>
+        <c:if test="#{cartManagedBean.count() > 0}">
+            <p>
+                <h:outputText value="Gesamtbetrag: "></h:outputText>
+                <h:outputText value="#{cartManagedBean.total}">
+                    <f:convertNumber type="currency" currencySymbol="€" locale="de-DE"></f:convertNumber>
+                </h:outputText>
+            </p>
+        </c:if>
     </ui:define>
 
 </ui:composition>

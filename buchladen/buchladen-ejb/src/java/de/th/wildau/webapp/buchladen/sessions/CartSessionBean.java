@@ -56,5 +56,15 @@ public class CartSessionBean implements CartSessionBeanRemote {
     public int count() {
         return this.cart.size();
     }
+
+    @Override
+    public double getTotal() {
+        Iterator<BookEntity> iteratorBookEntity = this.cart.iterator();
+        double total = 0.0;
+        while(iteratorBookEntity.hasNext()) {
+            total += iteratorBookEntity.next().getPrice();
+        }
+        return total;
+    }
     
 }
