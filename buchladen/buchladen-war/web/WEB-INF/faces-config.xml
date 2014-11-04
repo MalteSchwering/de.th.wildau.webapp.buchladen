@@ -44,4 +44,9 @@
         <managed-bean-class>de.th.wildau.buchladen.CartManagedBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>registeredUserManagedBean</managed-bean-name>
+        <managed-bean-class>de.th.wildau.buchladen.RegisteredUserManagedBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 </faces-config>

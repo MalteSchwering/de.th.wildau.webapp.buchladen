@@ -28,6 +28,8 @@ public interface UserGroupEntityFacadeRemote {
 
     List<UserGroupEntity> findRange(int[] range);
 
+    UserGroupEntity findByGroupName(String groupName);
+
     int count();
     
 }

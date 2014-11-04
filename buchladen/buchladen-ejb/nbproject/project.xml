@@ -6,6 +6,7 @@
             <name>buchladen-ejb</name>
             <minimum-ant-version>1.6.5</minimum-ant-version>
             <included-library dirs="200">reference.buchladen-ejb-remote-interface.jar</included-library>
+            <included-library dirs="200">file.reference.commons-codec-1.9.jar</included-library>
             <source-roots>
                 <root id="src.dir"/>
             </source-roots>
