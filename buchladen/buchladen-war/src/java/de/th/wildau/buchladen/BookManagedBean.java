@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.th.wildau.buchladen;
 
 import de.th.wildau.webapp.buchladen.entities.BookEntity;
@@ -14,34 +9,39 @@ import javax.ejb.EJB;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
-/**
- *
- * @author Jan
- */
 public class BookManagedBean implements Serializable {
-    @EJB
-    private BookEntityFacadeRemote bookEntityFacade;
-    
 
     /**
-     * Creates a new instance of BookManagedBean
+     * Enterprise Java Bean bookEntityFacade mit einem Remote Interface.
      */
-    public BookManagedBean() {
-    }
-    
+    @EJB
+    private BookEntityFacadeRemote bookEntityFacade;
+
+    /**
+     * Liefert eine Liste aller Bücher Entitäten zurück.
+     * @return Liste vom Typ BookEntity
+     */
     public List<BookEntity> getBookEntities() {
         return bookEntityFacade.findAll();
     }
-    
+
+    /**
+     * Liefert eine Bücker Entität zurück, die über eine ID gesucht wird.
+     * @return BookEntity
+     */
     public BookEntity getBookEntity() {
         return bookEntityFacade.find(this.getId());
     }
-    
+
+    /**
+     * Liefert den Parameter 'id' des GET-Request zurück.
+     * @return GET-Request Parameter 'id'
+     */
     public int getId() {
         FacesContext context = FacesContext.getCurrentInstance();
         ExternalContext extContext = context.getExternalContext();
         Map<String, String> params = extContext.getRequestParameterMap();
         return Integer.parseInt(params.get("id"));
     }
-    
+
 }

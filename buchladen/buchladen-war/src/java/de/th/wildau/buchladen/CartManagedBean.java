@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.th.wildau.buchladen;
 
 import de.th.wildau.webapp.buchladen.entities.BookEntity;
@@ -11,36 +6,50 @@ import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 
-/**
- *
- * @author Jan
- */
 public class CartManagedBean implements Serializable {
+    
+    /**
+     * Enterprise Java Bean cartSessionBean mit einem Remote Interface.
+     */
     @EJB
     private CartSessionBeanRemote cartSessionBean;
     
     /**
-     * Creates a new instance of CartManagedBean
+     * Fügt ein Buch zum Warenkorb hinzu.
+     * @param id ID des Buchs
      */
-    public CartManagedBean() {
-    }
-    
     public void addBook(int id) {
         this.cartSessionBean.addBook(id);
     }
     
+    /**
+     * Löscht ein Buch aus dem Warenkorb.
+     * @param id ID des Buchs
+     */
     public void removeBook(int id) {
         this.cartSessionBean.removeBook(id);
     }
     
+    /**
+     * Liefert den Inhalt des Warenkorbs zurück in Form einer Liste.
+     * @return Liste vom Typ BookEntity
+     */
     public List<BookEntity> getContent() {
         return this.cartSessionBean.getContent();
     }
     
+    /**
+     * Liefert die Anzahl von Büchern die im Warenkorb enthalten sind zurück.
+     * @return Anzahl der Bücher im Warenkorb
+     */
     public int count() {
         return this.cartSessionBean.count();
     }
     
+    /**
+     * Liefert die Summe aller Bücher zurück, die im Warenkorb enthalten sind.
+     * @return Summe des Warenkorbs
+     */
     public double getTotal() {
         return this.cartSessionBean.getTotal();
     }
