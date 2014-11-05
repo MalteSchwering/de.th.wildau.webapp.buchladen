@@ -25,3 +25,6 @@ nb-configuration.xml
 /buchladen/buchladen-ejb/nbproject/private/
 /buchladen-ejb-remote-interface/nbproject/private/
 /buchladen/buchladen-war/nbproject/faces-config.NavData
+
+!/commons-codec-1.9/commons-codec-1.9.jar
+!/commons-validator-1.4.0/commons-validator-1.4.0.jar

@@ -1,38 +1,56 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.th.wildau.buchladen;
 
-import java.util.Map;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
+import de.th.wildau.webapp.buchladen.entities.BookEntity;
+import de.th.wildau.webapp.buchladen.sessions.CartSessionBeanRemote;
+import java.io.Serializable;
+import java.util.List;
+import javax.ejb.EJB;
 
-/**
- *
- * @author Jan
- */
-@ManagedBean
-@SessionScoped
-public class CartManagedBean {
+public class CartManagedBean implements Serializable {
     
     /**
-     * Creates a new instance of CartManagedBean
+     * Enterprise Java Bean cartSessionBean mit einem Remote Interface.
      */
-    public CartManagedBean() {
+    @EJB
+    private CartSessionBeanRemote cartSessionBean;
+    
+    /**
+     * Fügt ein Buch zum Warenkorb hinzu.
+     * @param id ID des Buchs
+     */
+    public void addBook(int id) {
+        this.cartSessionBean.addBook(id);
     }
     
-    public void add() {
-        //...
+    /**
+     * Löscht ein Buch aus dem Warenkorb.
+     * @param id ID des Buchs
+     */
+    public void removeBook(int id) {
+        this.cartSessionBean.removeBook(id);
     }
     
-    public int getId() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        ExternalContext extContext = context.getExternalContext();
-        Map<String, String> params = extContext.getRequestParameterMap();
-        return Integer.parseInt(params.get("id"));
+    /**
+     * Liefert den Inhalt des Warenkorbs zurück in Form einer Liste.
+     * @return Liste vom Typ BookEntity
+     */
+    public List<BookEntity> getContent() {
+        return this.cartSessionBean.getContent();
+    }
+    
+    /**
+     * Liefert die Anzahl von Büchern die im Warenkorb enthalten sind zurück.
+     * @return Anzahl der Bücher im Warenkorb
+     */
+    public int count() {
+        return this.cartSessionBean.count();
+    }
+    
+    /**
+     * Liefert die Summe aller Bücher zurück, die im Warenkorb enthalten sind.
+     * @return Summe des Warenkorbs
+     */
+    public double getTotal() {
+        return this.cartSessionBean.getTotal();
     }
 }

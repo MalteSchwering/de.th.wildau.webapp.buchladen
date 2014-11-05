@@ -27,6 +27,8 @@ public interface RegisteredUserEntityFacadeRemote {
     List<RegisteredUserEntity> findAll();
 
     List<RegisteredUserEntity> findRange(int[] range);
+    
+    RegisteredUserEntity findByEmailAddress(String emailAddress);
 
     int count();
     

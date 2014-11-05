@@ -41,6 +41,12 @@
                 </h:outputText>
             </h:panelGroup>
         </h:panelGrid>
+        <p>
+            <h:form>
+                <h:commandButton action="#{cartManagedBean.addBook(bookManagedBean.bookEntity.id)}" value="In den Warenkorb">
+                </h:commandButton>
+            </h:form>
+        </p>
         <p><h:link outcome="index">&larr; zur&uuml;ck zur Buchübersicht</h:link></p>
     </ui:define>
 

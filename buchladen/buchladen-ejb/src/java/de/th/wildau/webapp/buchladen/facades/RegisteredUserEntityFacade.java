@@ -6,9 +6,12 @@
 package de.th.wildau.webapp.buchladen.facades;
 
 import de.th.wildau.webapp.buchladen.entities.RegisteredUserEntity;
+import de.th.wildau.webapp.buchladen.entities.UserGroupEntity;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -26,6 +29,16 @@ public class RegisteredUserEntityFacade extends AbstractFacade<RegisteredUserEnt
 
     public RegisteredUserEntityFacade() {
         super(RegisteredUserEntity.class);
+    }
+
+    @Override
+    public RegisteredUserEntity findByEmailAddress(String emailAddress) {
+        try {
+            Query query = em.createNamedQuery("RegisteredUserEntity.findByEmailAddress");
+            return (RegisteredUserEntity) query.setParameter("emailAddress", emailAddress).getSingleResult();
+        } catch(NoResultException e) {
+            return null;
+        }
     }
     
 }

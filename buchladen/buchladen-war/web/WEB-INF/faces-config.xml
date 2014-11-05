@@ -22,6 +22,7 @@
             <to-view-id>/public/login.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
+            <from-action>#{logoutManagedBean.logout()}</from-action>
             <from-outcome>logout</from-outcome>
             <to-view-id>/public/logout.xhtml</to-view-id>
         </navigation-case>
@@ -35,6 +36,11 @@
         </navigation-case>
     </navigation-rule>
     <managed-bean>
+        <managed-bean-name>logoutManagedBean</managed-bean-name>
+        <managed-bean-class>de.th.wildau.buchladen.LogoutManagedBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
         <managed-bean-name>bookManagedBean</managed-bean-name>
         <managed-bean-class>de.th.wildau.buchladen.BookManagedBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
@@ -44,4 +50,15 @@
         <managed-bean-class>de.th.wildau.buchladen.CartManagedBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>registeredUserManagedBean</managed-bean-name>
+        <managed-bean-class>de.th.wildau.buchladen.RegisteredUserManagedBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <validator>
+	<description></description>
+	<display-name>EmailAddressValidator</display-name>
+	<validator-id>EmailAddressValidator</validator-id>
+	<validator-class>de.th.wildau.webapp.buchladen.validator.EmailAddressValidator</validator-class>
+    </validator>
 </faces-config>
