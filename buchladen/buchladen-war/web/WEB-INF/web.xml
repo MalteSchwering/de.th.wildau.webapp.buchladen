@@ -54,6 +54,13 @@
             <http-method>GET</http-method>
             <http-method>POST</http-method>
         </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>jsf-javascript</web-resource-name>
+            <description/>
+            <url-pattern>/faces/javax.faces.resource/jsf.js</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
     </security-constraint>
     <security-constraint>
         <display-name>user</display-name>
