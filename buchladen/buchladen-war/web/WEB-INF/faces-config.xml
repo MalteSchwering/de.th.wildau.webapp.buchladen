@@ -22,6 +22,7 @@
             <to-view-id>/public/login.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
+            <from-action>#{logoutManagedBean.logout()}</from-action>
             <from-outcome>logout</from-outcome>
             <to-view-id>/public/logout.xhtml</to-view-id>
         </navigation-case>
@@ -34,6 +35,11 @@
             <to-view-id>/authorized/admin/admin.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    <managed-bean>
+        <managed-bean-name>logoutManagedBean</managed-bean-name>
+        <managed-bean-class>de.th.wildau.buchladen.LogoutManagedBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
     <managed-bean>
         <managed-bean-name>bookManagedBean</managed-bean-name>
         <managed-bean-class>de.th.wildau.buchladen.BookManagedBean</managed-bean-class>
