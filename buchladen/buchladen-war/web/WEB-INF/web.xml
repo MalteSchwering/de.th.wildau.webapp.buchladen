@@ -15,12 +15,12 @@
         <load-on-startup>0</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/faces/*</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>jcaptcha</servlet-name>
         <url-pattern>/jcaptcha</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -28,7 +28,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/public/index.xhtml</welcome-file>
+        <welcome-file>public/index.xhtml</welcome-file>
     </welcome-file-list>
     <error-page>
         <error-code>403</error-code>
@@ -52,21 +52,14 @@
         <web-resource-collection>
             <web-resource-name>webpages</web-resource-name>
             <description/>
-            <url-pattern>/faces/public/*</url-pattern>
+            <url-pattern>/public/*</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
         </web-resource-collection>
         <web-resource-collection>
-            <web-resource-name>stylesheets</web-resource-name>
+            <web-resource-name>resources</web-resource-name>
             <description/>
-            <url-pattern>/faces/javax.faces.resource/css/*</url-pattern>
-            <http-method>GET</http-method>
-            <http-method>POST</http-method>
-        </web-resource-collection>
-        <web-resource-collection>
-            <web-resource-name>jsf-javascript</web-resource-name>
-            <description/>
-            <url-pattern>/faces/javax.faces.resource/jsf.js</url-pattern>
+            <url-pattern>/javax.faces.resource/*</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
         </web-resource-collection>
@@ -83,7 +76,7 @@
         <web-resource-collection>
             <web-resource-name>user</web-resource-name>
             <description/>
-            <url-pattern>/faces/authorized/user/*</url-pattern>
+            <url-pattern>/authorized/user/*</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
         </web-resource-collection>
@@ -98,7 +91,7 @@
         <web-resource-collection>
             <web-resource-name>admin</web-resource-name>
             <description/>
-            <url-pattern>/faces/authorized/admin/*</url-pattern>
+            <url-pattern>/authorized/admin/*</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
         </web-resource-collection>
@@ -111,8 +104,8 @@
         <auth-method>FORM</auth-method>
         <realm-name>bookstore-realm</realm-name>
         <form-login-config>
-            <form-login-page>/faces/public/login.xhtml</form-login-page>
-            <form-error-page>/faces/public/error.xhtml</form-error-page>
+            <form-login-page>/public/login.xhtml</form-login-page>
+            <form-error-page>/public/error.xhtml</form-error-page>
         </form-login-config>
     </login-config>
     <security-role>
