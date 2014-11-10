@@ -37,7 +37,9 @@
                 <h:message for="last_name" errorClass="errorMsg"></h:message>
                 
                 <h:outputLabel value="Straße: " for="street"></h:outputLabel>
-                <h:inputText id="street" value="#{registeredUserManagedBean.street}"></h:inputText>
+                <h:inputText id="street" value="#{registeredUserManagedBean.street}">
+                    <f:validator validatorId="NameValidator"></f:validator>
+                </h:inputText>
                 <h:message for="street" errorClass="errorMsg"></h:message>
                 
                 <h:outputLabel value="Hausnummer: " for="house_number"></h:outputLabel>
@@ -49,7 +51,9 @@
                 <h:message for="zip_code" errorClass="errorMsg"></h:message>
                 
                 <h:outputLabel value="Stadt: " for="city"></h:outputLabel>
-                <h:inputText id="city" value="#{registeredUserManagedBean.city}"></h:inputText>
+                <h:inputText id="city" value="#{registeredUserManagedBean.city}">
+                    <f:validator validatorId="NameValidator"></f:validator>
+                </h:inputText>
                 <h:message for="city" errorClass="errorMsg"></h:message>
                 
                 <h:outputText value="&nbsp;"></h:outputText>
