@@ -33,6 +33,15 @@
                 <h:outputLabel value="Stadt: " for="city"></h:outputLabel>
                 <h:inputText id="city" value="#{registeredUserManagedBean.city}"></h:inputText>
             </h:panelGrid>
+            <p>
+                <img src="/buchladen-war/jcaptcha"></img>
+                <br></br>
+                <h:outputLabel value="Captcha*: "></h:outputLabel>
+                <h:inputText id="j_captcha_response" value="#{registeredUserManagedBean.captcha}">
+                    <f:validateRequired></f:validateRequired>
+                    <f:validator validatorId="JCaptchaValidator"></f:validator>
+                </h:inputText>
+            </p>
             <p><h:outputText value="* = erforderlich"></h:outputText></p>
             <p><h:commandButton value="Jetzt registrieren" action="#{registeredUserManagedBean.registerUser()}"></h:commandButton></p>
         </h:form>

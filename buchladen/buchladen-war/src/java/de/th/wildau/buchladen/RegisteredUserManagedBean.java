@@ -69,6 +69,11 @@ public class RegisteredUserManagedBean implements Serializable {
     private String city;
     
     /**
+     * Captcha das der Benutzer identifiziert hat.
+     */
+    private String captcha;
+    
+    /**
      * Der Benutzer mit der Benutzergruppe 'User' wird angelegt.
      */
     public void registerUser() {
@@ -214,6 +219,14 @@ public class RegisteredUserManagedBean implements Serializable {
      */
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getCaptcha() {
+        return captcha;
+    }
+
+    public void setCaptcha(String captcha) {
+        this.captcha = captcha;
     }
     
 }

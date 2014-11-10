@@ -61,4 +61,10 @@
 	<validator-id>EmailAddressValidator</validator-id>
 	<validator-class>de.th.wildau.webapp.buchladen.validator.EmailAddressValidator</validator-class>
     </validator>
+    <validator>
+        <description></description>
+        <display-name>JCaptchaValidator</display-name>
+        <validator-id>JCaptchaValidator</validator-id>
+        <validator-class>de.th.wildau.webapp.buchladen.validator.JCaptchaValidator</validator-class>
+    </validator>
 </faces-config>

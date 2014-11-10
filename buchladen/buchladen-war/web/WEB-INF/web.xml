@@ -9,9 +9,18 @@
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>jcaptcha</servlet-name>
+        <servlet-class>de.th.wildau.buchladen.servlets.ImageCaptchaServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>jcaptcha</servlet-name>
+        <url-pattern>/jcaptcha</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -58,6 +67,13 @@
             <web-resource-name>jsf-javascript</web-resource-name>
             <description/>
             <url-pattern>/faces/javax.faces.resource/jsf.js</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>jcaptcha</web-resource-name>
+            <description/>
+            <url-pattern>/jcaptcha</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
         </web-resource-collection>
