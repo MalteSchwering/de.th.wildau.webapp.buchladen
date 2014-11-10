@@ -54,7 +54,12 @@ public class CartSessionBean implements CartSessionBeanRemote {
 
     @Override
     public int count() {
-        return this.cart.size();
+        if(this.cart.isEmpty()) {
+            return 0;
+        }
+        else {
+            return this.cart.size();
+        }
     }
 
     @Override
