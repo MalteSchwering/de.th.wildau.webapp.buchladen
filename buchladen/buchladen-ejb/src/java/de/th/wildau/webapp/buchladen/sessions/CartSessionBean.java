@@ -22,7 +22,7 @@ public class CartSessionBean implements CartSessionBeanRemote {
     @EJB
     private BookEntityFacadeRemote bookEntityFacade;
 
-    private List<BookEntity> cart;
+    private List<BookEntity> cart = new ArrayList<>();
 
     public CartSessionBean() {
         this.cart = new ArrayList<>();
