@@ -221,10 +221,18 @@ public class RegisteredUserManagedBean implements Serializable {
         this.city = city;
     }
 
+    /**
+     * Liefert das Captcha zurück.
+     * @return Captcha des Benutzers
+     */
     public String getCaptcha() {
         return captcha;
     }
 
+    /**
+     * Setzt das Captcha.
+     * @param captcha Captcha des Benutzers
+     */
     public void setCaptcha(String captcha) {
         this.captcha = captcha;
     }
