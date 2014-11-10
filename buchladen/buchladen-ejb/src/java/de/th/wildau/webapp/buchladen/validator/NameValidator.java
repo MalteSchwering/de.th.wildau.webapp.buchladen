@@ -12,6 +12,7 @@ public class NameValidator implements Validator {
     
     private int maxLength = 255;
     private static final String NAME_REGEX = "[\\w\\s-]{0,255}";
+    private String message = "";
     private Pattern pattern;
     private Matcher matcher;
 
@@ -23,13 +24,13 @@ public class NameValidator implements Validator {
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         matcher = pattern.matcher(value.toString());
         if(!matcher.matches()) {
-            FacesMessage facesMessage = new FacesMessage(component.getClientId() 
-                    + ": Überprüfungsfehler: Wert beinhaltet ungültige Zeichen, es sind nur Groß-/Kleinbuchstaben, Bindestriche und Leerzeichen erlaubt");
-            throw new ValidatorException(facesMessage);
+            message += "Wert beinhaltet ungültige Zeichen, es sind nur Groß-/Kleinbuchstaben, Bindestriche und Leerzeichen erlaubt";
         }
         if(value.toString().length() > maxLength) {
-            FacesMessage facesMessage = new FacesMessage(component.getClientId() 
-                    + ": Überprüfungsfehler: Wert ist zu lang");
+            message += ", Wert ist zu lang";
+        }
+        if(!message.isEmpty()) {
+            FacesMessage facesMessage = new FacesMessage(component.getClientId() + ": Überprüfungsfehler: " + message);
             throw new ValidatorException(facesMessage);
         }
     }

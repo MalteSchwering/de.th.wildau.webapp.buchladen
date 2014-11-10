@@ -67,4 +67,10 @@
         <validator-id>JCaptchaValidator</validator-id>
         <validator-class>de.th.wildau.webapp.buchladen.validator.JCaptchaValidator</validator-class>
     </validator>
+    <validator>
+        <description></description>
+        <display-name>NameValidator</display-name>
+        <validator-id>NameValidator</validator-id>
+        <validator-class>de.th.wildau.webapp.buchladen.validator.NameValidator</validator-class>
+    </validator>
 </faces-config>
