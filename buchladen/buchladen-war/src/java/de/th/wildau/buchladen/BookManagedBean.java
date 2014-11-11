@@ -26,7 +26,7 @@ public class BookManagedBean implements Serializable {
     }
 
     /**
-     * Liefert eine Bücker Entität zurück, die über eine ID gesucht wird.
+     * Liefert eine Bücher Entität zurück, die über eine ID gesucht wird.
      * @return BookEntity
      */
     public BookEntity getBookEntity() {
