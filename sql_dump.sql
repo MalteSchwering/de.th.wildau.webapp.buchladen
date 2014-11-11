@@ -145,7 +145,7 @@ insert into booking_order (fk_registered_user_id, fk_payment_credit_card, fk_pay
 (1, 1, null),
 (2, 2, null),
 (3, 3, null);
-insert into booking_order_detail (fk_book_order_id, fk_book_id) values
+insert into booking_order_detail (fk_book_order_id, fk_book_id, quantity) values
 (1, 1, 1),
 (2, 2, 2),
 (3, 3, 3);
