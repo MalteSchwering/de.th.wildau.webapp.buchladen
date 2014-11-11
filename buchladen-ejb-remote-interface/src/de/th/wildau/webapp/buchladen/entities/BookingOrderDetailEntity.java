@@ -36,6 +36,8 @@ public class BookingOrderDetailEntity implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
+    @Column(name = "QUANTITY")
+    private int quantity;
     @JoinColumn(name = "FK_BOOK_ORDER_ID", referencedColumnName = "ID")
     @ManyToOne
     private BookingOrderEntity fkBookOrderId;
@@ -72,6 +74,14 @@ public class BookingOrderDetailEntity implements Serializable {
 
     public void setFkBookId(BookEntity fkBookId) {
         this.fkBookId = fkBookId;
+    }
+    
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     @Override

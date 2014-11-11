@@ -18,21 +18,27 @@
                      rendered="#{cartManagedBean.count() > 0}"
                      border="1" cellpadding="0" cellspacing="0">
             <h:column>
+                <f:facet name="header">Anzahl</f:facet>
+                <h:form>
+                    <h:inputText value="#{cartItem.quantity}"></h:inputText>
+                    <h:commandButton action="#{cartManagedBean.setQuantity(cartItem.fkBookId.id, 1)}" value="&#8635;" alt="aktualisieren" title="aktualisieren"></h:commandButton>
+                </h:form>
+            </h:column>
+            <h:column>
                 <f:facet name="header">Artikel</f:facet>
-                <h:outputText value="#{cartItem.title}"></h:outputText>
-                <i><h:outputText value=" von #{cartItem.fkAuthorId.firstName} #{cartItem.fkAuthorId.lastName}"></h:outputText></i>
+                <h:outputText value="#{cartItem.fkBookId.title}"></h:outputText>
+                <i><h:outputText value=" von #{cartItem.fkBookId.fkAuthorId.firstName} #{cartItem.fkBookId.fkAuthorId.lastName}"></h:outputText></i>
             </h:column>
             <h:column>
                 <f:facet name="header">Preis</f:facet>
-                <h:outputText value="#{cartItem.price}">
+                <h:outputText value="#{cartItem.fkBookId.price}">
                     <f:convertNumber type="currency" currencySymbol="€" locale="de-DE"></f:convertNumber>
                 </h:outputText>
             </h:column>
             <h:column>
                 <f:facet name="header">&nbsp;</f:facet>
                 <h:form>
-                    <h:commandButton action="#{cartManagedBean.removeBook(cartItem.id)}" value="löschen">
-                    </h:commandButton>
+                    <h:commandButton action="#{cartManagedBean.removeBook(cartItem.fkBookId.id)}" value="&#10005;" alt="löschen" title="löschen"></h:commandButton>
                 </h:form>
             </h:column>
         </h:dataTable>

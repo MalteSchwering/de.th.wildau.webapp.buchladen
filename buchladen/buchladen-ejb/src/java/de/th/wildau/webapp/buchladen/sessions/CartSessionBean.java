@@ -6,7 +6,9 @@
 package de.th.wildau.webapp.buchladen.sessions;
 
 import de.th.wildau.webapp.buchladen.entities.BookEntity;
+import de.th.wildau.webapp.buchladen.entities.BookingOrderDetailEntity;
 import de.th.wildau.webapp.buchladen.facades.BookEntityFacadeRemote;
+import de.th.wildau.webapp.buchladen.facades.BookingOrderDetailEntityFacadeRemote;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -19,36 +21,69 @@ import javax.ejb.Stateful;
  */
 @Stateful
 public class CartSessionBean implements CartSessionBeanRemote {
+
     @EJB
     private BookEntityFacadeRemote bookEntityFacade;
 
-    private List<BookEntity> cart = new ArrayList<>();
+    @EJB
+    private BookingOrderDetailEntityFacadeRemote bookingOrderDetailEntityFacade;
+
+    private List<BookingOrderDetailEntity> cart;
 
     public CartSessionBean() {
         this.cart = new ArrayList<>();
     }
-
+    
+    private boolean isBookInTheCart(BookEntity bookEntity) {
+        Iterator<BookingOrderDetailEntity> iteratorBookingOrderDetailEntity = this.cart.iterator();
+        while(iteratorBookingOrderDetailEntity.hasNext()) {
+            if(iteratorBookingOrderDetailEntity.next().getFkBookId().equals(bookEntity)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     @Override
     public void addBook(int id) {
         BookEntity bookEntity = this.bookEntityFacade.find(id);
         if(bookEntity != null) {
-            this.cart.add(bookEntity);
-        }
-    }
-
-    @Override
-    public void removeBook(int id) {
-        Iterator<BookEntity> iteratorBookEntity = this.cart.iterator();
-        while(iteratorBookEntity.hasNext()) {
-            if(id == iteratorBookEntity.next().getId()) {
-                iteratorBookEntity.remove();
-                break;
+            Iterator<BookingOrderDetailEntity> iteratorBookingOrderDetailEntity = this.cart.iterator();
+            if(this.isBookInTheCart(bookEntity)) {
+                while(iteratorBookingOrderDetailEntity.hasNext()) {
+                    BookingOrderDetailEntity next = iteratorBookingOrderDetailEntity.next();
+                    if(next.getFkBookId().equals(bookEntity)) {
+                        next.setQuantity(next.getQuantity() + 1);
+                    }
+                }
+            }
+            else {
+                BookingOrderDetailEntity bookOrderDetailEntity = new BookingOrderDetailEntity();
+                bookOrderDetailEntity.setFkBookId(bookEntity);
+                bookOrderDetailEntity.setQuantity(1);
+                this.cart.add(bookOrderDetailEntity);
             }
         }
     }
 
     @Override
-    public List<BookEntity> getContent() {
+    public void removeBook(int id) {
+        BookEntity bookEntity = this.bookEntityFacade.find(id);
+        if(bookEntity != null) {
+            Iterator<BookingOrderDetailEntity> iteratorBookingOrderDetailEntity = this.cart.iterator();
+            if(this.isBookInTheCart(bookEntity)) {
+                while(iteratorBookingOrderDetailEntity.hasNext()) {
+                    BookingOrderDetailEntity next = iteratorBookingOrderDetailEntity.next();
+                    if(next.getFkBookId().equals(bookEntity)) {
+                        iteratorBookingOrderDetailEntity.remove();
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public List<BookingOrderDetailEntity> getContent() {
         return this.cart;
     }
 
@@ -58,18 +93,45 @@ public class CartSessionBean implements CartSessionBeanRemote {
             return 0;
         }
         else {
-            return this.cart.size();
+            int total = 0;
+            Iterator<BookingOrderDetailEntity> iteratorBookingOrderDetailEntity = this.cart.iterator();
+            while(iteratorBookingOrderDetailEntity.hasNext()) {
+                total += iteratorBookingOrderDetailEntity.next().getQuantity();
+            }
+            return total;
         }
     }
 
     @Override
     public double getTotal() {
-        Iterator<BookEntity> iteratorBookEntity = this.cart.iterator();
+        Iterator<BookingOrderDetailEntity> iteratorBookingOrderDetailEntity = this.cart.iterator();
         double total = 0.0;
-        while(iteratorBookEntity.hasNext()) {
-            total += iteratorBookEntity.next().getPrice();
+        while(iteratorBookingOrderDetailEntity.hasNext()) {
+            BookingOrderDetailEntity next = iteratorBookingOrderDetailEntity.next();
+            total += next.getFkBookId().getPrice() * next.getQuantity();
         }
         return total;
     }
-    
+
+    @Override
+    public void setQuantity(int id, int quantity) {
+        if(quantity < 1) {
+            this.removeBook(id);
+        }
+        else {
+            BookEntity bookEntity = this.bookEntityFacade.find(id);
+            if(bookEntity != null) {
+                Iterator<BookingOrderDetailEntity> iteratorBookingOrderDetailEntity = this.cart.iterator();
+                if(this.isBookInTheCart(bookEntity)) {
+                    while(iteratorBookingOrderDetailEntity.hasNext()) {
+                        BookingOrderDetailEntity next = iteratorBookingOrderDetailEntity.next();
+                        if(next.getFkBookId().equals(bookEntity)) {
+                            next.setQuantity(quantity);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 }

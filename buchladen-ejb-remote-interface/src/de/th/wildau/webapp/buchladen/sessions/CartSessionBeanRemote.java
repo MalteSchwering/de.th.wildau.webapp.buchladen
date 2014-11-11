@@ -5,7 +5,7 @@
  */
 package de.th.wildau.webapp.buchladen.sessions;
 
-import de.th.wildau.webapp.buchladen.entities.BookEntity;
+import de.th.wildau.webapp.buchladen.entities.BookingOrderDetailEntity;
 import java.util.List;
 import javax.ejb.Remote;
 
@@ -20,9 +20,11 @@ public interface CartSessionBeanRemote {
     
     void removeBook(int id);
     
-    List<BookEntity> getContent();
+    List<BookingOrderDetailEntity> getContent();
     
     int count();
     
     double getTotal();
+    
+    void setQuantity(int id, int quantity);
 }

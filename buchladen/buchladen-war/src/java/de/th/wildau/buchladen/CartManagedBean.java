@@ -1,6 +1,6 @@
 package de.th.wildau.buchladen;
 
-import de.th.wildau.webapp.buchladen.entities.BookEntity;
+import de.th.wildau.webapp.buchladen.entities.BookingOrderDetailEntity;
 import de.th.wildau.webapp.buchladen.sessions.CartSessionBeanRemote;
 import java.io.Serializable;
 import java.util.List;
@@ -13,10 +13,10 @@ public class CartManagedBean implements Serializable {
      */
     @EJB
     private CartSessionBeanRemote cartSessionBean;
-    
+        
     /**
      * Fügt ein Buch zum Warenkorb hinzu.
-     * @param id ID des Buchs
+     * @param id ID des Buches
      */
     public void addBook(int id) {
         this.cartSessionBean.addBook(id);
@@ -24,7 +24,7 @@ public class CartManagedBean implements Serializable {
     
     /**
      * Löscht ein Buch aus dem Warenkorb.
-     * @param id ID des Buchs
+     * @param id ID des Buches
      */
     public void removeBook(int id) {
         this.cartSessionBean.removeBook(id);
@@ -34,7 +34,7 @@ public class CartManagedBean implements Serializable {
      * Liefert den Inhalt des Warenkorbs zurück in Form einer Liste.
      * @return Liste vom Typ BookEntity
      */
-    public List<BookEntity> getContent() {
+    public List<BookingOrderDetailEntity> getContent() {
         return this.cartSessionBean.getContent();
     }
     
@@ -52,5 +52,14 @@ public class CartManagedBean implements Serializable {
      */
     public double getTotal() {
         return this.cartSessionBean.getTotal();
+    }
+    
+    /**
+     * Setzt die Anzahl von Büchern die im Warenkorb enthalten sind.
+     * @param id ID des Buches
+     * @param quantity Anzahl der Bücher
+     */
+    public void setQuantity(int id, int quantity) {
+        this.cartSessionBean.setQuantity(id, quantity);
     }
 }
