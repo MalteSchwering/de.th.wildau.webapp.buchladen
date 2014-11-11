@@ -46,6 +46,10 @@
         <auth-constraint>
             <description/>
         </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
     </security-constraint>
     <security-constraint>
         <display-name>public</display-name>
@@ -70,6 +74,10 @@
             <http-method>GET</http-method>
             <http-method>POST</http-method>
         </web-resource-collection>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
     </security-constraint>
     <security-constraint>
         <display-name>user</display-name>
@@ -85,6 +93,10 @@
             <role-name>user</role-name>
             <role-name>admin</role-name>
         </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
     </security-constraint>
     <security-constraint>
         <display-name>admin</display-name>
@@ -99,6 +111,10 @@
             <description/>
             <role-name>admin</role-name>
         </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
     </security-constraint>
     <login-config>
         <auth-method>FORM</auth-method>
