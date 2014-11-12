@@ -32,3 +32,6 @@ nb-configuration.xml
 !/commons-collections-3.2.1/commons-collections-3.2.1.jar
 !/commons-logging-1.2/commons-logging-1.2.jar
 !/jcaptcha-1.0-bin/jcaptcha-1.0-all.jar
+
+!/jcaptcha-1.0-bin/extensions/*.jar
+!/jcaptcha-1.0-bin/integrations/*.jar
