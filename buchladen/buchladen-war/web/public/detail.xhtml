@@ -40,6 +40,10 @@
                     <f:convertNumber type="currency" currencySymbol="€" locale="de-DE"></f:convertNumber>
                 </h:outputText>
             </h:panelGroup>
+            <h:panelGroup>
+                <b><h:outputText value="Lagerbestand: "></h:outputText></b>
+                <h:outputText value="#{bookManagedBean.bookEntity.quantity}"></h:outputText>
+            </h:panelGroup>
         </h:panelGrid>
         <p>
             <h:form>
