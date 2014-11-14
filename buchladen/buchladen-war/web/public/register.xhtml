@@ -57,8 +57,10 @@
                 <h:message for="city" errorClass="errorMsg"></h:message>
                 
                 <h:outputText value="&nbsp;"></h:outputText>
-                <img src="/buchladen-war/jcaptcha"></img>
-                <h:outputText value="&nbsp;"></h:outputText>
+                <h:graphicImage value="/jcaptcha" id="captchaImage"></h:graphicImage>
+                <h:commandButton value="&#8635;" alt="Captcha erneuern" title="Captcha erneuern">
+                    <f:ajax execute="captchaImage" render="captchaImage"></f:ajax>
+                </h:commandButton>
                 <h:outputLabel value="Captcha*: "></h:outputLabel>
                 <h:inputText id="j_captcha_response" value="#{registeredUserManagedBean.captcha}" validatorMessage="Bitte &uuml;berpr&uuml;fen Sie ihre Eingabe">
                     <f:validateRequired></f:validateRequired>
