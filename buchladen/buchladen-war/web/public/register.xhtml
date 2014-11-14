@@ -12,14 +12,14 @@
             <h:panelGrid columns="3">
                 
                 <h:outputLabel value="E-Mail Adresse*: " for="email_address"></h:outputLabel>
-                <h:inputText id="email_address" value="#{registeredUserManagedBean.emailAddress}">
+                <h:inputText id="email_address" value="#{registeredUserManagedBean.emailAddress}" validatorMessage="Bitte &uuml;berpr&uuml;fen Sie ihre E-Mail-Adresse">
                     <f:validateRequired></f:validateRequired>
                     <f:validator validatorId="EmailAddressValidator"></f:validator>
                 </h:inputText>
                 <h:message for="email_address" errorClass="errorMsg"></h:message>
                 
                 <h:outputLabel value="Passwort*: " for="password"></h:outputLabel>
-                <h:inputSecret id="password" value="#{registeredUserManagedBean.password}">
+                <h:inputSecret id="password" value="#{registeredUserManagedBean.password}" validatorMessage="Bitte w&auml;hlen Sie ein Passwort (Mindestens 8 Zeichen + Sonderzeichen + Zahl)">
                     <f:validateRequired></f:validateRequired>
                 </h:inputSecret>
                 <h:message for="password" errorClass="errorMsg"></h:message>
@@ -60,7 +60,7 @@
                 <img src="/buchladen-war/jcaptcha"></img>
                 <h:outputText value="&nbsp;"></h:outputText>
                 <h:outputLabel value="Captcha*: "></h:outputLabel>
-                <h:inputText id="j_captcha_response" value="#{registeredUserManagedBean.captcha}">
+                <h:inputText id="j_captcha_response" value="#{registeredUserManagedBean.captcha}" validatorMessage="Bitte &uuml;berpr&uuml;fen Sie ihre Eingabe">
                     <f:validateRequired></f:validateRequired>
                     <f:validator validatorId="JCaptchaValidator"></f:validator>
                 </h:inputText>
