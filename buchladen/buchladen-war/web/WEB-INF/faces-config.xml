@@ -77,4 +77,10 @@
         <validator-id>NameValidator</validator-id>
         <validator-class>de.th.wildau.webapp.buchladen.validator.NameValidator</validator-class>
     </validator>
+    <validator>
+        <description></description>
+        <display-name>InventoryValidator</display-name>
+        <validator-id>InventoryValidator</validator-id>
+        <validator-class>de.th.wildau.webapp.buchladen.validator.InventoryValidator</validator-class>
+    </validator>
 </faces-config>
