@@ -3,10 +3,11 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="./../layout.xhtml"
-                xmlns:h="http://xmlns.jcp.org/jsf/html">>
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <ui:define name="content">
-        <h2>Für diese Seite haben Sie keinen Zugriff!</h2>
+        <h2>Interner Server Fehler</h2>
+        <h:outputText>#{requestScope['javax.servlet.error.message']}</h:outputText>
         <h:link value="Zurück zur Startseite" outcome="index"></h:link>
     </ui:define>
 
