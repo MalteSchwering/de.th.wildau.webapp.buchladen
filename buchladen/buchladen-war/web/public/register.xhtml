@@ -43,13 +43,15 @@
                 <h:message for="street" errorClass="errorMsg"></h:message>
                 
                 <h:outputLabel value="Hausnummer: " for="house_number"></h:outputLabel>
-                <h:inputText id="house_number" value="#{registeredUserManagedBean.houseNumber}" validatorMessage="Bitte überprüfen Sie ihre Eingabe. (z.B. 123a)">
+                <h:inputText id="house_number" value="#{registeredUserManagedBean.houseNumber}" validatorMessage="Bitte &uuml;berpr&uuml;fen Sie ihre Eingabe. (z.B. 123a)">
                     <f:validator validatorId="HouseNumberValidator"></f:validator>
                 </h:inputText>
                 <h:message for="house_number" errorClass="errorMsg"></h:message>
                 
                 <h:outputLabel value="Postleitzahl: " for="zip_code"></h:outputLabel>
-                <h:inputText id="zip_code" value="#{registeredUserManagedBean.zipCode}"></h:inputText>
+                <h:inputText id="zip_code" value="#{registeredUserManagedBean.zipCode}" validatorMessage="Bitte &uuml;berpr&uuml;fen Sie ihre Eingabe. (z.B. 12345, 54321)">
+                    <f:validator validatorId="ZipCodeValidator"></f:validator>
+                </h:inputText>
                 <h:message for="zip_code" errorClass="errorMsg"></h:message>
                 
                 <h:outputLabel value="Stadt: " for="city"></h:outputLabel>

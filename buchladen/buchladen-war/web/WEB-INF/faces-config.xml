@@ -89,4 +89,10 @@
         <validator-id>HouseNumberValidator</validator-id>
         <validator-class>de.th.wildau.webapp.buchladen.validator.HouseNumberValidator</validator-class>
     </validator>
+    <validator>
+        <description></description>
+        <display-name>ZipCodeValidator</display-name>
+        <validator-id>ZipCodeValidator</validator-id>
+        <validator-class>de.th.wildau.webapp.buchladen.validator.ZipCodeValidator</validator-class>
+    </validator>
 </faces-config>
