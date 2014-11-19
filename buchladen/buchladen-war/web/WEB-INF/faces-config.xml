@@ -101,4 +101,10 @@
         <validator-id>StreetNameValidator</validator-id>
         <validator-class>de.th.wildau.webapp.buchladen.validator.StreetNameValidator</validator-class>
     </validator>
+    <validator>
+        <description></description>
+        <display-name>PasswordValidator</display-name>
+        <validator-id>PasswordValidator</validator-id>
+        <validator-class>de.th.wildau.webapp.buchladen.validator.PasswordValidator</validator-class>
+    </validator>
 </faces-config>
