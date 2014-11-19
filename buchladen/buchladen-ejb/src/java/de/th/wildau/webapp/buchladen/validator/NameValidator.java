@@ -11,7 +11,7 @@ import javax.faces.validator.ValidatorException;
 public class NameValidator implements Validator {
     
     private int maxLength = 255;
-    private static final String NAME_REGEX = "[\\w\\s-]{0,255}";
+    private static final String NAME_REGEX = "[a-zA-Z '&-]*[A-Za-z]";
     private String message = "";
     private Pattern pattern;
     private Matcher matcher;
