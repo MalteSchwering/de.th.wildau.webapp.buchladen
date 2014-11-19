@@ -8,29 +8,21 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-public class NameValidator implements Validator {
-    
-    private int maxLength = 255;
-    private static final String NAME_REGEX = "[a-zA-Z '&-]*[A-Za-z]";
-    private String message = "";
+public class HouseNumberValidator implements Validator {
+
+    private static final String HOUSENUMBER_REGEX = "\\d{1,4}[a-zA-Z]{0,1}";
     private Pattern pattern;
     private Matcher matcher;
 
-    public NameValidator() {
-        pattern = Pattern.compile(NAME_REGEX);
+    public HouseNumberValidator() {
+        pattern = Pattern.compile(HOUSENUMBER_REGEX);
     }
 
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         matcher = pattern.matcher(value.toString());
         if(!matcher.matches()) {
-            message += "Wert beinhaltet ungültige Zeichen, es sind nur Groß-/Kleinbuchstaben, Bindestriche und Leerzeichen erlaubt";
-        }
-        if(value.toString().length() > maxLength) {
-            message += ", Wert ist zu lang";
-        }
-        if(!message.isEmpty()) {
-            FacesMessage facesMessage = new FacesMessage(component.getClientId() + ": Überprüfungsfehler: " + message);
+            FacesMessage facesMessage = new FacesMessage(component.getClientId());
             throw new ValidatorException(facesMessage);
         }
     }

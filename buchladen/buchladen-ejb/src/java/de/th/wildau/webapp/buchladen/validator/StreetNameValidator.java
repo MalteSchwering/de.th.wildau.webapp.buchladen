@@ -1,3 +1,4 @@
+
 package de.th.wildau.webapp.buchladen.validator;
 
 import java.util.regex.Matcher;
@@ -8,29 +9,22 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-public class NameValidator implements Validator {
-    
-    private int maxLength = 255;
-    private static final String NAME_REGEX = "[a-zA-Z '&-]*[A-Za-z]";
-    private String message = "";
+
+public class StreetNameValidator implements Validator{
+
+    private static final String STREETNAME_REGEX = "[\\d\\w\\s-.]{0,255}";
     private Pattern pattern;
     private Matcher matcher;
 
-    public NameValidator() {
-        pattern = Pattern.compile(NAME_REGEX);
+    public StreetNameValidator() {
+        pattern = Pattern.compile(STREETNAME_REGEX);
     }
 
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         matcher = pattern.matcher(value.toString());
         if(!matcher.matches()) {
-            message += "Wert beinhaltet ungültige Zeichen, es sind nur Groß-/Kleinbuchstaben, Bindestriche und Leerzeichen erlaubt";
-        }
-        if(value.toString().length() > maxLength) {
-            message += ", Wert ist zu lang";
-        }
-        if(!message.isEmpty()) {
-            FacesMessage facesMessage = new FacesMessage(component.getClientId() + ": Überprüfungsfehler: " + message);
+            FacesMessage facesMessage = new FacesMessage(component.getClientId());
             throw new ValidatorException(facesMessage);
         }
     }
