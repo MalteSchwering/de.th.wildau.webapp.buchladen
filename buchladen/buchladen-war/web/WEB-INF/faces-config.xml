@@ -95,4 +95,10 @@
         <validator-id>ZipCodeValidator</validator-id>
         <validator-class>de.th.wildau.webapp.buchladen.validator.ZipCodeValidator</validator-class>
     </validator>
+    <validator>
+        <description></description>
+        <display-name>StreetNameValidator</display-name>
+        <validator-id>StreetNameValidator</validator-id>
+        <validator-class>de.th.wildau.webapp.buchladen.validator.StreetNameValidator</validator-class>
+    </validator>
 </faces-config>

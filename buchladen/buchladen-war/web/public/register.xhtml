@@ -37,8 +37,8 @@
                 <h:message for="last_name" errorClass="errorMsg"></h:message>
                 
                 <h:outputLabel value="Straße: " for="street"></h:outputLabel>
-                <h:inputText id="street" value="#{registeredUserManagedBean.street}">
-                    <f:validator validatorId="NameValidator"></f:validator>
+                <h:inputText id="street" value="#{registeredUserManagedBean.street}" validatorMessage="Bitte &uuml;berpr&uuml;fen Sie ihre Eingabe. (z.B. Musterstraße)">
+                    <f:validator validatorId="StreetNameValidator"></f:validator>
                 </h:inputText>
                 <h:message for="street" errorClass="errorMsg"></h:message>
                 
