@@ -4,7 +4,9 @@ import de.th.wildau.webapp.buchladen.entities.BookingOrderDetailEntity;
 import de.th.wildau.webapp.buchladen.sessions.CartSessionBeanRemote;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 
 public class CartManagedBean implements Serializable {
     
@@ -60,6 +62,10 @@ public class CartManagedBean implements Serializable {
      * @param quantity Anzahl der Bücher
      */
     public void setQuantity(int id, int quantity) {
+        System.out.println("================> id " + id + " quantity " + quantity);
+        Map<String, String> reqMap = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        System.out.println(reqMap.toString());
+        
         this.cartSessionBean.setQuantity(id, quantity);
     }
 }

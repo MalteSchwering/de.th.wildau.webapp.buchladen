@@ -20,11 +20,11 @@
             <h:column>
                 <f:facet name="header">Anzahl</f:facet>
                 <h:form>
-                    <h:inputText id="quantity" value="#{cartItem.quantity}">
+                    <h:inputText value="#{cartItem.quantity}">
                         <f:attribute name="bookEntityId" value="#{cartItem.fkBookId.id}"></f:attribute> 
                         <f:validator validatorId="InventoryValidator"></f:validator>
                     </h:inputText>
-                    <h:commandButton action="#{cartManagedBean.setQuantity(cartItem.fkBookId.id, 1)}" value="&#8635;" alt="aktualisieren" title="aktualisieren"></h:commandButton>
+                    <h:commandButton action="#{cartManagedBean.setQuantity(cartItem.fkBookId.id, cartItem.quantity)}" value="&#8635;" alt="aktualisieren" title="aktualisieren"></h:commandButton>
                 </h:form>
             </h:column>
             <h:column>
