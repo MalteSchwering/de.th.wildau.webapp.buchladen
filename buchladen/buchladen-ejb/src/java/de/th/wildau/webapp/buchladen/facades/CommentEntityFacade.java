@@ -5,7 +5,9 @@
  */
 package de.th.wildau.webapp.buchladen.facades;
 
+import de.th.wildau.webapp.buchladen.entities.BookEntity;
 import de.th.wildau.webapp.buchladen.entities.CommentEntity;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,6 +28,11 @@ public class CommentEntityFacade extends AbstractFacade<CommentEntity> implement
 
     public CommentEntityFacade() {
         super(CommentEntity.class);
+    }
+
+    @Override
+    public List<CommentEntity> findByBookId(int id) {
+        return em.createNamedQuery("CommentEntity.findByBookId").setParameter("bookId", id).getResultList();
     }
     
 }

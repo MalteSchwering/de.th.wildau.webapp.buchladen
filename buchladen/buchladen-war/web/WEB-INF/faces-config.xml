@@ -107,4 +107,9 @@
         <validator-id>PasswordValidator</validator-id>
         <validator-class>de.th.wildau.webapp.buchladen.validator.PasswordValidator</validator-class>
     </validator>
+    <managed-bean>
+        <managed-bean-name>commentManagedBean</managed-bean-name>
+        <managed-bean-class>de.th.wildau.buchladen.CommentManagedBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 </faces-config>

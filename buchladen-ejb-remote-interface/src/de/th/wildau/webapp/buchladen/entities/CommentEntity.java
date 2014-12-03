@@ -30,6 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "CommentEntity.findAll", query = "SELECT c FROM CommentEntity c"),
     @NamedQuery(name = "CommentEntity.findById", query = "SELECT c FROM CommentEntity c WHERE c.id = :id"),
+    @NamedQuery(name = "CommentEntity.findByBookId", query = "SELECT c FROM CommentEntity c WHERE c.fkBookId.id = :bookId"),
     @NamedQuery(name = "CommentEntity.findByCommentText", query = "SELECT c FROM CommentEntity c WHERE c.commentText = :commentText")})
 public class CommentEntity implements Serializable {
     private static final long serialVersionUID = 1L;

@@ -5,6 +5,7 @@
  */
 package de.th.wildau.webapp.buchladen.facades;
 
+import de.th.wildau.webapp.buchladen.entities.BookEntity;
 import de.th.wildau.webapp.buchladen.entities.CommentEntity;
 import java.util.List;
 import javax.ejb.Remote;
@@ -27,6 +28,8 @@ public interface CommentEntityFacadeRemote {
     List<CommentEntity> findAll();
 
     List<CommentEntity> findRange(int[] range);
+    
+    List<CommentEntity> findByBookId(int id);
 
     int count();
     
