@@ -14,7 +14,7 @@ create table registered_user
   first_name varchar(255),
   last_name varchar(255),
   street varchar(255),
-  house_number varchar(10),
+  house_number varchar(5),
   zip_code varchar(5),
   city varchar(255)
 );

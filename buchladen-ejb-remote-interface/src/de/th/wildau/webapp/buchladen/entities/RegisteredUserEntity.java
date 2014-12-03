@@ -62,7 +62,7 @@ public class RegisteredUserEntity implements Serializable {
     @Size(max = 255)
     @Column(name = "STREET")
     private String street;
-    @Size(max = 10)
+    @Size(max = 5)
     @Column(name = "HOUSE_NUMBER")
     private String houseNumber;
     @Size(max = 5)
