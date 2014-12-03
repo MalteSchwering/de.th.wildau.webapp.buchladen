@@ -52,7 +52,13 @@
             </h:form>
         </p>
         <p><h:link outcome="index">&larr; zur&uuml;ck zur Buchübersicht</h:link></p>
-        
+        <br></br>
+        <h:form>
+            <h:inputTextarea id="comment" cols="80" rows="8"></h:inputTextarea>
+            <br></br>
+            <h:commandButton type="submit" value="Kommentar abschicken"></h:commandButton>
+        </h:form>
+        <br></br>
         <h:dataTable value="#{commentManagedBean.getBookComments(bookManagedBean.bookEntity.id)}"
                      var="comment"
                      border="1" cellpadding="0" cellspacing="0">
