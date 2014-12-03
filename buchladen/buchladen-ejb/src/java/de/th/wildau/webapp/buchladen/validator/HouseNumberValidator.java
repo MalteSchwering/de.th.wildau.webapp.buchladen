@@ -10,7 +10,7 @@ import javax.faces.validator.ValidatorException;
 
 public class HouseNumberValidator implements Validator {
 
-    private static final String HOUSENUMBER_REGEX = "\\d{1,4}[a-zA-Z]{0,1}";
+    private static final String HOUSENUMBER_REGEX = "\\d{0,4}[a-zA-Z]{0,1}";
     private Pattern pattern;
     private Matcher matcher;
 

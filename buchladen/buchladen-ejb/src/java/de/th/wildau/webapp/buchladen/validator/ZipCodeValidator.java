@@ -12,7 +12,7 @@ import javax.faces.validator.ValidatorException;
 
 public class ZipCodeValidator implements Validator {
 
-    private static final String ZIPCODE_REGEX = "\\d{5}";
+    private static final String ZIPCODE_REGEX = "\\d{0,5}";
     private Pattern pattern;
     private Matcher matcher;
 
