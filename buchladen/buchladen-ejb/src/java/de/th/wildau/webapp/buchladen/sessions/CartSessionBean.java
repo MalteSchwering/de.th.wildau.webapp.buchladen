@@ -134,4 +134,39 @@ public class CartSessionBean implements CartSessionBeanRemote {
         }
     }
 
+    @Override
+    public void setQuantityPlusOne(int id) {
+        this.addBook(id);
+    }
+
+    @Override
+    public void setQuantityMinusOne(int id) {
+        int cartId = this.getCartIdFromBookId(id);
+        if(cartId > -1) {
+            int quantityChange = this.cart.get(cartId).getQuantity() - 1;
+            if(quantityChange < 1) {
+                this.removeBook(id);
+            }
+            else {
+                this.cart.get(cartId).setQuantity(quantityChange);
+            }
+        }
+    }
+
+    @Override
+    public int getCartIdFromBookId(int id) {
+        BookEntity bookEntity = this.bookEntityFacade.find(id);
+        if(bookEntity == null || !this.isBookInTheCart(bookEntity)) {
+            return -1;
+        }
+        else {
+            Iterator<BookingOrderDetailEntity> iteratorBookingOrderDetailEntity = this.cart.iterator();
+            while(iteratorBookingOrderDetailEntity.hasNext()) {
+                BookingOrderDetailEntity next = iteratorBookingOrderDetailEntity.next();
+                return this.cart.indexOf(next);
+            }
+        }
+        return -1; 
+    }
+
 }

@@ -20,6 +20,7 @@ a:link:hover, a:visited:hover  {
 }
 
 form {
+    display: inline-block;
     margin: 0;
 }
 

@@ -21,7 +21,8 @@ public class InventoryValidator implements Validator {
         int bookEntityId = (int) component.getAttributes().get("bookEntityId");
         BookEntity bookEntity = this.bookEntityFacade.find(bookEntityId);
         int bookInventory = bookEntity.getQuantity();
-        int quantityFromCart = Integer.parseInt(value.toString());
+        int quantityChange = Integer.parseInt(component.getAttributes().get("quantityChange").toString());
+        int quantityFromCart = Integer.parseInt(value.toString()) + quantityChange;
         
         if(bookEntity == null) {
             FacesMessage facesMessage = new FacesMessage(component.getClientId() + ": Überprüfungsfehler: Buch existiert nicht");
