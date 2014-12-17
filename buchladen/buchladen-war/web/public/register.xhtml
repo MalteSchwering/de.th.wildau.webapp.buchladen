@@ -19,7 +19,7 @@
                 <h:message for="email_address" errorClass="errorMsg"></h:message>
                 
                 <h:outputLabel value="Passwort*: " for="password"></h:outputLabel>
-                <h:inputSecret id="password" value="#{registeredUserManagedBean.password}" validatorMessage="Bitte w&auml;hlen Sie ein Passwort (Mindestens 8 Zeichen + 1 Großbuchstaben + 1 Kleinbuchstaben + Sonderzeichen + Zahl).">
+                <h:inputSecret id="password" value="#{registeredUserManagedBean.password}" validatorMessage="Bitte w&auml;hlen Sie ein Passwort (Mindestens 8 Zeichen + 1 Großbuchstaben + 1 Kleinbuchstaben + Sonderzeichen @#$% + Zahl).">
                     <f:validateRequired></f:validateRequired>
                     <f:validator validatorId="PasswordValidator"></f:validator>
                 </h:inputSecret>
