@@ -48,6 +48,8 @@
         <p>
             <h:form>
                 <h:commandButton action="#{cartManagedBean.addBook(bookManagedBean.bookEntity.id)}" value="In den Warenkorb">
+                    <f:param name="id" value="#{bookManagedBean.id}"></f:param>
+                    <f:ajax render="@all"></f:ajax>
                 </h:commandButton>
             </h:form>
         </p>
