@@ -55,25 +55,32 @@
         </p>
         <p><h:link outcome="index">&larr; zur&uuml;ck zur Buchübersicht</h:link></p>
         <br></br>
-        <h:form>
-            <h:inputTextarea id="comment" cols="80" rows="8"></h:inputTextarea>
-            <br></br>
-            <h:commandButton type="submit" value="Kommentar abschicken"></h:commandButton>
-        </h:form>
+        <p>
+            <h:form rendered="#{request.userPrincipal != null}">
+                <h:inputTextarea id="comment" cols="80" rows="8" value="#{commentManagedBean.commentText}"></h:inputTextarea>
+                <br></br>
+                <h:commandButton type="submit" value="Kommentar abschicken" action="#{commentManagedBean.createBookComment()}">
+                    <f:param name="id" value="#{bookManagedBean.id}"></f:param>
+                    <f:ajax execute="comment" render="commentList"></f:ajax>
+                </h:commandButton>
+            </h:form>
+        </p>
         <br></br>
-        <h:dataTable value="#{commentManagedBean.getBookComments(bookManagedBean.bookEntity.id)}"
-                     var="comment"
-                     border="1" cellpadding="0" cellspacing="0">
-            <h:column>
-                <f:facet name="header">Benutzer</f:facet>
-                <h:outputText value="#{comment.fkRegisteredUserId.firstName} "></h:outputText>
-                <h:outputText value="#{comment.fkRegisteredUserId.lastName}"></h:outputText>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Kommentar</f:facet>    				
-                <h:outputText value="#{comment.commentText}"></h:outputText>
-            </h:column>
-        </h:dataTable>
+        <p>
+            <h:dataTable value="#{commentManagedBean.getBookComments(bookManagedBean.bookEntity.id)}" id="commentList"
+                         var="comment"
+                         border="1" cellpadding="0" cellspacing="0">
+                <h:column>
+                    <f:facet name="header">Benutzer</f:facet>
+                    <h:outputText value="#{comment.fkRegisteredUserId.firstName} "></h:outputText>
+                    <h:outputText value="#{comment.fkRegisteredUserId.lastName}"></h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Kommentar</f:facet>    				
+                    <h:outputText value="#{comment.commentText}"></h:outputText>
+                </h:column>
+            </h:dataTable>
+        </p>
     </ui:define>
 
 </ui:composition>

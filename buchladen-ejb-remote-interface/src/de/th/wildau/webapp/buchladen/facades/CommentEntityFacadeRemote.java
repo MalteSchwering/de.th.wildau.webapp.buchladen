@@ -16,6 +16,8 @@ import javax.ejb.Remote;
  */
 @Remote
 public interface CommentEntityFacadeRemote {
+    
+    void createBookComment(int bookId, String comment);
 
     void create(CommentEntity commentEntity);
 
