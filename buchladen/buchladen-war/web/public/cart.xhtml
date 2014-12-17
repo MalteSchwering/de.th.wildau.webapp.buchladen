@@ -16,17 +16,19 @@
         <h:dataTable value="#{cartManagedBean.content}"
                      var="cartItem"
                      rendered="#{cartManagedBean.count() > 0}"
-                     border="1" cellpadding="0" cellspacing="0">
+                     border="1" cellpadding="0" cellspacing="0" id="cartTable">
             <h:column>
                 <f:facet name="header">Anzahl</f:facet>
-                <h:outputText value="#{cartItem.quantity} "></h:outputText>
+                <h:outputText value="#{cartItem.quantity}"></h:outputText>
                 <h:form>
                     <h:inputHidden value="#{cartItem.quantity}">
                         <f:attribute name="bookEntityId" value="#{cartItem.fkBookId.id}"></f:attribute>
                         <f:attribute name="quantityChange" value="1"></f:attribute>
                         <f:validator validatorId="InventoryValidator"></f:validator>
                     </h:inputHidden>
-                    <h:commandButton action="#{cartManagedBean.setQuantityPlusOne(cartItem.fkBookId.id)}" value="+" alt="Anzahl erhöhen" title="Anzahl erhöhen"></h:commandButton>
+                    <h:commandButton action="#{cartManagedBean.setQuantityPlusOne(cartItem.fkBookId.id)}" value="+" alt="Anzahl erhöhen" title="Anzahl erhöhen">
+                        <f:ajax render="cartLink cartTable cartSumTable"></f:ajax>
+                    </h:commandButton>
                 </h:form>    
                 <h:form>
                     <h:inputHidden value="#{cartItem.quantity}">
@@ -34,7 +36,9 @@
                         <f:attribute name="quantityChange" value="-1"></f:attribute>
                         <f:validator validatorId="InventoryValidator"></f:validator>
                     </h:inputHidden>
-                    <h:commandButton action="#{cartManagedBean.setQuantityMinusOne(cartItem.fkBookId.id)}" value="&minus;" alt="Anzahl verringern" title="Anzahl verringern"></h:commandButton>
+                    <h:commandButton action="#{cartManagedBean.setQuantityMinusOne(cartItem.fkBookId.id)}" value="&minus;" alt="Anzahl verringern" title="Anzahl verringern">
+                        <f:ajax render="cartLink cartTable cartSumTable"></f:ajax>
+                    </h:commandButton>
                 </h:form>
             </h:column>
             <h:column>
@@ -63,7 +67,7 @@
         </h:dataTable>
         <br></br>
         <c:if test="#{cartManagedBean.count() > 0}">
-            <h:panelGrid columns="2" border="1" cellpadding="0" cellspacing="0">
+            <h:panelGrid columns="2" border="1" cellpadding="0" cellspacing="0" id="cartSumTable">
                 <h:outputText value="Zwischensumme: "></h:outputText>
                 <h:outputText value="#{cartManagedBean.total}" class="textAlignRight">
                     <f:convertNumber type="currency" currencySymbol="€" locale="de-DE"></f:convertNumber>
