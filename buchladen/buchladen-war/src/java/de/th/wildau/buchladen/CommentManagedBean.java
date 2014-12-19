@@ -12,6 +12,8 @@ import javax.faces.context.FacesContext;
 public class CommentManagedBean implements Serializable {
     
     private String commentText;
+    private int maxLengthOfCommentText = 250;
+    private int currentLengthOfCommentText = 0;
     
     @EJB
     private CommentEntityFacadeRemote commentEntityFacade;
@@ -22,6 +24,10 @@ public class CommentManagedBean implements Serializable {
     
     public void createBookComment() {
         this.commentEntityFacade.createBookComment(this.getId(), this.commentText);
+    }
+    
+    public void countLengthOfCommentText() {
+        this.currentLengthOfCommentText = this.commentText.length();
     }
     
     /**
@@ -41,6 +47,22 @@ public class CommentManagedBean implements Serializable {
 
     public void setCommentText(String commentText) {
         this.commentText = commentText;
+    }
+
+    public int getMaxLengthOfCommentText() {
+        return maxLengthOfCommentText;
+    }
+
+    public void setMaxLengthOfCommentText(int maxLengthOfCommentText) {
+        this.maxLengthOfCommentText = maxLengthOfCommentText;
+    }
+
+    public int getCurrentLengthOfCommentText() {
+        return currentLengthOfCommentText;
+    }
+
+    public void setCurrentLengthOfCommentText(int currentLengthOfCommentText) {
+        this.currentLengthOfCommentText = currentLengthOfCommentText;
     }
     
 }

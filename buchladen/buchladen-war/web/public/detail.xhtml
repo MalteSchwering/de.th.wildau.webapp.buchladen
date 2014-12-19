@@ -57,7 +57,13 @@
         <br></br>
         <p>
             <h:form rendered="#{request.userPrincipal != null}">
-                <h:inputTextarea id="comment" cols="80" rows="8" value="#{commentManagedBean.commentText}"></h:inputTextarea>
+                <h:outputText id="commentLength" value="#{commentManagedBean.currentLengthOfCommentText}"></h:outputText>
+                <h:outputText value=" von #{commentManagedBean.maxLengthOfCommentText}"></h:outputText>
+                <br></br>
+                <h:inputTextarea id="comment" cols="80" rows="8" value="#{commentManagedBean.commentText}">
+                    <f:ajax execute="comment" render="commentLength" event="keydown" listener="#{commentManagedBean.countLengthOfCommentText()}"></f:ajax>
+                    <f:ajax execute="comment" render="commentLength" event="keyup" listener="#{commentManagedBean.countLengthOfCommentText()}"></f:ajax>
+                </h:inputTextarea>
                 <br></br>
                 <h:commandButton type="submit" value="Kommentar abschicken" action="#{commentManagedBean.createBookComment()}">
                     <f:param name="id" value="#{bookManagedBean.id}"></f:param>
