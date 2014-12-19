@@ -8,11 +8,19 @@ import javax.faces.validator.ValidatorException;
 import org.apache.commons.validator.EmailValidator;
 
 /**
- *
- * @author Jan
+ * @author Jan Gabler
+ * @author Malte Schwering
+ * @version 0.1
  */
 public class EmailAddressValidator implements Validator {
 
+    /**
+     * Validiert den Wert des Input Elements.
+     * @param context FacesContext
+     * @param component User Interface Komponente
+     * @param value Wert des Input Elements
+     * @throws ValidatorException 
+     */
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         EmailValidator validator = EmailValidator.getInstance();

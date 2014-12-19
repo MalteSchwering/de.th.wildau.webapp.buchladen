@@ -1,11 +1,12 @@
 package de.th.wildau.buchladen;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-@ManagedBean
-@SessionScoped
+/**
+ * @author Jan Gabler
+ * @author Malte Schwering
+ * @version 0.1
+ */
 public class LogoutManagedBean {
     
     /**

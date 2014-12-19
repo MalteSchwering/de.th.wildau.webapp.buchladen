@@ -13,9 +13,25 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+/**
+ * @author Jan Gabler
+ * @author Malte Schwering
+ * @version 0.1
+ */
 public class InventoryValidator implements Validator {
+    
+    /**
+     * Enterprise Java Bean bookEntityFacade.
+     */
     BookEntityFacadeRemote bookEntityFacade = lookupBookEntityFacadeRemote();
 
+    /**
+     * Validiert den Wert des Input Elements.
+     * @param context FacesContext
+     * @param component User Interface Komponente
+     * @param value Wert des Input Elements
+     * @throws ValidatorException 
+     */
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         int bookEntityId = (int) component.getAttributes().get("bookEntityId");
@@ -35,6 +51,10 @@ public class InventoryValidator implements Validator {
         }
     }
 
+    /**
+     * Liefert die Remote bookEntityFacade zurück.
+     * @return Remote bookEntityFacade
+     */
     private BookEntityFacadeRemote lookupBookEntityFacadeRemote() {
         try {
             Context c = new InitialContext();

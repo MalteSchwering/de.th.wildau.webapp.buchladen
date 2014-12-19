@@ -2,7 +2,6 @@ package de.th.wildau.buchladen.servlets;
 
 import de.th.wildau.buchladen.services.CaptchaServiceSingleton;
 import com.octo.captcha.service.CaptchaServiceException;
- 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -14,25 +13,40 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
+/**
+ * @author Jan Gabler
+ * @author Malte Schwering
+ * @version 0.1
+ */
 public class ImageCaptchaServlet extends HttpServlet {
 
+    /**
+     * Initialisiert die Captcha Konfiguration.
+     * @param servletConfig Servlet Konfiguration
+     * @throws ServletException 
+     */
     @Override
     public void init(ServletConfig servletConfig) throws ServletException {
         super.init(servletConfig);
     }
 
+    /**
+     * Erstellt bei GET-Anfragen ein neues Captcha vom Format JPEG.
+     * @param httpServletRequest
+     * @param httpServletResponse
+     * @throws ServletException
+     * @throws IOException 
+     */
     @Override
     protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
         byte[] captchaChallengeAsJpeg = null;
-        // the output stream to render the captcha image as jpeg into
         ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();
         try {
-            // get the session id that will identify the generated captcha.
-            // the same id must be used to validate the response, the session id is a good candidate!
+            // Session ID des Benutzers der Anfrage
             String captchaId = httpServletRequest.getSession().getId();
-            // call the ImageCaptchaService getChallenge method
+            // passend zur Session ID wird ein Captcha generiert, 
+            // diese Zuordnung kann im Validator dann verglichen werden
             BufferedImage challenge = CaptchaServiceSingleton.getInstance().getImageChallengeForID(captchaId, httpServletRequest.getLocale());
-            // a jpg encoder
             ImageIO.write(challenge, "jpg", jpegOutputStream);
         } catch (IllegalArgumentException e) {
             httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -41,10 +55,9 @@ public class ImageCaptchaServlet extends HttpServlet {
             httpServletResponse.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             return;
         }
-
         captchaChallengeAsJpeg = jpegOutputStream.toByteArray();
-
-        // flush it in the response
+        
+        // JPEG wird geflusht
         httpServletResponse.setHeader("Cache-Control", "no-store");
         httpServletResponse.setHeader("Pragma", "no-cache");
         httpServletResponse.setDateHeader("Expires", 0);

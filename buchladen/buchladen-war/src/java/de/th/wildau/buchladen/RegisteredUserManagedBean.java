@@ -8,6 +8,11 @@ import de.th.wildau.webapp.buchladen.facades.UserGroupEntityFacadeRemote;
 import java.io.Serializable;
 import javax.ejb.EJB;
 
+/**
+ * @author Jan Gabler
+ * @author Malte Schwering
+ * @version 0.1
+ */
 public class RegisteredUserManagedBean implements Serializable {
     
     /**
@@ -59,17 +64,17 @@ public class RegisteredUserManagedBean implements Serializable {
     private String houseNumber;
     
     /**
-     * Postleitzahl des Wohnorts des Benutzers.
+     * Die Postleitzahl des Wohnorts des Benutzers.
      */
     private String zipCode;
     
     /**
-     * Name der Stadt in der der Benutzer wohnt.
+     * Der Name der Stadt in der der Benutzer wohnt.
      */
     private String city;
     
     /**
-     * Captcha das der Benutzer identifiziert hat.
+     * Das Captcha das der Benutzer identifiziert hat.
      */
     private String captcha;
     

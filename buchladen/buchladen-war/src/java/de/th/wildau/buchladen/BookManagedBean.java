@@ -9,6 +9,11 @@ import javax.ejb.EJB;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
+/**
+ * @author Jan Gabler
+ * @author Malte Schwering
+ * @version 0.1
+ */
 public class BookManagedBean implements Serializable {
 
     /**

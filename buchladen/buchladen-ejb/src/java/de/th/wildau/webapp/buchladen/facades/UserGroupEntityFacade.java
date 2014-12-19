@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.th.wildau.webapp.buchladen.facades;
 
 import de.th.wildau.webapp.buchladen.entities.UserGroupEntity;
@@ -13,23 +8,40 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 /**
- *
- * @author Jan
+ * @author Jan Gabler
+ * @author Malte Schwering
+ * @version 0.1
  */
 @Stateless
 public class UserGroupEntityFacade extends AbstractFacade<UserGroupEntity> implements de.th.wildau.webapp.buchladen.facades.UserGroupEntityFacadeRemote {
+
+    /**
+     * Der Entitäten-Manager.
+     */
     @PersistenceContext(unitName = "buchladen-ejbPU")
     private EntityManager em;
 
+    /**
+     * Liefert den Entitäten-Manager zurück.
+     * @return Entitäten-Manager
+     */
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
 
+    /**
+     * Konstruktor der den Konstruktor der abstrakten Klasse aufruft.
+     */
     public UserGroupEntityFacade() {
         super(UserGroupEntity.class);
     }
 
+    /**
+     * Liefert die Entität einer Benutzergruppe zu einem bestimmten Gruppennamen zurück.
+     * @param groupName Name der Benutzergruppe
+     * @return UserGroupEntity
+     */
     @Override
     public UserGroupEntity findByGroupName(String groupName) {
         try {

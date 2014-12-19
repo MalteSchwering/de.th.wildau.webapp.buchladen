@@ -8,16 +8,42 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
+/**
+ * @author Jan Gabler
+ * @author Malte Schwering
+ * @version 0.1
+ */
 public class HouseNumberValidator implements Validator {
 
+    /**
+     * Regulärer Ausdruck der Hausnummer.
+     */
     private static final String HOUSENUMBER_REGEX = "\\d{0,4}[a-zA-Z]{0,1}";
+    
+    /**
+     * Kompilierte Repräsentation des regulären Ausdrucks.
+     */
     private Pattern pattern;
+
+    /**
+     * Match Engine.
+     */
     private Matcher matcher;
 
+    /**
+     * Konstruktur der den regulären Ausdruck kompiliert.
+     */
     public HouseNumberValidator() {
         pattern = Pattern.compile(HOUSENUMBER_REGEX);
     }
 
+    /**
+     * Validiert den Wert des Input Elements.
+     * @param context FacesContext
+     * @param component User Interface Komponente
+     * @param value Wert des Input Elements
+     * @throws ValidatorException 
+     */
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         matcher = pattern.matcher(value.toString());

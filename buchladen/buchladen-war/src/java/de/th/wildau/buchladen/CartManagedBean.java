@@ -6,6 +6,11 @@ import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 
+/**
+ * @author Jan Gabler
+ * @author Malte Schwering
+ * @version 0.1
+ */
 public class CartManagedBean implements Serializable {
     
     /**
@@ -69,4 +74,5 @@ public class CartManagedBean implements Serializable {
     public void setQuantityMinusOne(int id) {
         this.cartSessionBean.setQuantityMinusOne(id);
     }
+    
 }

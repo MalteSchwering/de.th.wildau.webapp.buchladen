@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.th.wildau.webapp.buchladen.sessions;
 
 import de.th.wildau.webapp.buchladen.entities.BookEntity;
@@ -16,24 +11,42 @@ import javax.ejb.EJB;
 import javax.ejb.Stateful;
 
 /**
- *
- * @author Jan
+ * @author Jan Gabler
+ * @author Malte Schwering
+ * @version 0.1
  */
 @Stateful
 public class CartSessionBean implements CartSessionBeanRemote {
 
+    /**
+     * Enterprise Java Bean bookEntityFacade mit einem Remote Interface.
+     */
     @EJB
     private BookEntityFacadeRemote bookEntityFacade;
 
+    /**
+     * Enterprise Java Bean bookingOrderDetailEntityFacade mit einem Remote Interface.
+     */
     @EJB
     private BookingOrderDetailEntityFacadeRemote bookingOrderDetailEntityFacade;
 
+    /**
+     * Liste vom Typ BookingOrderDetailEntity die den Warenkorb repräsentiert.
+     */
     private List<BookingOrderDetailEntity> cart;
 
+    /**
+     * Konstruktur der den Warenkorb initialisiert.
+     */
     public CartSessionBean() {
         this.cart = new ArrayList<>();
     }
-    
+
+    /**
+     * Prüft nach ob sich ein Buch im Warenkorb befindet.
+     * @param bookEntity Buch Entität
+     * @return Wahrheitswert
+     */
     private boolean isBookInTheCart(BookEntity bookEntity) {
         Iterator<BookingOrderDetailEntity> iteratorBookingOrderDetailEntity = this.cart.iterator();
         while(iteratorBookingOrderDetailEntity.hasNext()) {
@@ -43,7 +56,11 @@ public class CartSessionBean implements CartSessionBeanRemote {
         }
         return false;
     }
-    
+
+    /**
+     * Fügt ein Buch zum Warenkorb hinzu.
+     * @param id ID des Buches
+     */
     @Override
     public void addBook(int id) {
         BookEntity bookEntity = this.bookEntityFacade.find(id);
@@ -66,6 +83,10 @@ public class CartSessionBean implements CartSessionBeanRemote {
         }
     }
 
+    /**
+     * Löscht ein Buch aus dem Warenkorb.
+     * @param id ID des Buches
+     */
     @Override
     public void removeBook(int id) {
         BookEntity bookEntity = this.bookEntityFacade.find(id);
@@ -82,11 +103,19 @@ public class CartSessionBean implements CartSessionBeanRemote {
         }
     }
 
+    /**
+     * Liefert den Inhalt vom Warenkorb zurück.
+     * @return Liste vom Typ BookingOrderDetailEntity
+     */
     @Override
     public List<BookingOrderDetailEntity> getContent() {
         return this.cart;
     }
 
+    /**
+     * Zählt die Anzahl der Bücher im Warenkorb.
+     * @return Anzahl der Bücher
+     */
     @Override
     public int count() {
         if(this.cart.isEmpty()) {
@@ -102,6 +131,10 @@ public class CartSessionBean implements CartSessionBeanRemote {
         }
     }
 
+    /**
+     * Liefert den Warenwert vom Warenkorb zurück.
+     * @return Warenwert vom Warenkorb
+     */
     @Override
     public double getTotal() {
         Iterator<BookingOrderDetailEntity> iteratorBookingOrderDetailEntity = this.cart.iterator();
@@ -113,6 +146,11 @@ public class CartSessionBean implements CartSessionBeanRemote {
         return total;
     }
 
+    /**
+     * Setzt die Anzahl eines Buches im Warenkorb.
+     * @param id ID des Buches
+     * @param quantity neue Anzahl des Buches
+     */
     @Override
     public void setQuantity(int id, int quantity) {
         if(quantity < 1) {
@@ -134,11 +172,19 @@ public class CartSessionBean implements CartSessionBeanRemote {
         }
     }
 
+    /**
+     * Setzt die Anzahl eines Buches im Warenkorb +1.
+     * @param id ID des Buches
+     */
     @Override
     public void setQuantityPlusOne(int id) {
         this.addBook(id);
     }
 
+    /**
+     * Setzt die Anzahl eines Buches im Warenkorb -1.
+     * @param id ID des Buches
+     */
     @Override
     public void setQuantityMinusOne(int id) {
         int cartId = this.getCartIdFromBookId(id);
@@ -153,6 +199,11 @@ public class CartSessionBean implements CartSessionBeanRemote {
         }
     }
 
+    /**
+     * Durchsucht den Warenkorb nach einem Buch und liefert den Listen-Index zurück.
+     * @param id ID des Buches
+     * @return Listen Index
+     */
     @Override
     public int getCartIdFromBookId(int id) {
         BookEntity bookEntity = this.bookEntityFacade.find(id);
