@@ -17,6 +17,7 @@ public class ZipCodeValidator implements Validator {
 
     /**
      * Regulärer Ausdruck der Postleitzahl.
+     * Er verbietet alles außer eine Eingabe aus 0 bzw. maximal 5 Zahlen.
      */
     private static final String ZIPCODE_REGEX = "\\d{0,5}";
 
@@ -31,7 +32,7 @@ public class ZipCodeValidator implements Validator {
     private Matcher matcher;
 
     /**
-     * Konstruktur der den regulären Ausdruck kompiliert.
+     * Konstruktor der den regulären Ausdruck kompiliert.
      */
     public ZipCodeValidator() {
         pattern = Pattern.compile(ZIPCODE_REGEX);

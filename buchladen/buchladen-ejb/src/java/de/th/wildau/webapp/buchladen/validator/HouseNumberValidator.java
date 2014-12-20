@@ -17,6 +17,7 @@ public class HouseNumberValidator implements Validator {
 
     /**
      * Regulärer Ausdruck der Hausnummer.
+     * Er verbietet alles außer 0-4 Zahlen mit einem nachgestellten Buchstaben.
      */
     private static final String HOUSENUMBER_REGEX = "\\d{0,4}[a-zA-Z]{0,1}";
     
@@ -31,7 +32,7 @@ public class HouseNumberValidator implements Validator {
     private Matcher matcher;
 
     /**
-     * Konstruktur der den regulären Ausdruck kompiliert.
+     * Konstruktor der den regulären Ausdruck kompiliert.
      */
     public HouseNumberValidator() {
         pattern = Pattern.compile(HOUSENUMBER_REGEX);

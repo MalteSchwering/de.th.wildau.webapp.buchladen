@@ -36,7 +36,7 @@ public class CartSessionBean implements CartSessionBeanRemote {
     private List<BookingOrderDetailEntity> cart;
 
     /**
-     * Konstruktur der den Warenkorb initialisiert.
+     * Konstruktor der den Warenkorb initialisiert.
      */
     public CartSessionBean() {
         this.cart = new ArrayList<>();

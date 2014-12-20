@@ -22,6 +22,8 @@ public class NameValidator implements Validator {
 
     /**
      * Regulärer Ausdruck vom Namen.
+     * Er verbietet alles außer Groß-und Kleinbuchstaben bzw. die Sonderzeichen
+     * für eine Namenstrennung '&-
      */
     private static final String NAME_REGEX = "[a-zA-Z '&-]*[A-Za-z]{0,255}";
 
@@ -41,7 +43,7 @@ public class NameValidator implements Validator {
     private Matcher matcher;
 
     /**
-     * Konstruktur der den regulären Ausdruck kompiliert.
+     * Konstruktor der den regulären Ausdruck kompiliert.
      */
     public NameValidator() {
         pattern = Pattern.compile(NAME_REGEX);

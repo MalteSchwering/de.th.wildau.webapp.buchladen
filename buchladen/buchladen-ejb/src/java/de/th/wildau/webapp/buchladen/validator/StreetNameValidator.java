@@ -17,6 +17,7 @@ public class StreetNameValidator implements Validator{
 
     /**
      * Regulärer Ausdruck vom Straßennamen.
+     * Er verbietet alles außer Groß- und Kleinbuchstaben.
      */
     private static final String STREETNAME_REGEX = "[\\d\\w\\s-.]{0,255}";
 
@@ -31,7 +32,7 @@ public class StreetNameValidator implements Validator{
     private Matcher matcher;
 
     /**
-     * Konstruktur der den regulären Ausdruck kompiliert.
+     * Konstruktor der den regulären Ausdruck kompiliert.
      */
     public StreetNameValidator() {
         pattern = Pattern.compile(STREETNAME_REGEX);

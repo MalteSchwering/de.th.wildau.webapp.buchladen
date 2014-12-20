@@ -17,6 +17,9 @@ public class PasswordValidator implements Validator {
 
     /**
      * Regulärer Ausdruck vom Passwort.
+     * Er verbietet alles außer ein Passwort aus mindestens 8 Buchstaben,
+     * bestehend aus Großbuchstaben, Kleinbuchstaben, Zahlen und mindestens 
+     * ein Sonderzeichen, wie zum Beispiel @#$%
      */
     private static final String PASSWORD_REGEX = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20})";
 
@@ -31,7 +34,7 @@ public class PasswordValidator implements Validator {
     private Matcher matcher;
 
     /**
-     * Konstruktur der den regulären Ausdruck kompiliert.
+     * Konstruktor der den regulären Ausdruck kompiliert.
      */
     public PasswordValidator() {
         pattern = Pattern.compile(PASSWORD_REGEX);
