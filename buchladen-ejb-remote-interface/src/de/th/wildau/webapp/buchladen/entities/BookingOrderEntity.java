@@ -39,7 +39,7 @@ public class BookingOrderEntity implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    @OneToMany(mappedBy = "fkBookOrderId")
+    @OneToMany(mappedBy = "fkBookingOrderId")
     private Collection<BookingOrderDetailEntity> bookingOrderDetailEntityCollection;
     @JoinColumn(name = "FK_REGISTERED_USER_ID", referencedColumnName = "ID")
     @ManyToOne

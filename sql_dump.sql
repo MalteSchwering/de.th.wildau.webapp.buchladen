@@ -89,7 +89,7 @@ create table booking_order
 create table booking_order_detail
 (
   id int not null generated always as identity constraint pk_book_order_detail primary key,
-  fk_book_order_id int constraint fk_booking_order_detail_to_book_order references booking_order on delete cascade on update restrict,
+  fk_booking_order_id int constraint fk_booking_order_detail_to_booking_order references booking_order on delete cascade on update restrict,
   fk_book_id int constraint fk_booking_order_detail_to_book references book on delete cascade on update restrict,
   quantity int
 );
@@ -145,7 +145,7 @@ insert into booking_order (fk_registered_user_id, fk_payment_credit_card, fk_pay
 (1, 1, null),
 (2, 2, null),
 (3, 3, null);
-insert into booking_order_detail (fk_book_order_id, fk_book_id, quantity) values
+insert into booking_order_detail (fk_booking_order_id, fk_book_id, quantity) values
 (1, 1, 1),
 (2, 2, 2),
 (3, 3, 3);
