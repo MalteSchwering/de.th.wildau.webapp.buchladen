@@ -39,7 +39,7 @@
                         <c:if test="#{request.userPrincipal == null}"><li><h:link value="Anmelden" outcome="login"></h:link></li></c:if>
                         <c:if test="#{request.userPrincipal != null}"><li><h:form><h:commandLink action="#{logoutManagedBean.logout()}" value="Abmelden"></h:commandLink></h:form></li></c:if>
                         <c:if test="#{request.userPrincipal == null}"><li><h:link value="Registrieren" outcome="register"></h:link></li></c:if>
-                        <li><h:link value="Admin" outcome="admin"></h:link></li>
+                        <c:if test="#{request.isUserInRole('admin')}"><li><h:link value="Admin" outcome="admin"></h:link></li></c:if>
                     </ul>
                 </ui:insert>
             </div>
