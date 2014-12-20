@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../../layout.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <h2>Kasse</h2>
+        <p><h:link outcome="cart">&larr; zur&uuml;ck zum Warenkorb</h:link></p>
+        <c:if test="#{cartManagedBean.count() > 0}">
+            <h3><i>Bestellung</i></h3>
+            <h:dataTable value="#{cartManagedBean.content}"
+                     var="cartItem"
+                     rendered="#{cartManagedBean.count() > 0}"
+                     border="1" cellpadding="0" cellspacing="0" id="cartTable">
+                
+                <h:column>
+                    <f:facet name="header">Anzahl</f:facet>
+                    <h:outputText value="#{cartItem.quantity}"></h:outputText>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Artikel</f:facet>
+                    <h:outputText value="#{cartItem.fkBookId.title}"></h:outputText>
+                    <i><h:outputText value=" von #{cartItem.fkBookId.fkAuthorId.firstName} #{cartItem.fkBookId.fkAuthorId.lastName}"></h:outputText></i>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Einzelpreis</f:facet>
+                    <h:outputText value="#{cartItem.fkBookId.price}" class="textAlignRight">
+                        <f:convertNumber type="currency" currencySymbol="€" locale="de-DE"></f:convertNumber>
+                    </h:outputText>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Gesamtpreis</f:facet>
+                    <h:outputText value="#{cartItem.quantity * cartItem.fkBookId.price}" class="textAlignRight">
+                        <f:convertNumber type="currency" currencySymbol="€" locale="de-DE"></f:convertNumber>
+                    </h:outputText>
+                </h:column>
+                
+            </h:dataTable>
+            <br></br>
+            <h:panelGrid columns="2" border="1" cellpadding="0" cellspacing="0" id="cartSumTable">
+                
+                <h:outputText value="Zwischensumme: "></h:outputText>
+                <h:outputText value="#{cartManagedBean.total}" class="textAlignRight">
+                    <f:convertNumber type="currency" currencySymbol="€" locale="de-DE"></f:convertNumber>
+                </h:outputText>
+                
+                <h:outputText value="Versandkosten: "></h:outputText>
+                <h:outputText value="#{0}" class="textAlignRight">
+                    <f:convertNumber type="currency" currencySymbol="€" locale="de-DE"></f:convertNumber>
+                </h:outputText>
+                
+                <h:outputText value="Gesamtsumme (inkl. MwSt): "></h:outputText>
+                <h:outputText value="#{cartManagedBean.total}" class="textAlignRight">
+                    <f:convertNumber type="currency" currencySymbol="€" locale="de-DE"></f:convertNumber>
+                </h:outputText>
+                
+            </h:panelGrid>
+            <h:form>
+                <h3><i>Adresse</i></h3>
+                <h:panelGrid columns="3">
+
+                    <h:outputLabel value="Vorname: " for="first_name"></h:outputLabel>
+                    <h:inputText id="first_name" value="#{checkoutManagedBean.registeredUserEntity.firstName}" validatorMessage="Es sind unerlaubte Zeichen im Vornamen enthalten. Bitte &uuml;berpr&uuml;fen Sie ihre Eingabe.">
+                        <f:validator validatorId="NameValidator"></f:validator>
+                    </h:inputText>
+                    <h:message for="first_name" errorClass="errorMsg"></h:message>
+
+                    <h:outputLabel value="Nachname " for="last_name"></h:outputLabel>
+                    <h:inputText id="last_name" value="#{checkoutManagedBean.registeredUserEntity.lastName}" validatorMessage="Es sind unerlaubte Zeichen im Nachnamen enthalten. Bitte &uuml;berpr&uuml;fen Sie ihre Eingabe.">
+                        <f:validator validatorId="NameValidator"></f:validator>
+                    </h:inputText>
+                    <h:message for="last_name" errorClass="errorMsg"></h:message>
+
+                    <h:outputLabel value="Straße: " for="street"></h:outputLabel>
+                    <h:inputText id="street" value="#{checkoutManagedBean.registeredUserEntity.street}" validatorMessage="Bitte &uuml;berpr&uuml;fen Sie ihre Eingabe. (z.B. Musterstraße)">
+                        <f:validator validatorId="StreetNameValidator"></f:validator>
+                    </h:inputText>
+                    <h:message for="street" errorClass="errorMsg"></h:message>
+
+                    <h:outputLabel value="Hausnummer: " for="house_number"></h:outputLabel>
+                    <h:inputText id="house_number" value="#{checkoutManagedBean.registeredUserEntity.houseNumber}" validatorMessage="Bitte &uuml;berpr&uuml;fen Sie ihre Eingabe. (z.B. 123a)">
+                        <f:validator validatorId="HouseNumberValidator"></f:validator>
+                    </h:inputText>
+                    <h:message for="house_number" errorClass="errorMsg"></h:message>
+
+                    <h:outputLabel value="Postleitzahl: " for="zip_code"></h:outputLabel>
+                    <h:inputText id="zip_code" value="#{checkoutManagedBean.registeredUserEntity.zipCode}" validatorMessage="Bitte &uuml;berpr&uuml;fen Sie ihre Eingabe. (z.B. 12345, 54321)">
+                        <f:validator validatorId="ZipCodeValidator"></f:validator>
+                    </h:inputText>
+                    <h:message for="zip_code" errorClass="errorMsg"></h:message>
+
+                    <h:outputLabel value="Stadt: " for="city"></h:outputLabel>
+                    <h:inputText id="city" value="#{checkoutManagedBean.registeredUserEntity.city}" validatorMessage="Es sind unerlaubte Zeichen im Stadtnamen enthalten. Bitte &uuml;berpr&uuml;fen Sie ihre Eingabe.">
+                        <f:validator validatorId="NameValidator"></f:validator>
+                    </h:inputText>
+                    <h:message for="city" errorClass="errorMsg"></h:message>
+
+                </h:panelGrid>
+                <h3><i>Bezahlung</i></h3>
+                <h:commandButton value="Jetzt kaufen" action="#{checkoutManagedBean.buyBooks()}"></h:commandButton>
+            </h:form>
+        </c:if>
+    </ui:define>
+
+</ui:composition>

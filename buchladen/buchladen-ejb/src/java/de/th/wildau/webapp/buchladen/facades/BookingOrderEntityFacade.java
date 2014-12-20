@@ -35,4 +35,16 @@ public class BookingOrderEntityFacade extends AbstractFacade<BookingOrderEntity>
         super(BookingOrderEntity.class);
     }
     
+    /**
+     * Erstellt eine Entität vom Typ BookingOrderEntity
+     * @param entity Entität die erstellt werden soll
+     * @return BookingOrderEntity
+     */
+    @Override
+    public BookingOrderEntity createAndReturnEntity(BookingOrderEntity entity) {
+        super.create(entity);
+        getEntityManager().flush();
+        return entity;
+    }
+    
 }

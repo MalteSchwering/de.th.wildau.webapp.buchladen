@@ -17,6 +17,8 @@ import javax.ejb.Remote;
 public interface BookingOrderEntityFacadeRemote {
 
     void create(BookingOrderEntity bookingOrderEntity);
+    
+    BookingOrderEntity createAndReturnEntity(BookingOrderEntity entity);
 
     void edit(BookingOrderEntity bookingOrderEntity);
 
