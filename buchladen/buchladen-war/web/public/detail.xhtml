@@ -4,7 +4,8 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="./../layout.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:define name="content">
         <h2><h:outputText value="#{bookManagedBean.bookEntity.title}"></h:outputText></h2>
@@ -57,8 +58,8 @@
         <br></br>
         <p>
             <h:form rendered="#{request.userPrincipal != null}">
+                <h3><i><h:outputText value="Kommentar (max. #{commentManagedBean.maxLengthOfCommentText} Zeichen)"></h:outputText></i></h3>
                 <h:outputText id="commentLength" value="#{commentManagedBean.currentLengthOfCommentText}"></h:outputText>
-                <h:outputText value=" von #{commentManagedBean.maxLengthOfCommentText}"></h:outputText>
                 <br></br>
                 <h:inputTextarea id="comment" cols="80" rows="8" value="#{commentManagedBean.commentText}" validatorMessage="Der Kommentar enthält ungültige Zeichen. Bitte korrigieren Sie ihre Eingabe! Erlaubte Sonderzeichen sind: ?!,-.">
                     <f:ajax execute="comment" render="commentLength" event="keydown" listener="#{commentManagedBean.countLengthOfCommentText()}"></f:ajax>

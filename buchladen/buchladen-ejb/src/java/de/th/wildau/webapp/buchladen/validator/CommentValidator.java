@@ -18,7 +18,7 @@ public class CommentValidator implements Validator {
     /**
      * Regulärer Ausdruck vom Kommentar.
      * Er verbietet alles außer ein Kommentar mit mindestens ein Wort, jedoch
-     * lediglich 250 Wörter. Sonderzeichen die genutzt werden dürfen sind !.?-,
+     * lediglich 250 Zeichen. Sonderzeichen die genutzt werden dürfen sind !.?-,
      */
     private static final String COMMENT_REGEX = "[\\d\\w\\säüöÄÜÖ?!,-.]{1,250}";
 
