@@ -18,6 +18,10 @@
             <to-view-id>/authorized/user/userprofil.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
+            <from-outcome>orders</from-outcome>
+            <to-view-id>/authorized/user/orders.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
             <from-outcome>login</from-outcome>
             <to-view-id>/public/login.xhtml</to-view-id>
         </navigation-case>
@@ -123,6 +127,6 @@
     <managed-bean>
         <managed-bean-name>checkoutManagedBean</managed-bean-name>
         <managed-bean-class>de.th.wildau.buchladen.CheckoutManagedBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
+        <managed-bean-scope>view</managed-bean-scope>
     </managed-bean>
 </faces-config>
