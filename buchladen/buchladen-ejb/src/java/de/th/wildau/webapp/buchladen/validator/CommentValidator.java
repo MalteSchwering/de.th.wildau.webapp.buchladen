@@ -16,7 +16,7 @@ import javax.faces.validator.ValidatorException;
 public class CommentValidator implements Validator {
 
     /**
-     * Regulärer Ausdruck vom Passwort.
+     * Regulärer Ausdruck vom Kommentar.
      * Er verbietet alles außer ein Kommentar mit mindestens ein Wort, jedoch
      * lediglich 250 Wörter. Sonderzeichen die genutzt werden dürfen sind !.?-,
      */
