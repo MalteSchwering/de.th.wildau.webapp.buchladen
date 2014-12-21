@@ -2,6 +2,8 @@ package de.th.wildau.webapp.buchladen.sessions;
 
 import de.th.wildau.webapp.buchladen.entities.BookingOrderDetailEntity;
 import de.th.wildau.webapp.buchladen.entities.BookingOrderEntity;
+import de.th.wildau.webapp.buchladen.entities.PaymentCreditCardEntity;
+import de.th.wildau.webapp.buchladen.entities.PaymentTransferEntity;
 import de.th.wildau.webapp.buchladen.entities.RegisteredUserEntity;
 import de.th.wildau.webapp.buchladen.facades.BookingOrderDetailEntityFacadeRemote;
 import de.th.wildau.webapp.buchladen.facades.BookingOrderEntityFacadeRemote;
@@ -70,12 +72,34 @@ public class CheckoutSessionBean implements CheckoutSessionBeanRemote {
     /**
      * Kauf der Bücher aus dem Warenkorb wird durchgeführt.
      * @param listBookingOrderDetailEntity Inhalt vom Warenkorb
+     * @param paymentVariant Zahlungsvariante
+     * @param paymentCreditCardEntity Entität einer Kreditkarten Zahlung
+     * @param paymentTransferEntity Entität einer Kontoüberweisung
      */
     @Override
-    public void buyBooks(List<BookingOrderDetailEntity> listBookingOrderDetailEntity) {
+    public void buyBooks(List<BookingOrderDetailEntity> listBookingOrderDetailEntity, int paymentVariant, PaymentCreditCardEntity paymentCreditCardEntity, PaymentTransferEntity paymentTransferEntity) {
+
+        PaymentCreditCardEntity createdPaymentCreditCartyEntity = null;
+        PaymentTransferEntity createdPaymentTransferEntity = null;
+        // Bezahlmethode anlegen
+        if(paymentVariant == 1) {
+            paymentCreditCardEntity.setFkRegisteredUserId(registeredUserEntity);
+            createdPaymentCreditCartyEntity = paymentCreditCardEntityFacade.createAndReturnEntity(paymentCreditCardEntity);
+        }
+        else if(paymentVariant == 2) {
+            paymentTransferEntity.setFkRegisteredUserId(registeredUserEntity);
+            createdPaymentTransferEntity = paymentTransferEntityFacade.createAndReturnEntity(paymentTransferEntity);
+        }
+        
         // Bestellung anlegen
         BookingOrderEntity bookingOrderEntity = new BookingOrderEntity();
         bookingOrderEntity.setFkRegisteredUserId(this.registeredUserEntity);
+        if(createdPaymentCreditCartyEntity == null) {
+            bookingOrderEntity.setFkPaymentCreditCard(createdPaymentCreditCartyEntity);
+        }
+        else if(createdPaymentTransferEntity == null) {
+            bookingOrderEntity.setFkPaymentTransfer(createdPaymentTransferEntity);
+        }
         BookingOrderEntity createdBookingOrderEntity = this.bookingOrderEntityFacade.createAndReturnEntity(bookingOrderEntity);
         
         // Bestelldetails anlegen
@@ -85,12 +109,6 @@ public class CheckoutSessionBean implements CheckoutSessionBeanRemote {
             bookingOrderDetailEntity.setFkBookingOrderId(createdBookingOrderEntity);
             this.bookingOrderDetailEntityFacade.create(bookingOrderDetailEntity);
         }
-        
-        // Bezahlmethode anlegen
-        //...
-        
-        // Warenkorb löschen
-        //...
     }
     
     /**
@@ -110,5 +128,5 @@ public class CheckoutSessionBean implements CheckoutSessionBeanRemote {
     public void setRegisteredUserEntity(RegisteredUserEntity registeredUserEntity) {
         this.registeredUserEntity = registeredUserEntity;
     }
-
+    
 }

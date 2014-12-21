@@ -35,4 +35,16 @@ public class PaymentTransferEntityFacade extends AbstractFacade<PaymentTransferE
         super(PaymentTransferEntity.class);
     }
     
+    /**
+     * Erstellt eine Entität vom Typ PaymentTransferEntity.
+     * @param paymentTransferEntity Entität die erstellt werden soll
+     * @return PaymentTransferEntity
+     */
+    @Override
+    public PaymentTransferEntity createAndReturnEntity(PaymentTransferEntity paymentTransferEntity) {
+        super.create(paymentTransferEntity);
+        getEntityManager().flush();
+        return paymentTransferEntity;
+    }
+    
 }

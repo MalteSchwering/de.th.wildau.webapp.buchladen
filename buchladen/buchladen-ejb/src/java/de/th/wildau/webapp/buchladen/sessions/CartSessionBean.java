@@ -111,6 +111,14 @@ public class CartSessionBean implements CartSessionBeanRemote {
     public List<BookingOrderDetailEntity> getContent() {
         return this.cart;
     }
+    
+    /**
+     * Leert den Inhalt vom Warenkorb.
+     */
+    @Override
+    public void clearCart() {
+        this.cart.clear();
+    }
 
     /**
      * Zählt die Anzahl der Bücher im Warenkorb.

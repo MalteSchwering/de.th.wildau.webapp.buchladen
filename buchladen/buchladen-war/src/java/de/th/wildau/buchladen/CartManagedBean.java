@@ -44,6 +44,13 @@ public class CartManagedBean implements Serializable {
     }
     
     /**
+     * Leert den Inhalt vom Warenkorb.
+     */
+    public void clearCart() {
+        this.cartSessionBean.clearCart();
+    }
+    
+    /**
      * Liefert die Anzahl von Büchern die im Warenkorb enthalten sind zurück.
      * @return Anzahl der Bücher im Warenkorb
      */

@@ -17,6 +17,8 @@ import javax.ejb.Remote;
 public interface PaymentTransferEntityFacadeRemote {
 
     void create(PaymentTransferEntity paymentTransferEntity);
+    
+    PaymentTransferEntity createAndReturnEntity(PaymentTransferEntity paymentTransferEntity);
 
     void edit(PaymentTransferEntity paymentTransferEntity);
 

@@ -26,6 +26,8 @@ public interface CartSessionBeanRemote {
     
     double getTotal();
     
+    void clearCart();
+    
     void setQuantity(int id, int quantity);
     
     void setQuantityPlusOne(int id);

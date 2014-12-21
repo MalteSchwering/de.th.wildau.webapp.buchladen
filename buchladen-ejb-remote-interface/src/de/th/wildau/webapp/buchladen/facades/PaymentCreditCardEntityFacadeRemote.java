@@ -17,6 +17,8 @@ import javax.ejb.Remote;
 public interface PaymentCreditCardEntityFacadeRemote {
 
     void create(PaymentCreditCardEntity paymentCreditCardEntity);
+    
+    PaymentCreditCardEntity createAndReturnEntity(PaymentCreditCardEntity paymentCreditCardEntity);
 
     void edit(PaymentCreditCardEntity paymentCreditCardEntity);
 
