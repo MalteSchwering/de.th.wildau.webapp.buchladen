@@ -104,7 +104,61 @@
 
                 </h:panelGrid>
                 <h3><i>Bezahlung</i></h3>
-                <h:commandButton value="Jetzt kaufen" action="#{checkoutManagedBean.buyBooks()}"></h:commandButton>
+                <p>
+                    <h:selectOneMenu id="payment_variant" value="#{checkoutManagedBean.paymentVariant}" validatorMessage="Bitte wählen Sie eine Zahlungsvariante aus.">
+                        <f:selectItem itemValue="0" itemLabel="Zahlungsvariante wählen ..."></f:selectItem>
+                        <f:selectItem itemValue="1" itemLabel="Zahlung per Kreditkarte"></f:selectItem>
+                        <f:selectItem itemValue="2" itemLabel="Zahlung per Kontoüberweisung"></f:selectItem>
+                        <f:ajax execute="payment_variant" render="payment_form"></f:ajax>
+                        <f:validateLongRange minimum="1" maximum="2"></f:validateLongRange>
+                    </h:selectOneMenu>
+                    <h:message for="payment_variant" errorClass="errorMsg"></h:message>
+                </p>
+                <h:panelGroup id="payment_form">
+                    <h:panelGrid columns="3">
+                        <c:if test="#{checkoutManagedBean.paymentVariant == 1}">
+                            
+                            <h:outputLabel value="Kreditkartennummer:" for="credit_card_number"></h:outputLabel>
+                            <h:inputText id="credit_card_number" value="#{checkoutManagedBean.paymentCreditCardEntity.creditCardNumber}"></h:inputText>
+                            <h:message for="credit_card_number" errorClass="errorMsg"></h:message>
+                            
+                            <h:outputLabel value="Karten Validierungscode:" for="card_validation_code"></h:outputLabel>
+                            <h:inputText id="card_validation_code" value="#{checkoutManagedBean.paymentCreditCardEntity.cardValidationCode}"></h:inputText>
+                            <h:message for="card_validation_code" errorClass="errorMsg"></h:message>
+                            
+                            <h:outputLabel value="Karten Besitzer:" for="card_holder"></h:outputLabel>
+                            <h:inputText id="card_holder" value="#{checkoutManagedBean.paymentCreditCardEntity.cardHolder}"></h:inputText>
+                            <h:message for="card_holder" errorClass="errorMsg"></h:message>
+                            
+                            <h:outputLabel value="Ablauf Monat:" for="expiration_month"></h:outputLabel>
+                            <h:inputText id="expiration_month" value="#{checkoutManagedBean.paymentCreditCardEntity.expirationMonth}"></h:inputText>
+                            <h:message for="expiration_month" errorClass="errorMsg"></h:message>
+                            
+                            <h:outputLabel value="Ablauf Jahr:" for="expiration_year"></h:outputLabel>
+                            <h:inputText id="expiration_year" value="#{checkoutManagedBean.paymentCreditCardEntity.expirationYear}"></h:inputText>
+                            <h:message for="expiration_year" errorClass="errorMsg"></h:message>
+                            
+                        </c:if>
+                        <c:if test="#{checkoutManagedBean.paymentVariant == 2}">
+                            
+                            <h:outputLabel value="IBAN:" for="iban"></h:outputLabel>
+                            <h:inputText id="iban" value="#{checkoutManagedBean.paymentTransferEntity.iban}"></h:inputText>
+                            <h:message for="iban" errorClass="errorMsg"></h:message>
+                            
+                            <h:outputLabel value="BIC:" for="bic"></h:outputLabel>
+                            <h:inputText id="bic" value="#{checkoutManagedBean.paymentTransferEntity.bic}"></h:inputText>
+                            <h:message for="bic" errorClass="errorMsg"></h:message>
+                            
+                            <h:outputLabel value="Kontoinhaber:" for="account_holder"></h:outputLabel>
+                            <h:inputText id="account_holder" value="#{checkoutManagedBean.paymentTransferEntity.accountHolder}"></h:inputText>
+                            <h:message for="account_holder" errorClass="errorMsg"></h:message>
+                            
+                        </c:if>
+                    </h:panelGrid>
+                </h:panelGroup>
+                <p>
+                    <h:commandButton value="Jetzt kaufen" action="#{checkoutManagedBean.buyBooks()}"></h:commandButton>
+                </p>
             </h:form>
         </c:if>
     </ui:define>

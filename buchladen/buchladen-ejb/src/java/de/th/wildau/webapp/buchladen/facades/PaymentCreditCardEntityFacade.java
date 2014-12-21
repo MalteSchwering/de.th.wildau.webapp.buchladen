@@ -35,4 +35,16 @@ public class PaymentCreditCardEntityFacade extends AbstractFacade<PaymentCreditC
         super(PaymentCreditCardEntity.class);
     }
     
+    /**
+     * Erstellt eine Entität vom Typ PaymentCreditCardEntity.
+     * @param paymentCreditCardEntity Entität die erstellt werden soll
+     * @return PaymentCreditCardEntity
+     */
+    @Override
+    public PaymentCreditCardEntity createAndReturnEntity(PaymentCreditCardEntity paymentCreditCardEntity) {
+        super.create(paymentCreditCardEntity);
+        getEntityManager().flush();
+        return paymentCreditCardEntity;
+    }
+    
 }

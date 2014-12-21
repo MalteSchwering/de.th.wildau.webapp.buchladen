@@ -36,7 +36,7 @@ public class BookingOrderEntityFacade extends AbstractFacade<BookingOrderEntity>
     }
     
     /**
-     * Erstellt eine Entität vom Typ BookingOrderEntity
+     * Erstellt eine Entität vom Typ BookingOrderEntity.
      * @param entity Entität die erstellt werden soll
      * @return BookingOrderEntity
      */
