@@ -6,6 +6,7 @@
 package de.th.wildau.webapp.buchladen.facades;
 
 import de.th.wildau.webapp.buchladen.entities.BookingOrderEntity;
+import de.th.wildau.webapp.buchladen.entities.RegisteredUserEntity;
 import java.util.List;
 import javax.ejb.Remote;
 
@@ -27,6 +28,8 @@ public interface BookingOrderEntityFacadeRemote {
     BookingOrderEntity find(Object id);
 
     List<BookingOrderEntity> findAll();
+    
+    List<BookingOrderEntity> findAllByRegisteredUser(RegisteredUserEntity user);
 
     List<BookingOrderEntity> findRange(int[] range);
 

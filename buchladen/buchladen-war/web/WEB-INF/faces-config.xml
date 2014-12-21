@@ -129,4 +129,9 @@
         <managed-bean-class>de.th.wildau.buchladen.CheckoutManagedBean</managed-bean-class>
         <managed-bean-scope>view</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>ordersManagedBean</managed-bean-name>
+        <managed-bean-class>de.th.wildau.buchladen.OrdersManagedBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 </faces-config>

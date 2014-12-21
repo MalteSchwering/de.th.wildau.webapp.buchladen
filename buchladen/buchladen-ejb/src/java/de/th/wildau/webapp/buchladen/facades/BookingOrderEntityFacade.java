@@ -1,6 +1,8 @@
 package de.th.wildau.webapp.buchladen.facades;
 
 import de.th.wildau.webapp.buchladen.entities.BookingOrderEntity;
+import de.th.wildau.webapp.buchladen.entities.RegisteredUserEntity;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -45,6 +47,16 @@ public class BookingOrderEntityFacade extends AbstractFacade<BookingOrderEntity>
         super.create(entity);
         getEntityManager().flush();
         return entity;
+    }
+    
+    /**
+     * Liefert eine Liste aller Bücher Bestellungen eines Benutzers zurück.
+     * @param user Entität des registrierten Benutzers
+     * @return Liste vom Typ BookingOrderEntity
+     */
+    @Override
+    public List<BookingOrderEntity> findAllByRegisteredUser(RegisteredUserEntity user) {
+        return em.createNamedQuery("BookingOrderEntity.findAllByRegisteredUserId").setParameter("registeredUserId", user.getId()).getResultList();
     }
     
 }

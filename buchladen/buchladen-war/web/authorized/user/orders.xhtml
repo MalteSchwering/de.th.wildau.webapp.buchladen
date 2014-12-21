@@ -3,15 +3,33 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="./../../layout.xhtml"
-                xmlns:h="http://xmlns.jcp.org/jsf/html">
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:define name="content">
-        <h2>bisherige Bestellungen</h2>
-        <h:dataTable value=""
-                     var="order"
-                     rendered="true"
-                     border="1" cellpadding="0" cellspacing="0" id="orderTable">
-        </h:dataTable>
+        <h2>Bestellungen</h2>
+        <c:forEach items="#{ordersManagedBean.bookingOrderEntitiesFromUser}" var="order" varStatus="loop">
+            <p>
+                <h3><i><h:outputText value="Bestellung #{loop.index + 1}"></h:outputText></i></h3>
+                <h:dataTable value="#{ordersManagedBean.getBookingOrderDetailFromBookingOrder(order)}"
+                         var="orderItem"
+                         border="1" cellpadding="0" cellspacing="0">
+                    
+                    <h:column>
+                        <h:outputText value="#{orderItem.fkBookId.title}"></h:outputText>
+                    </h:column>
+
+                    <h:column>
+                        <h:outputText value="#{orderItem.fkBookId.price}">
+                            <f:convertNumber type="currency" currencySymbol="€" locale="de-DE"></f:convertNumber>
+                        </h:outputText>
+                    </h:column>
+
+                </h:dataTable>
+            </p>
+            
+        </c:forEach>
     </ui:define>
 
 </ui:composition>

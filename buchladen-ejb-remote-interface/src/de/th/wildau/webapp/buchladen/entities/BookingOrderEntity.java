@@ -10,6 +10,7 @@ import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,7 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "BookingOrderEntity.findAll", query = "SELECT b FROM BookingOrderEntity b"),
-    @NamedQuery(name = "BookingOrderEntity.findById", query = "SELECT b FROM BookingOrderEntity b WHERE b.id = :id")})
+    @NamedQuery(name = "BookingOrderEntity.findById", query = "SELECT b FROM BookingOrderEntity b WHERE b.id = :id"),
+    @NamedQuery(name = "BookingOrderEntity.findAllByRegisteredUserId", query = "SELECT b FROM BookingOrderEntity b WHERE b.fkRegisteredUserId.id = :registeredUserId")})
 public class BookingOrderEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
