@@ -125,6 +125,12 @@
         <validator-id>CommentValidator</validator-id>
         <validator-class>de.th.wildau.webapp.buchladen.validator.CommentValidator</validator-class>
     </validator>
+    <validator>
+        <description></description>
+        <display-name>UsernameValidator</display-name>
+        <validator-id>UsernameValidator</validator-id>
+        <validator-class>de.th.wildau.webapp.buchladen.validator.UsernameValidator</validator-class>
+    </validator>
     <managed-bean>
         <managed-bean-name>commentManagedBean</managed-bean-name>
         <managed-bean-class>de.th.wildau.buchladen.CommentManagedBean</managed-bean-class>

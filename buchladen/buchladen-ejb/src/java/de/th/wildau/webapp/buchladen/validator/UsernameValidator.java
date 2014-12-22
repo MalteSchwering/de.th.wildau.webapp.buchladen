@@ -19,14 +19,15 @@ import javax.naming.NamingException;
  * @author Malte Schwering
  * @version 0.1
  */
-public class EmailAddressValidator implements Validator {
-    RegisteredUserEntityFacadeRemote registeredUserEntityFacade = lookupRegisteredUserEntityFacadeRemote();
+public class UsernameValidator implements Validator {
     
     /**
-     * Regulärer Ausdruck der E-Mail Adresse.
-     * Er verbietet alles außer einer normalen EMail-Adresse.
+     * Regulärer Ausdruck vom Username.
+     * Dieser Ausdruck stammt vom W3C und wird für die Validierung von HTML5
+     * Input vom Typ "email" genutzt.
+     * Link: http://www.w3.org/TR/html5/forms.html#valid-e-mail-address
      */
-    private static final String EMAIL_ADDRESS_REGEX = "[\\w|.|-]*@\\w*\\.[\\w|.]*";
+    private static final String USERNAME_REGEX = "^[_A-Za-z0-9-]+(\\\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})$";
 
     /**
      * Kompilierte Repräsentation des regulären Ausdrucks.
@@ -41,8 +42,8 @@ public class EmailAddressValidator implements Validator {
     /**
      * Konstruktor der den regulären Ausdruck kompiliert.
      */
-    public EmailAddressValidator() {
-        pattern = Pattern.compile(EMAIL_ADDRESS_REGEX);
+    public UsernameValidator() {
+        pattern = Pattern.compile(USERNAME_REGEX);
     }
 
     /**
@@ -63,21 +64,6 @@ public class EmailAddressValidator implements Validator {
         if(value.toString().length() > 250) {
             FacesMessage facesMessage = new FacesMessage(component.getClientId());
             throw new ValidatorException(facesMessage);
-        }
-        
-        if(registeredUserEntityFacade.findByEmailAddress(value.toString()) != null) {
-            FacesMessage facesMessage = new FacesMessage(component.getClientId());
-            throw new ValidatorException(facesMessage);
-        }
-    }
-
-    private RegisteredUserEntityFacadeRemote lookupRegisteredUserEntityFacadeRemote() {
-        try {
-            Context c = new InitialContext();
-            return (RegisteredUserEntityFacadeRemote) c.lookup("java:global/buchladen/buchladen-ejb/RegisteredUserEntityFacade!de.th.wildau.webapp.buchladen.facades.RegisteredUserEntityFacadeRemote");
-        } catch (NamingException ne) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
-            throw new RuntimeException(ne);
         }
     }
 }
