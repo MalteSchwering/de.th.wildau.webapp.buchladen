@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 public class LogoutManagedBean {
     
     /**
-     * 
+     * Meldet den Benutzer ab.
      */
     public void logout() {
         FacesContext context = FacesContext.getCurrentInstance();
