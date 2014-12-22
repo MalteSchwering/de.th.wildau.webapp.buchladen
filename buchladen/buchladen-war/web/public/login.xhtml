@@ -9,15 +9,15 @@
     <ui:define name="content">
         <h2>Anmeldung</h2>
         <h:form>
-            <h:panelGrid columns="2">
+            <h:panelGrid columns="3">
                 <h:outputLabel for="username">Benutzername: </h:outputLabel>
-                <h:inputText id="username" value="#{loginManagedBean.username}" required="true" validatorMessage="Falsche E-Mail-Adresse.">
+                <h:inputText id="username" value="#{loginManagedBean.username}" validatorMessage="Falsche E-Mail-Adresse.">
                     <f:validateRequired></f:validateRequired>
-                    <f:validator validatorId="EmailAddressValidator"></f:validator>
+                    <f:validator validatorId="UsernameValidator"></f:validator>
                 </h:inputText>
                 <h:message for="username" errorClass="errorMsg"></h:message>
                 <h:outputLabel for="password">Passwort: </h:outputLabel>
-                <h:inputSecret id="password" value="#{loginManagedBean.password}" required="true"></h:inputSecret>
+                <h:inputSecret id="password" value="#{loginManagedBean.password}"></h:inputSecret>
                 <h:commandButton value="Anmelden" action="#{loginManagedBean.login()}"></h:commandButton>
             </h:panelGrid>
         </h:form>

@@ -1,8 +1,5 @@
 package de.th.wildau.webapp.buchladen.validator;
 
-import de.th.wildau.webapp.buchladen.facades.RegisteredUserEntityFacadeRemote;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.faces.application.FacesMessage;
@@ -10,9 +7,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 
 /**
  * @author Jan Gabler
@@ -23,11 +17,9 @@ public class UsernameValidator implements Validator {
     
     /**
      * Regulärer Ausdruck vom Username.
-     * Dieser Ausdruck stammt vom W3C und wird für die Validierung von HTML5
-     * Input vom Typ "email" genutzt.
-     * Link: http://www.w3.org/TR/html5/forms.html#valid-e-mail-address
+     * Er verbietet alles außer einer normalen E-Mail-Adresse.
      */
-    private static final String USERNAME_REGEX = "^[_A-Za-z0-9-]+(\\\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})$";
+    private static final String USERNAME_REGEX = "[\\w|.|-]*@\\w*\\.[\\w|.]*";
 
     /**
      * Kompilierte Repräsentation des regulären Ausdrucks.
@@ -66,4 +58,5 @@ public class UsernameValidator implements Validator {
             throw new ValidatorException(facesMessage);
         }
     }
+    
 }

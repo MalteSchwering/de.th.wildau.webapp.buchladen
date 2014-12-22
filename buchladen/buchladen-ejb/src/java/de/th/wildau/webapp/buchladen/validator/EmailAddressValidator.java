@@ -20,11 +20,15 @@ import javax.naming.NamingException;
  * @version 0.1
  */
 public class EmailAddressValidator implements Validator {
+    
+    /**
+     * Enterprise Java Bean registeredUserEntityFacade.
+     */
     RegisteredUserEntityFacadeRemote registeredUserEntityFacade = lookupRegisteredUserEntityFacadeRemote();
     
     /**
      * Regulärer Ausdruck der E-Mail Adresse.
-     * Er verbietet alles außer einer normalen EMail-Adresse.
+     * Er verbietet alles außer einer normalen E-Mail-Adresse.
      */
     private static final String EMAIL_ADDRESS_REGEX = "[\\w|.|-]*@\\w*\\.[\\w|.]*";
 
@@ -70,7 +74,11 @@ public class EmailAddressValidator implements Validator {
             throw new ValidatorException(facesMessage);
         }
     }
-
+    
+    /**
+     * Liefert die Remote registeredUserEntityFacade zurück.
+     * @return registeredUserEntityFacade
+     */
     private RegisteredUserEntityFacadeRemote lookupRegisteredUserEntityFacadeRemote() {
         try {
             Context c = new InitialContext();
@@ -80,4 +88,5 @@ public class EmailAddressValidator implements Validator {
             throw new RuntimeException(ne);
         }
     }
+    
 }
