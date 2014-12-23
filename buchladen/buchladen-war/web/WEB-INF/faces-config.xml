@@ -131,6 +131,36 @@
         <validator-id>UsernameValidator</validator-id>
         <validator-class>de.th.wildau.webapp.buchladen.validator.UsernameValidator</validator-class>
     </validator>
+    <validator>
+        <description></description>
+        <display-name>IBANValidator</display-name>
+        <validator-id>IBANValidator</validator-id>
+        <validator-class>de.th.wildau.webapp.buchladen.validator.IBANValidator</validator-class>
+    </validator>
+    <validator>
+        <description></description>
+        <display-name>BICValidator</display-name>
+        <validator-id>BICValidator</validator-id>
+        <validator-class>de.th.wildau.webapp.buchladen.validator.BICValidator</validator-class>
+    </validator>
+    <validator>
+        <description></description>
+        <display-name>CreditCardNumberValidator</display-name>
+        <validator-id>CreditCardNumberValidator</validator-id>
+        <validator-class>de.th.wildau.webapp.buchladen.validator.CreditCardNumberValidator</validator-class>
+    </validator>
+    <validator>
+        <description></description>
+        <display-name>CreditCardValidationCodeValidator</display-name>
+        <validator-id>CreditCardValidationCodeValidator</validator-id>
+        <validator-class>de.th.wildau.webapp.buchladen.validator.CreditCardValidationCodeValidator</validator-class>
+    </validator>
+    <validator>
+        <description></description>
+        <display-name>CreditCardMonthValidator</display-name>
+        <validator-id>CreditCardMonthValidator</validator-id>
+        <validator-class>de.th.wildau.webapp.buchladen.validator.CreditCardMonthValidator</validator-class>
+    </validator>
     <managed-bean>
         <managed-bean-name>commentManagedBean</managed-bean-name>
         <managed-bean-class>de.th.wildau.buchladen.CommentManagedBean</managed-bean-class>
