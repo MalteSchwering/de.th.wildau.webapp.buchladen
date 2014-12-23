@@ -155,6 +155,12 @@
         <validator-id>CreditCardValidationCodeValidator</validator-id>
         <validator-class>de.th.wildau.webapp.buchladen.validator.CreditCardValidationCodeValidator</validator-class>
     </validator>
+    <validator>
+        <description></description>
+        <display-name>CreditCardMonthValidator</display-name>
+        <validator-id>CreditCardMonthValidator</validator-id>
+        <validator-class>de.th.wildau.webapp.buchladen.validator.CreditCardMonthValidator</validator-class>
+    </validator>
     <managed-bean>
         <managed-bean-name>commentManagedBean</managed-bean-name>
         <managed-bean-class>de.th.wildau.buchladen.CommentManagedBean</managed-bean-class>

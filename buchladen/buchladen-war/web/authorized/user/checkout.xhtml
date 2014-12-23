@@ -140,7 +140,11 @@
                             <h:message for="card_holder" errorClass="errorMsg"></h:message>
                             
                             <h:outputLabel value="Ablauf Monat:*" for="expiration_month"></h:outputLabel>
-                            <h:inputText id="expiration_month" value="#{checkoutManagedBean.paymentCreditCardEntity.expirationMonth}"></h:inputText>
+                            <h:inputText id="expiration_month" value="#{checkoutManagedBean.paymentCreditCardEntity.expirationMonth}" validatorMessage="Falsche Eingabe des Monats. Eingabe zwischen 01-12 möglich.">
+                                <f:convertNumber integerOnly="true" type="number"></f:convertNumber>
+                                <f:validateRequired></f:validateRequired>
+                                <f:validator validatorId="CreditCardMonthValidator"></f:validator>
+                            </h:inputText>
                             <h:message for="expiration_month" errorClass="errorMsg"></h:message>
                             
                             <h:outputLabel value="Ablauf Jahr:*" for="expiration_year"></h:outputLabel>
