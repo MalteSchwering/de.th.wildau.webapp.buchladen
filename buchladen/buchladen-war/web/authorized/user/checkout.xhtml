@@ -148,7 +148,9 @@
                             <h:message for="iban" errorClass="errorMsg"></h:message>
                             
                             <h:outputLabel value="BIC:" for="bic"></h:outputLabel>
-                            <h:inputText id="bic" value="#{checkoutManagedBean.paymentTransferEntity.bic}"></h:inputText>
+                            <h:inputText id="bic" value="#{checkoutManagedBean.paymentTransferEntity.bic}" validatorMessage="Falsche BIC. Bitte korrigieren Sie ihre Eingabe.">
+                                <f:validator validatorId="BICValidator"></f:validator>
+                            </h:inputText>
                             <h:message for="bic" errorClass="errorMsg"></h:message>
                             
                             <h:outputLabel value="Kontoinhaber:" for="account_holder"></h:outputLabel>

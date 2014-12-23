@@ -13,14 +13,15 @@ import javax.faces.validator.ValidatorException;
  * @author Malte Schwering
  * @version 0.1
  */
-public class IBANValidator implements Validator{
-
-    /**
-     * Regulärer Ausdruck des IBAN.
-     * Er verbietet alles außer eine IBAN-Nummer aus Deutschland und ohne
-     * Leerzeichen.
+public class BICValidator implements Validator{
+    
+/**
+     * Regulärer Ausdruck der BIC.
+     * Er verbietet alles außer ein Passwort aus mindestens 8 Buchstaben,
+     * bestehend aus Großbuchstaben, Kleinbuchstaben, Zahlen und mindestens 
+     * ein Sonderzeichen, wie zum Beispiel @#$%
      */
-    private static final String IBAN_REGEX = "\\w{2}\\d{2} ?\\d{4} ?\\d{4} ?\\d{4} ?\\d{4} ?\\d{2}";
+    private static final String BIC_REGEX = "([a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?)";
 
     /**
      * Kompilierte Repräsentation des regulären Ausdrucks.
@@ -35,8 +36,8 @@ public class IBANValidator implements Validator{
     /**
      * Konstruktor der den regulären Ausdruck kompiliert.
      */
-    public IBANValidator() {
-        pattern = Pattern.compile(IBAN_REGEX);
+    public BICValidator() {
+        pattern = Pattern.compile(BIC_REGEX);
     }
 
     /**
