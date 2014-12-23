@@ -28,4 +28,4 @@ nb-configuration.xml
 /buchladen/buchladen-war/nbproject/faces-config.NavData
 
 ### don't ignore jars in libs folder
-!/libs/
+!libs/*.jar
