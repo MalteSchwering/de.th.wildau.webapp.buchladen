@@ -23,9 +23,8 @@ public class CreditCardNumberValidator implements Validator{
     
     /**
      * Regulärer Ausdruck der Kreditkartennummer.
-     * Er verbietet alles außer ein Passwort aus mindestens 8 Buchstaben,
-     * bestehend aus Großbuchstaben, Kleinbuchstaben, Zahlen und mindestens 
-     * ein Sonderzeichen, wie zum Beispiel @#$%
+     * Er verbietet alles außer eine Kreditkartennummer aus den jeweiligen
+     * Unternehmen.
      */
     private static final String CREDITCARDNUMBER_REGEX = "[3-6]{1}\\d{3}[\\s-]?\\d{4}[\\s-]?\\d{4}[\\s-]?\\d{3,4}";
 

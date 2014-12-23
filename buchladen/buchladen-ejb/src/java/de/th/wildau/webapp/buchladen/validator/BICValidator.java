@@ -17,9 +17,7 @@ public class BICValidator implements Validator{
     
 /**
      * Regulärer Ausdruck der BIC.
-     * Er verbietet alles außer ein Passwort aus mindestens 8 Buchstaben,
-     * bestehend aus Großbuchstaben, Kleinbuchstaben, Zahlen und mindestens 
-     * ein Sonderzeichen, wie zum Beispiel @#$%
+     * Er verbietet alles außer ein regelkonformes BIC.
      */
     private static final String BIC_REGEX = "([a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?)";
 
