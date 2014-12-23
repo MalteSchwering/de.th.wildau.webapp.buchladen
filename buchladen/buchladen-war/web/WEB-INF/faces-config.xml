@@ -143,6 +143,12 @@
         <validator-id>BICValidator</validator-id>
         <validator-class>de.th.wildau.webapp.buchladen.validator.BICValidator</validator-class>
     </validator>
+    <validator>
+        <description></description>
+        <display-name>CreditCardNumberValidator</display-name>
+        <validator-id>CreditCardNumberValidator</validator-id>
+        <validator-class>de.th.wildau.webapp.buchladen.validator.CreditCardNumberValidator</validator-class>
+    </validator>
     <managed-bean>
         <managed-bean-name>commentManagedBean</managed-bean-name>
         <managed-bean-class>de.th.wildau.buchladen.CommentManagedBean</managed-bean-class>

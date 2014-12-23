@@ -119,7 +119,10 @@
                         <c:if test="#{checkoutManagedBean.paymentVariant == 1}">
                             
                             <h:outputLabel value="Kreditkartennummer:*" for="credit_card_number"></h:outputLabel>
-                            <h:inputText id="credit_card_number" value="#{checkoutManagedBean.paymentCreditCardEntity.creditCardNumber}"></h:inputText>
+                            <h:inputText id="credit_card_number" value="#{checkoutManagedBean.paymentCreditCardEntity.creditCardNumber}" validatorMessage="Falsche Kreditkartennummer. Bitte korrigieren Sie ihre Eingabe.">
+                                <f:validateRequired></f:validateRequired>
+                                <f:validator validatorId="CreditCardNumberValidator"></f:validator>
+                            </h:inputText>
                             <h:message for="credit_card_number" errorClass="errorMsg"></h:message>
                             
                             <h:outputLabel value="Karten Validierungscode:*" for="card_validation_code"></h:outputLabel>
