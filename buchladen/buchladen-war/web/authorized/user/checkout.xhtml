@@ -142,7 +142,9 @@
                         <c:if test="#{checkoutManagedBean.paymentVariant == 2}">
                             
                             <h:outputLabel value="IBAN:" for="iban"></h:outputLabel>
-                            <h:inputText id="iban" value="#{checkoutManagedBean.paymentTransferEntity.iban}"></h:inputText>
+                            <h:inputText id="iban" value="#{checkoutManagedBean.paymentTransferEntity.iban}" validatorMessage="Falsche IBAN. Leerzeichen sind nicht zugelassen. Bitte korrigieren Sie ihre Eingabe.">
+                                <f:validator validatorId="IBANValidator"></f:validator>
+                            </h:inputText>
                             <h:message for="iban" errorClass="errorMsg"></h:message>
                             
                             <h:outputLabel value="BIC:" for="bic"></h:outputLabel>
