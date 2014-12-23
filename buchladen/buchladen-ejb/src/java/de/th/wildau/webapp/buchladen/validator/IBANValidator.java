@@ -18,7 +18,7 @@ public class IBANValidator implements Validator{
     /**
      * Regulärer Ausdruck des IBAN.
      * Er verbietet alles außer eine IBAN-Nummer aus Deutschland und ohne
-     * Leerzeichen.
+     * Leerzeichen. 
      */
     private static final String IBAN_REGEX = "\\w{2}\\d{2} ?\\d{4} ?\\d{4} ?\\d{4} ?\\d{4} ?\\d{2}";
 
