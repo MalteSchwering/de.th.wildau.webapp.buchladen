@@ -125,8 +125,11 @@
                             </h:inputText>
                             <h:message for="credit_card_number" errorClass="errorMsg"></h:message>
                             
-                            <h:outputLabel value="Karten Validierungscode:*" for="card_validation_code"></h:outputLabel>
-                            <h:inputText id="card_validation_code" value="#{checkoutManagedBean.paymentCreditCardEntity.cardValidationCode}"></h:inputText>
+                            <h:outputLabel value="Karten Validierungscode (CVV):*" for="card_validation_code"></h:outputLabel>
+                            <h:inputText id="card_validation_code" value="#{checkoutManagedBean.paymentCreditCardEntity.cardValidationCode}" validatorMessage="Falscher Validierungscode. Bitte korrigieren Sie ihre Eingabe. (Mindestens 3, Maximal 4 Zahlen)">
+                                <f:validateRequired></f:validateRequired>
+                                <f:validator validatorId="CreditCardValidationCodeValidator"></f:validator>
+                            </h:inputText>
                             <h:message for="card_validation_code" errorClass="errorMsg"></h:message>
                             
                             <h:outputLabel value="Karten Besitzer:*" for="card_holder"></h:outputLabel>
