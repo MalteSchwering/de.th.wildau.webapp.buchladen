@@ -1,10 +1,14 @@
 package de.th.wildau.buchladen;
 
+import de.th.wildau.webapp.buchladen.entities.RegisteredUserEntity;
+import de.th.wildau.webapp.buchladen.facades.RegisteredUserEntityFacadeRemote;
 import java.io.Serializable;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  * @author Jan Gabler
@@ -12,6 +16,12 @@ import javax.servlet.http.HttpServletRequest;
  * @version 0.1
  */
 public class LoginManagedBean implements Serializable {
+    
+    /**
+     * Enterprise Java Bean registeredUserEntityFacade mit einem Remote Interface.
+     */
+    @EJB
+    private RegisteredUserEntityFacadeRemote registeredUserEntityFacade;
     
     /**
      * Der Benutzername des Anwenders.
@@ -68,7 +78,13 @@ public class LoginManagedBean implements Serializable {
      * @param password Passwort
      */
     public void setPassword(String password) {
-        this.password = password;
+        RegisteredUserEntity registeredUserEntity = registeredUserEntityFacade.findByEmailAddress(this.username);
+        String salt = registeredUserEntity.getSalt();
+        String pepper = "DeR$uLtImAtIvE%pEpPeR";
+        String part1 = password.substring(0, 4);
+        String part2 = password.substring(4);
+        String passwordWithSaltAndPepper = part1.concat(pepper).concat(part2).concat(salt);
+        this.password = passwordWithSaltAndPepper;
     }
     
 }
