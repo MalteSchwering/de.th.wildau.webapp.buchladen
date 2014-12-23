@@ -20,6 +20,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 
 /**
  *
@@ -52,6 +54,9 @@ public class RegisteredUserEntity implements Serializable {
     @Size(max = 255)
     @Column(name = "PASSWORD")
     private String password;
+    @Size(max = 4)
+    @Column(name = "SALT")
+    private String salt;
     @Size(max = 255)
     @Column(name = "FIRST_NAME")
     private String firstName;
@@ -109,7 +114,20 @@ public class RegisteredUserEntity implements Serializable {
     }
 
     public void setPassword(String password) {
-        //this.password = DigestUtils.sha256Hex(password);
+        this.salt = RandomStringUtils.randomAlphanumeric(4);
+        String pepper = "DeR$uLtImAtIvE%pEpPeR";
+        String part1 = password.substring(0, 4);
+        String part2 = password.substring(4);
+        String passwordWithSaltAndPepper = part1.concat(pepper).concat(part2).concat(this.salt);
+        this.password = DigestUtils.sha256Hex(passwordWithSaltAndPepper);
+    }
+    
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public String getFirstName() {

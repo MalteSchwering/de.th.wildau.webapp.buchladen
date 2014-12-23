@@ -11,6 +11,7 @@ create table registered_user
   id int not null generated always as identity constraint pk_registered_user primary key,
   email_address varchar(255),
   password varchar(255),
+  salt varchar(4),
   first_name varchar(255),
   last_name varchar(255),
   street varchar(255),
@@ -106,10 +107,10 @@ left join user_group ug on rugm.fk_user_group_id = ug.id;
 -- ##################################################
 -- INSERT (DUMMY) DATA INTO TABLES
 -- ##################################################
-insert into registered_user (email_address, password, first_name, last_name, street, house_number, zip_code, city) values
-('max.mustermann@beispiel.de', '2ac9a6746aca543af8dff39894cfe8173afba21eb01c6fae33d52947222855ef', 'Max', 'Mustermann', 'Abc Str.', '1', '12345', 'Berlin'),
-('jan.gabler@beispiel.de', '2ac9a6746aca543af8dff39894cfe8173afba21eb01c6fae33d52947222855ef', 'Jan', 'Gabler', 'Def Str.', '2', '12345', 'Berlin'),
-('malte.schwering@beispiel.de', '2ac9a6746aca543af8dff39894cfe8173afba21eb01c6fae33d52947222855ef', 'Malte', 'Schwering', 'Ghi Str.', '3', '12345', 'Berlin');
+insert into registered_user (email_address, password, salt, first_name, last_name, street, house_number, zip_code, city) values
+('max.mustermann@beispiel.de', 'b6ec4a0c92fc390b8bb30be6efd16b94dd75fe4fd76bd89c8c44daf85295db98', 'Fy73', 'Max', 'Mustermann', 'Abc Str.', '1', '12345', 'Berlin'),
+('jan.gabler@beispiel.de', 'c7490aebff95f18e81a97aa84072f8ce714efa893c6f30dee3eac4f560dbe681', 'Bx8N', 'Jan', 'Gabler', 'Def Str.', '2', '12345', 'Berlin'),
+('malte.schwering@beispiel.de', 'f178366558ec65e83430a2bdaf5ef0ecad51493d10427234ece1f404e632d223', '9Lr2', 'Malte', 'Schwering', 'Ghi Str.', '3', '12345', 'Berlin');
 insert into user_group (group_name) values
 ('admin'),
 ('user');
