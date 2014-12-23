@@ -20,6 +20,7 @@ public class LogoutManagedBean {
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
         try {
             request.logout();
+            FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         } catch (ServletException ex) {
             context.addMessage(null, new FacesMessage("Logout failed."));
         }
