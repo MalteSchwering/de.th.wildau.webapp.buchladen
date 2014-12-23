@@ -130,7 +130,10 @@
                             <h:message for="card_validation_code" errorClass="errorMsg"></h:message>
                             
                             <h:outputLabel value="Karten Besitzer:*" for="card_holder"></h:outputLabel>
-                            <h:inputText id="card_holder" value="#{checkoutManagedBean.paymentCreditCardEntity.cardHolder}"></h:inputText>
+                            <h:inputText id="card_holder" value="#{checkoutManagedBean.paymentCreditCardEntity.cardHolder}" validatorMessage="Es sind unerlaubte Zeichen im Feld enthalten. Bitte korrigieren Sie ihre Eingabe.">
+                                <f:validateRequired></f:validateRequired>
+                                <f:validator validatorId="NameValidator"></f:validator>
+                            </h:inputText>
                             <h:message for="card_holder" errorClass="errorMsg"></h:message>
                             
                             <h:outputLabel value="Ablauf Monat:*" for="expiration_month"></h:outputLabel>
