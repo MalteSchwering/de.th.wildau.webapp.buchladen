@@ -2,9 +2,12 @@ package de.th.wildau.buchladen;
 
 import de.th.wildau.webapp.buchladen.entities.BookEntity;
 import de.th.wildau.webapp.buchladen.facades.BookEntityFacadeRemote;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -47,6 +50,15 @@ public class BookManagedBean implements Serializable {
         ExternalContext extContext = context.getExternalContext();
         Map<String, String> params = extContext.getRequestParameterMap();
         return Integer.parseInt(params.get("id"));
+    }
+    
+    public void showDetail(){
+        
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("detail.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(BookManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
