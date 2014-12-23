@@ -9,6 +9,7 @@
             <included-library dirs="200">file.reference.commons-collections-3.2.1.jar</included-library>
             <included-library dirs="200">file.reference.commons-logging-1.2.jar</included-library>
             <included-library dirs="200">file.reference.jcaptcha-1.0-all.jar-1</included-library>
+            <included-library dirs="200">file.reference.commons-codec-1.9.jar-1</included-library>
             <source-roots>
                 <root id="src.dir"/>
             </source-roots>
