@@ -5,7 +5,6 @@
  */
 package de.th.wildau.webapp.buchladen.entities;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -110,7 +109,7 @@ public class RegisteredUserEntity implements Serializable {
     }
 
     public void setPassword(String password) {
-        this.password = DigestUtils.sha256Hex(password);
+        //this.password = DigestUtils.sha256Hex(password);
     }
 
     public String getFirstName() {

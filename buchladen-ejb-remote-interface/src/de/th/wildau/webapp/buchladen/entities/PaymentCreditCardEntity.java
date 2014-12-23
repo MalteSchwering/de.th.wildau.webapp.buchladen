@@ -48,7 +48,7 @@ public class PaymentCreditCardEntity implements Serializable {
     @Size(max = 16)
     @Column(name = "CREDIT_CARD_NUMBER")
     private String creditCardNumber;
-    @Size(max = 3)
+    @Size(max = 4)
     @Column(name = "CARD_VALIDATION_CODE")
     private String cardValidationCode;
     @Size(max = 255)

@@ -16,10 +16,23 @@
                 </library>
                 <library dirs="200">
                     <file>${file.reference.commons-codec-1.9.jar}</file>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.commons-validator-1.4.0.jar}</file>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.commons-collections-3.2.1.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.commons-logging-1.2.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
                     <file>${file.reference.jcaptcha-1.0-all.jar}</file>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.jcaptcha-1.0-all.jar-1}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>
