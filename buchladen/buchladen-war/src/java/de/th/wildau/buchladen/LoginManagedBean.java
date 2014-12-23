@@ -13,11 +13,21 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class LoginManagedBean implements Serializable {
     
+    /**
+     * Der Benutzername des Anwenders.
+     */
     private String username;
+    
+    /**
+     * Das Passwort des Anwenders.
+     */
     private String password;
     
+    /**
+     * Meldet den Benutzer an.
+     * @return Zielseite nach der Anmeldung
+     */
     public String login() {
-        System.out.println("--->"+username+" "+password);
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
         try {
@@ -28,19 +38,35 @@ public class LoginManagedBean implements Serializable {
         }
         return "index";
     }
-
+    
+    /**
+     * Liefert den Benutzernamen zurück.
+     * @return Benutzername
+     */
     public String getUsername() {
         return username;
     }
-
+    
+    /**
+     * Setzt den Benutzername.
+     * @param username Benutzername
+     */
     public void setUsername(String username) {
         this.username = username;
     }
-
+    
+    /**
+     * Liefert das Passwort zurück.
+     * @return Passwort
+     */
     public String getPassword() {
         return password;
     }
-
+    
+    /**
+     * Setzt das Passwort.
+     * @param password Passwort
+     */
     public void setPassword(String password) {
         this.password = password;
     }

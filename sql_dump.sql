@@ -42,7 +42,7 @@ create table payment_credit_card
   id int not null generated always as identity constraint pk_payment_credit_card primary key,
   fk_registered_user_id int constraint fk_payment_credit_card_to_registered_user references registered_user on delete cascade on update restrict,
   credit_card_number varchar(16),
-  card_validation_code varchar(3),
+  card_validation_code varchar(4),
   card_holder varchar(255),
   expiration_month int,
   expiration_year int
