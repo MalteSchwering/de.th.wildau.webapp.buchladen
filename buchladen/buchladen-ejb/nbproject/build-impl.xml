@@ -802,24 +802,28 @@ exists or setup the property manually. For example like this:
     <target depends="compile,-library-inclusion-in-archive-weblogic,-library-inclusion-in-archive-by-user" name="library-inclusion-in-archive"/>
     <target if="is.jars.in.ejbjar" name="-library-inclusion-in-archive-by-user">
         <copyfiles files="${reference.buchladen-ejb-remote-interface.jar}" todir="${build.classes.dir}"/>
-        <copyfiles files="${file.reference.commons-codec-1.9.jar}" todir="${build.classes.dir}"/>
-        <copyfiles files="${file.reference.jcaptcha-1.0-all.jar}" todir="${build.classes.dir}"/>
+        <copyfiles files="${file.reference.commons-collections-3.2.1.jar}" todir="${build.classes.dir}"/>
+        <copyfiles files="${file.reference.commons-logging-1.2.jar}" todir="${build.classes.dir}"/>
+        <copyfiles files="${file.reference.jcaptcha-1.0-all.jar-1}" todir="${build.classes.dir}"/>
     </target>
     <target if="is.server.weblogic" name="-library-inclusion-in-archive-weblogic">
         <basename file="${reference.buchladen-ejb-remote-interface.jar}" property="manifest.reference.buchladen-ejb-remote-interface.jar"/>
-        <basename file="${file.reference.commons-codec-1.9.jar}" property="manifest.file.reference.commons-codec-1.9.jar"/>
-        <basename file="${file.reference.jcaptcha-1.0-all.jar}" property="manifest.file.reference.jcaptcha-1.0-all.jar"/>
+        <basename file="${file.reference.commons-collections-3.2.1.jar}" property="manifest.file.reference.commons-collections-3.2.1.jar"/>
+        <basename file="${file.reference.commons-logging-1.2.jar}" property="manifest.file.reference.commons-logging-1.2.jar"/>
+        <basename file="${file.reference.jcaptcha-1.0-all.jar-1}" property="manifest.file.reference.jcaptcha-1.0-all.jar-1"/>
         <manifest file="${build.ear.classes.dir}/META-INF/MANIFEST.MF" mode="update">
-            <attribute name="Extension-List" value="jar-1 jar-2 jar-3 "/>
+            <attribute name="Extension-List" value="jar-1 jar-2 jar-3 jar-4 "/>
             <attribute name="jar-1-Extension-Name" value="${manifest.reference.buchladen-ejb-remote-interface.jar}"/>
-            <attribute name="jar-2-Extension-Name" value="${manifest.file.reference.commons-codec-1.9.jar}"/>
-            <attribute name="jar-3-Extension-Name" value="${manifest.file.reference.jcaptcha-1.0-all.jar}"/>
+            <attribute name="jar-2-Extension-Name" value="${manifest.file.reference.commons-collections-3.2.1.jar}"/>
+            <attribute name="jar-3-Extension-Name" value="${manifest.file.reference.commons-logging-1.2.jar}"/>
+            <attribute name="jar-4-Extension-Name" value="${manifest.file.reference.jcaptcha-1.0-all.jar-1}"/>
         </manifest>
     </target>
     <target depends="compile" name="library-inclusion-in-manifest">
         <copyfiles files="${reference.buchladen-ejb-remote-interface.jar}" todir="${dist.ear.dir}/lib"/>
-        <copyfiles files="${file.reference.commons-codec-1.9.jar}" todir="${dist.ear.dir}/lib"/>
-        <copyfiles files="${file.reference.jcaptcha-1.0-all.jar}" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.commons-collections-3.2.1.jar}" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.commons-logging-1.2.jar}" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.jcaptcha-1.0-all.jar-1}" todir="${dist.ear.dir}/lib"/>
         <manifest file="${build.ear.classes.dir}/META-INF/MANIFEST.MF" mode="update"/>
     </target>
     <target name="-copy-meta-inf">
