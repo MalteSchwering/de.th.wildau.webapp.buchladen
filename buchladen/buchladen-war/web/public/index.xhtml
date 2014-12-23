@@ -38,13 +38,10 @@
             </h:column>
             <h:column>
                 <f:facet name="header">&nbsp;</f:facet>
-                <h:form id="detail">
-<!--                    <h:link outcome="detail" value="Details">
+                <h:form>          
+                    <h:link outcome="detail" value="Details">
                         <f:param name="id" value="#{book.id}"></f:param>
-                    </h:link>-->
-                    
-                    <h:inputHidden id="id" value="#{book.id}"></h:inputHidden>
-                    <h:commandButton id="submit" action="#{bookManagedBean.showDetail()}" value="Details"></h:commandButton>
+                    </h:link>
                 </h:form>
             </h:column>
             <h:column>

@@ -118,39 +118,61 @@
                     <h:panelGrid columns="3">
                         <c:if test="#{checkoutManagedBean.paymentVariant == 1}">
                             
-                            <h:outputLabel value="Kreditkartennummer:" for="credit_card_number"></h:outputLabel>
-                            <h:inputText id="credit_card_number" value="#{checkoutManagedBean.paymentCreditCardEntity.creditCardNumber}"></h:inputText>
+                            <h:outputLabel value="Kreditkartennummer:*" for="credit_card_number"></h:outputLabel>
+                            <h:inputText id="credit_card_number" value="#{checkoutManagedBean.paymentCreditCardEntity.creditCardNumber}" validatorMessage="Falsche Kreditkartennummer. Bitte korrigieren Sie ihre Eingabe.">
+                                <f:validateRequired></f:validateRequired>
+                                <f:validator validatorId="CreditCardNumberValidator"></f:validator>
+                            </h:inputText>
                             <h:message for="credit_card_number" errorClass="errorMsg"></h:message>
                             
-                            <h:outputLabel value="Karten Validierungscode:" for="card_validation_code"></h:outputLabel>
-                            <h:inputText id="card_validation_code" value="#{checkoutManagedBean.paymentCreditCardEntity.cardValidationCode}"></h:inputText>
+                            <h:outputLabel value="Karten Validierungscode (CVV):*" for="card_validation_code"></h:outputLabel>
+                            <h:inputText id="card_validation_code" value="#{checkoutManagedBean.paymentCreditCardEntity.cardValidationCode}" validatorMessage="Falscher Validierungscode. Bitte korrigieren Sie ihre Eingabe. (Mindestens 3, Maximal 4 Zahlen)">
+                                <f:validateRequired></f:validateRequired>
+                                <f:validator validatorId="CreditCardValidationCodeValidator"></f:validator>
+                            </h:inputText>
                             <h:message for="card_validation_code" errorClass="errorMsg"></h:message>
                             
-                            <h:outputLabel value="Karten Besitzer:" for="card_holder"></h:outputLabel>
-                            <h:inputText id="card_holder" value="#{checkoutManagedBean.paymentCreditCardEntity.cardHolder}"></h:inputText>
+                            <h:outputLabel value="Karten Besitzer:*" for="card_holder"></h:outputLabel>
+                            <h:inputText id="card_holder" value="#{checkoutManagedBean.paymentCreditCardEntity.cardHolder}" validatorMessage="Es sind unerlaubte Zeichen im Feld enthalten. Bitte korrigieren Sie ihre Eingabe.">
+                                <f:validateRequired></f:validateRequired>
+                                <f:validator validatorId="NameValidator"></f:validator>
+                            </h:inputText>
                             <h:message for="card_holder" errorClass="errorMsg"></h:message>
                             
-                            <h:outputLabel value="Ablauf Monat:" for="expiration_month"></h:outputLabel>
-                            <h:inputText id="expiration_month" value="#{checkoutManagedBean.paymentCreditCardEntity.expirationMonth}"></h:inputText>
+                            <h:outputLabel value="Ablauf Monat:*" for="expiration_month"></h:outputLabel>
+                            <h:inputText id="expiration_month" value="#{checkoutManagedBean.paymentCreditCardEntity.expirationMonth}" validatorMessage="Falsche Eingabe des Monats. Eingabe zwischen 01-12 möglich.">
+                                <f:convertNumber integerOnly="true" type="number"></f:convertNumber>
+                                <f:validateRequired></f:validateRequired>
+                                <f:validator validatorId="CreditCardMonthValidator"></f:validator>
+                            </h:inputText>
                             <h:message for="expiration_month" errorClass="errorMsg"></h:message>
                             
-                            <h:outputLabel value="Ablauf Jahr:" for="expiration_year"></h:outputLabel>
+                            <h:outputLabel value="Ablauf Jahr:*" for="expiration_year"></h:outputLabel>
                             <h:inputText id="expiration_year" value="#{checkoutManagedBean.paymentCreditCardEntity.expirationYear}"></h:inputText>
                             <h:message for="expiration_year" errorClass="errorMsg"></h:message>
                             
                         </c:if>
                         <c:if test="#{checkoutManagedBean.paymentVariant == 2}">
                             
-                            <h:outputLabel value="IBAN:" for="iban"></h:outputLabel>
-                            <h:inputText id="iban" value="#{checkoutManagedBean.paymentTransferEntity.iban}"></h:inputText>
+                            <h:outputLabel value="IBAN:*" for="iban"></h:outputLabel>
+                            <h:inputText id="iban" value="#{checkoutManagedBean.paymentTransferEntity.iban}" validatorMessage="Falsche IBAN. Leerzeichen sind nicht zugelassen. Bitte korrigieren Sie ihre Eingabe.">
+                                <f:validateRequired></f:validateRequired>
+                                <f:validator validatorId="IBANValidator"></f:validator>
+                            </h:inputText>
                             <h:message for="iban" errorClass="errorMsg"></h:message>
                             
-                            <h:outputLabel value="BIC:" for="bic"></h:outputLabel>
-                            <h:inputText id="bic" value="#{checkoutManagedBean.paymentTransferEntity.bic}"></h:inputText>
+                            <h:outputLabel value="BIC:*" for="bic"></h:outputLabel>
+                            <h:inputText id="bic" value="#{checkoutManagedBean.paymentTransferEntity.bic}" validatorMessage="Falsche BIC. Bitte korrigieren Sie ihre Eingabe.">
+                                <f:validateRequired></f:validateRequired>
+                                <f:validator validatorId="BICValidator"></f:validator>
+                            </h:inputText>
                             <h:message for="bic" errorClass="errorMsg"></h:message>
                             
-                            <h:outputLabel value="Kontoinhaber:" for="account_holder"></h:outputLabel>
-                            <h:inputText id="account_holder" value="#{checkoutManagedBean.paymentTransferEntity.accountHolder}"></h:inputText>
+                            <h:outputLabel value="Kontoinhaber:*" for="account_holder"></h:outputLabel>
+                            <h:inputText id="account_holder" value="#{checkoutManagedBean.paymentTransferEntity.accountHolder}" validatorMessage="Es sind unerlaubte Zeichen im Feld enthalten. Bitte korrigieren Sie ihre Eingabe.">
+                                <f:validateRequired></f:validateRequired>
+                                <f:validator validatorId="NameValidator"></f:validator>
+                            </h:inputText>
                             <h:message for="account_holder" errorClass="errorMsg"></h:message>
                             
                         </c:if>
