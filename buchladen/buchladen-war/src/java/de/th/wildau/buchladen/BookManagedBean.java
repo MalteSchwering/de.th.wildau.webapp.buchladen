@@ -53,18 +53,26 @@ public class BookManagedBean implements Serializable {
         return Integer.parseInt(params.get("id"));
     }
     
-    
-    int bookDetailId;
-    public void showDetail(){
-               
-        
+    /**
+     * Ruft die Detailseite auf
+     * @param id des Buch Objekts
+     */
+    public void showDetail(int id){    
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("detail.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("detail.xhtml?id="+id);
             
-            ExternalContext redirect= FacesContext.getCurrentInstance().getExternalContext();
         } catch (IOException ex) {
             Logger.getLogger(BookManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    /**
+     * Überprüft ob ein Objekt mit der angegebenen ID existiert
+     * @return true wenn Objekt existiert, false sonst
+     */
+    public boolean isValid(){
+        BookEntity bookEntity= this.getBookEntity();
+        return bookEntity != null;    
     }
 
 }

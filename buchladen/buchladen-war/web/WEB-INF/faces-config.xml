@@ -97,6 +97,12 @@
     </validator>
     <validator>
         <description></description>
+        <display-name>DetailValidator</display-name>
+        <validator-id>DetailValidator</validator-id>
+        <validator-class>de.th.wildau.webapp.buchladen.validator.DetailValidator</validator-class>
+    </validator>
+    <validator>
+        <description></description>
         <display-name>HouseNumberValidator</display-name>
         <validator-id>HouseNumberValidator</validator-id>
         <validator-class>de.th.wildau.webapp.buchladen.validator.HouseNumberValidator</validator-class>
