@@ -44,6 +44,7 @@
             <h:column>
                 <f:facet name="header">Artikel</f:facet>
                 <h:outputText value="#{cartItem.fkBookId.title}"></h:outputText>
+                <br></br>
                 <i><h:outputText value=" von #{cartItem.fkBookId.fkAuthorId.firstName} #{cartItem.fkBookId.fkAuthorId.lastName}"></h:outputText></i>
             </h:column>
             <h:column>

@@ -127,17 +127,35 @@ insert into payment_credit_card (fk_registered_user_id, credit_card_number, card
 (2, '2222222222222222', '222', 'Jan Gabler', 2, 2022),
 (3, '3333333333333333', '333', 'Malte Schwering', 3, 2023);
 insert into publisher (publisher_name) values
-('Verlag A'),
-('Verlag B'),
-('Verlag C');
+('Klett-Cotta'),
+('Heyne'),
+('Knaur'),
+('Eichborn'),
+('Carlsen'),
+('Deutscher Taschenbuch Verlag'),
+('A&C Black'),
+('Dorling Kindersley Verlag'),
+('FISCHER Taschenbuch');
 insert into author (first_name, last_name) values
-('A.', 'Müller'),
-('B.', 'Meier'),
-('C.', 'Schulze');
+('J.R.R.', 'Tolkien'),
+('Stephen', 'King'),
+('Sebastian', 'Fitzek'),
+('Timur', 'Vermes'),
+('J. K.', 'Rowling'),
+('Johann Wolfgang', 'von Goethe'),
+('William', 'Shakespeare'),
+('Jamie', 'Oliver'),
+('Nelson', 'Mandela');
 insert into book (isbn_13, fk_publisher_id, fk_author_id, title, edition, year_of_release, language, number_of_pages, price, quantity) values
-('1111111111111', 1, 1, 'Buchtitel A', 1, 2001, 'Deutsch', 111, 11.00, 111),
-('2222222222222', 2, 2, 'Buchtitel B', 2, 2002, 'Englisch', 222, 22.00, 222),
-('3333333333333', 3, 3, 'Buchtitel C', 3, 2003, 'Französisch', 333, 33.00, 333);
+('9783608938289', 1, 1, 'Der Herr der Ringe', 3, 2009, 'Deutsch', 1292, 49.95, 576),
+('9783453435773', 2, 2, 'Es', 3, 2011, 'Deutsch', 1533, 12.99, 398),
+('9783426637937', 3, 3, 'Das Kind', 1, 2009, 'Deutsch', 392, 9.99, 712),
+('9783847905172', 4, 4, 'Er ist wieder da', 1, 2012, 'Deutsch', 396, 19.33, 857),
+('9783551551672', 5, 5, 'Harry Potter und der Stein der Weisen', 1, 1998, 'Deutsch', 335, 15.90, 101),
+('9783423124003', 6, 6, 'Faust - Eine Tragödie: Erster und zweiter Teil', 8, 1997, 'Deutsch', 416, 6.90, 666),
+('9781903436912', 7, 7, 'Romeo and Juliet: Third Series', 7, 2012, 'Englisch', 451, 11.05, 539),
+('9783831022632', 8, 8, 'Jamies 15-Minuten-Küche', 1, 2012, 'Deutsch', 288, 24.95, 928),
+('9783596138043', 9, 9, 'Der lange Weg zur Freiheit: Autobiographie', 30, 1997, 'Deutsch', 864, 13.95, 237);
 insert into comment (fk_book_id, fk_registered_user_id, comment_text) values
 (1, 1, 'Kommentar A'),
 (2, 2, 'Kommentar B'),
