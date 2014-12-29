@@ -1,6 +1,7 @@
 package de.th.wildau.webapp.buchladen.facades;
 
 import de.th.wildau.webapp.buchladen.entities.PaymentTransferEntity;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -11,6 +12,7 @@ import javax.persistence.PersistenceContext;
  * @version 0.1
  */
 @Stateless
+@RolesAllowed({"admin", "user"})
 public class PaymentTransferEntityFacade extends AbstractFacade<PaymentTransferEntity> implements de.th.wildau.webapp.buchladen.facades.PaymentTransferEntityFacadeRemote {
     
     /**

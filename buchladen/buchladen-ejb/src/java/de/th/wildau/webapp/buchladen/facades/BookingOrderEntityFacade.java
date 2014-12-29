@@ -3,6 +3,7 @@ package de.th.wildau.webapp.buchladen.facades;
 import de.th.wildau.webapp.buchladen.entities.BookingOrderEntity;
 import de.th.wildau.webapp.buchladen.entities.RegisteredUserEntity;
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,6 +14,7 @@ import javax.persistence.PersistenceContext;
  * @version 0.1
  */
 @Stateless
+@RolesAllowed({"admin", "user"})
 public class BookingOrderEntityFacade extends AbstractFacade<BookingOrderEntity> implements de.th.wildau.webapp.buchladen.facades.BookingOrderEntityFacadeRemote {
     
     /**

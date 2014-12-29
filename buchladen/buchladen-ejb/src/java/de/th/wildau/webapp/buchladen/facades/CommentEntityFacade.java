@@ -4,6 +4,7 @@ import de.th.wildau.webapp.buchladen.entities.BookEntity;
 import de.th.wildau.webapp.buchladen.entities.CommentEntity;
 import de.th.wildau.webapp.buchladen.entities.RegisteredUserEntity;
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.context.FacesContext;
@@ -68,6 +69,7 @@ public class CommentEntityFacade extends AbstractFacade<CommentEntity> implement
      * @param comment Text des Kommentares
      */
     @Override
+    @RolesAllowed({"admin", "user"})
     public void createBookComment(int bookId, String comment) {
         String username = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
         if(username != null) {

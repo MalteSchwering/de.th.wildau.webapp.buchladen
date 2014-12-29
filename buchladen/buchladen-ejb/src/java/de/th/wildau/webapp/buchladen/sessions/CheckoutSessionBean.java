@@ -13,6 +13,7 @@ import de.th.wildau.webapp.buchladen.facades.RegisteredUserEntityFacadeRemote;
 import java.util.Iterator;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.context.FacesContext;
@@ -23,6 +24,7 @@ import javax.faces.context.FacesContext;
  * @version 0.1
  */
 @Stateless
+@RolesAllowed({"admin", "user"})
 public class CheckoutSessionBean implements CheckoutSessionBeanRemote {
         
     /**
