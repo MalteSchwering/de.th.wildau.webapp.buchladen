@@ -19,9 +19,16 @@
                     <h:column>
                         <h:outputText value="#{orderItem.fkBookId.title}"></h:outputText>
                     </h:column>
-
+                    
                     <h:column>
+                        <h:outputText value="#{orderItem.quantity} Stk. &times; "></h:outputText>
                         <h:outputText value="#{orderItem.fkBookId.price}">
+                            <f:convertNumber type="currency" currencySymbol="€" locale="de-DE"></f:convertNumber>
+                        </h:outputText>
+                    </h:column>
+                    
+                    <h:column>
+                        <h:outputText value="#{orderItem.quantity * orderItem.fkBookId.price}">
                             <f:convertNumber type="currency" currencySymbol="€" locale="de-DE"></f:convertNumber>
                         </h:outputText>
                     </h:column>
