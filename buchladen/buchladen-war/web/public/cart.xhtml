@@ -83,7 +83,9 @@
             </h:panelGrid>
         </c:if>
         <h:messages class="errorMsg"></h:messages>
-        <p><h:link value="Zur Kasse &rarr;" outcome="checkout"></h:link></p>
+        <c:if test="#{cartManagedBean.count() > 0}">
+            <p><h:link value="Zur Kasse &rarr;" outcome="checkout"></h:link></p>
+        </c:if>
     </ui:define>
 
 </ui:composition>

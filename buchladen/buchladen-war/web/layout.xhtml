@@ -25,10 +25,13 @@
                 <ui:insert name="left">
                     <ul>
                         <li><h:link value="Startseite" outcome="index"></h:link></li>
+                        <c:if test="#{request.userPrincipal != null}">
+                        <c:if test="#{request.isUserInRole('admin')}"><li><h:link value="Admin" outcome="admin"></h:link></li></c:if>
                         <li><h:link value="Benutzerprofil" outcome="userprofil"></h:link></li>
                         <ul>
                             <li><h:link value="bisherige Bestellungen" outcome="orders"></h:link></li>
                         </ul>
+                        </c:if>
                         <li>
                             <h:link value="Warenkorb" outcome="cart" id="cartLink">
                                 <h:outputText value=" (#{cartManagedBean.count()})"></h:outputText>
@@ -37,7 +40,6 @@
                         <c:if test="#{request.userPrincipal == null}"><li><h:link value="Anmelden" outcome="login"></h:link></li></c:if>
                         <c:if test="#{request.userPrincipal != null}"><li><h:form><h:commandLink action="#{logoutManagedBean.logout()}" value="Abmelden"></h:commandLink></h:form></li></c:if>
                         <c:if test="#{request.userPrincipal == null}"><li><h:link value="Registrieren" outcome="register"></h:link></li></c:if>
-                        <c:if test="#{request.isUserInRole('admin')}"><li><h:link value="Admin" outcome="admin"></h:link></li></c:if>
                     </ul>
                 </ui:insert>
             </div>
