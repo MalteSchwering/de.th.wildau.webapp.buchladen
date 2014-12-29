@@ -13,10 +13,10 @@ import javax.faces.validator.ValidatorException;
  * @author Malte Schwering
  * @version 0.1
  */
-public class CreditCardDateValidator implements Validator{
+public class CreditCardMonthValidator implements Validator{
     
     /**
-     * Regulärer Ausdruck vom Passwort.
+     * Regulärer Ausdruck vom Kreditkarten Ablauf-Monat.
      * Er verbietet alles außer einen Monat.
      */
     private static final String MONTH_REGEX = "^([1-9]|[0-1][0-2])$";
@@ -33,7 +33,7 @@ public class CreditCardDateValidator implements Validator{
     /**
      * Konstruktor der den regulären Ausdruck kompiliert.
      */
-    public CreditCardDateValidator() {
+    public CreditCardMonthValidator() {
         pattern = Pattern.compile(MONTH_REGEX);
     }
 

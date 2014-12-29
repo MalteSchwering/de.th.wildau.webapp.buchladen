@@ -154,7 +154,7 @@
                                 <f:selectItem itemValue="10" itemLabel="10"></f:selectItem>
                                 <f:selectItem itemValue="11" itemLabel="11"></f:selectItem>
                                 <f:selectItem itemValue="12" itemLabel="12"></f:selectItem>
-                                <f:validator validatorId="CreditCardDateValidator"></f:validator>
+                                <f:validator validatorId="CreditCardMonthValidator"></f:validator>
                                 <f:validateRequired></f:validateRequired>
                             </h:selectOneMenu>
                             <h:message for="expiration_month" errorClass="errorMsg"></h:message>
@@ -162,19 +162,15 @@
                             <h:outputLabel value="Ablauf Jahr:*" for="expiration_year"></h:outputLabel>    
                             <h:selectOneMenu id="expiration_year" label="Ablauf Jahr:*" value="#{checkoutManagedBean.paymentCreditCardEntity.expirationMonth}" validatorMessage="Bitte geben Sie ein Jahr an!">
                                 <f:selectItem itemValue="0" itemLabel="--"></f:selectItem>
-                                <f:selectItem itemValue="1" itemLabel="01"></f:selectItem>
-                                <f:selectItem itemValue="2" itemLabel="02"></f:selectItem>
-                                <f:selectItem itemValue="3" itemLabel="03"></f:selectItem>
-                                <f:selectItem itemValue="4" itemLabel="04"></f:selectItem>
-                                <f:selectItem itemValue="5" itemLabel="05"></f:selectItem>
-                                <f:selectItem itemValue="6" itemLabel="06"></f:selectItem>
-                                <f:selectItem itemValue="7" itemLabel="07"></f:selectItem>
-                                <f:selectItem itemValue="8" itemLabel="08"></f:selectItem>
-                                <f:selectItem itemValue="9" itemLabel="09"></f:selectItem>
-                                <f:selectItem itemValue="10" itemLabel="10"></f:selectItem>
-                                <f:selectItem itemValue="11" itemLabel="11"></f:selectItem>
-                                <f:selectItem itemValue="12" itemLabel="12"></f:selectItem>
-                                <f:validator validatorId="CreditCardDateValidator"></f:validator>
+                                <f:selectItem itemValue="2011" itemLabel="2011"></f:selectItem>
+                                <f:selectItem itemValue="2012" itemLabel="2012"></f:selectItem>
+                                <f:selectItem itemValue="2013" itemLabel="2013"></f:selectItem>
+                                <f:selectItem itemValue="2014" itemLabel="2014"></f:selectItem>
+                                <f:selectItem itemValue="2015" itemLabel="2015"></f:selectItem>
+                                <f:selectItem itemValue="2016" itemLabel="2016"></f:selectItem>
+                                <f:selectItem itemValue="2017" itemLabel="2017"></f:selectItem>
+                                <f:selectItem itemValue="2018" itemLabel="2018"></f:selectItem>
+                                <f:validator validatorId="CreditCardYearValidator"></f:validator>
                                 <f:validateRequired></f:validateRequired>
                             </h:selectOneMenu>
                             <h:message for="expiration_year" errorClass="errorMsg"></h:message>
