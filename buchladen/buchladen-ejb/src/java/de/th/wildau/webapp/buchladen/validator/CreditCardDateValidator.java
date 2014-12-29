@@ -13,18 +13,18 @@ import javax.faces.validator.ValidatorException;
  * @author Malte Schwering
  * @version 0.1
  */
-public class CreditCardMonthValidator implements Validator{
+public class CreditCardDateValidator implements Validator{
     
     /**
      * Regulärer Ausdruck vom Passwort.
      * Er verbietet alles außer einen Monat.
      */
-    private static final String MONTH_REGEX = "(0[1-9])|(1[012])";
+    private static final String MONTH_REGEX = "^([1-9]|[0-1][0-2])$";
 
     /**
      * Kompilierte Repräsentation des regulären Ausdrucks.
      */
-    private Pattern pattern;
+    private final Pattern pattern;
 
     /**
      * Match Engine.
@@ -33,7 +33,7 @@ public class CreditCardMonthValidator implements Validator{
     /**
      * Konstruktor der den regulären Ausdruck kompiliert.
      */
-    public CreditCardMonthValidator() {
+    public CreditCardDateValidator() {
         pattern = Pattern.compile(MONTH_REGEX);
     }
 
@@ -46,10 +46,8 @@ public class CreditCardMonthValidator implements Validator{
      */
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-        
-        int month = Integer.parseInt(value.toString());
-        
-        if(month < 1 || month > 12) {
+        Matcher matcher = pattern.matcher(value.toString());
+        if(!matcher.matches()) {
             FacesMessage facesMessage = new FacesMessage(component.getClientId());
             throw new ValidatorException(facesMessage);
         }

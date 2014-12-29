@@ -163,9 +163,9 @@
     </validator>
     <validator>
         <description></description>
-        <display-name>CreditCardMonthValidator</display-name>
-        <validator-id>CreditCardMonthValidator</validator-id>
-        <validator-class>de.th.wildau.webapp.buchladen.validator.CreditCardMonthValidator</validator-class>
+        <display-name>CreditCardDateValidator</display-name>
+        <validator-id>CreditCardDateValidator</validator-id>
+        <validator-class>de.th.wildau.webapp.buchladen.validator.CreditCardDateValidator</validator-class>
     </validator>
     <managed-bean>
         <managed-bean-name>commentManagedBean</managed-bean-name>
