@@ -80,8 +80,9 @@ public class RegisteredUserManagedBean implements Serializable {
     
     /**
      * Der Benutzer mit der Benutzergruppe 'User' wird angelegt.
+     * @return Zielseite nach der Registrierung
      */
-    public void registerUser() {
+    public String registerUser() {
         RegisteredUserEntity registeredUserEntity = new RegisteredUserEntity();
         registeredUserEntity.setEmailAddress(this.emailAddress);
         registeredUserEntity.setPassword(this.password);
@@ -96,6 +97,7 @@ public class RegisteredUserManagedBean implements Serializable {
         registeredUserGroupMappingEntity.setFkRegisteredUserId(registeredUserEntityFacade.findByEmailAddress(this.emailAddress));
         registeredUserGroupMappingEntity.setFkUserGroupId(userGroupEntityFacade.findByGroupName("user"));
         registeredUserGroupMappingEntityFacade.create(registeredUserGroupMappingEntity);
+        return "login";
     }
 
     /**
