@@ -27,10 +27,6 @@ public class CreditCardYearValidator implements Validator{
     private final Pattern pattern;
 
     /**
-     * Match Engine.
-     */
-
-    /**
      * Konstruktor der den regulären Ausdruck kompiliert.
      */
     public CreditCardYearValidator() {
