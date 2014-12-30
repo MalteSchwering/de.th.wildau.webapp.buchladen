@@ -14,8 +14,9 @@ public class LogoutManagedBean {
     
     /**
      * Meldet den Benutzer ab.
+     * @return Zielseite nach der Abmeldung
      */
-    public void logout() {
+    public String logout() {
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
         try {
@@ -24,6 +25,7 @@ public class LogoutManagedBean {
         } catch (ServletException ex) {
             context.addMessage(null, new FacesMessage("Logout failed."));
         }
+        return "logout";
     }
     
 }
