@@ -136,18 +136,15 @@ public class CartSessionBean implements CartSessionBeanRemote {
                 // Buch im Warenkorb gefunden
                 if(cartId >= 0) {
                     BookingOrderDetailEntity bookingOrdnerDetailEntity = this.cart.get(cartId);
-                    System.out.println(cartId);
                     // nur 1 Exemplar des Buches im Warenkorb und die Anzahl soll verringert werden
                     if(bookingOrdnerDetailEntity.getQuantity() <= 1 && quantity < 0) {
                         this.removeBook(id);
-                        System.out.println("nur 1 Exemplar des Buches im Warenkorb und die Anzahl soll verringert werden");
                     }
                     // es sind mehr als 1 Exemplar des Buches im Warenkorb
                     else {
                         BookingOrderDetailEntity bookingOrderDetailEntity = this.cart.get(cartId);
                         int currentQuantity = bookingOrderDetailEntity.getQuantity();
                         bookingOrderDetailEntity.setQuantity(currentQuantity + quantity);
-                        System.out.println("es sind mehr als 1 Exemplar des Buches im Warenkorb");
                     }
                 }
             }
