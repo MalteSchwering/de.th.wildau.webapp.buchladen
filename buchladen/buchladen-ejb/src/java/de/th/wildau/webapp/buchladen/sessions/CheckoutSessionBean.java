@@ -1,10 +1,12 @@
 package de.th.wildau.webapp.buchladen.sessions;
 
+import de.th.wildau.webapp.buchladen.entities.BookEntity;
 import de.th.wildau.webapp.buchladen.entities.BookingOrderDetailEntity;
 import de.th.wildau.webapp.buchladen.entities.BookingOrderEntity;
 import de.th.wildau.webapp.buchladen.entities.PaymentCreditCardEntity;
 import de.th.wildau.webapp.buchladen.entities.PaymentTransferEntity;
 import de.th.wildau.webapp.buchladen.entities.RegisteredUserEntity;
+import de.th.wildau.webapp.buchladen.facades.BookEntityFacadeRemote;
 import de.th.wildau.webapp.buchladen.facades.BookingOrderDetailEntityFacadeRemote;
 import de.th.wildau.webapp.buchladen.facades.BookingOrderEntityFacadeRemote;
 import de.th.wildau.webapp.buchladen.facades.PaymentCreditCardEntityFacadeRemote;
@@ -26,7 +28,13 @@ import javax.faces.context.FacesContext;
 @Stateless
 @RolesAllowed({"admin", "user"})
 public class CheckoutSessionBean implements CheckoutSessionBeanRemote {
-        
+    
+    /**
+     * Enterprise Java Bean bookEntityFacade mit einem Remote Interface.
+     */
+    @EJB
+    private BookEntityFacadeRemote bookEntityFacade;
+    
     /**
      * Enterprise Java Bean registeredUserEntityFacade mit einem Remote Interface.
      */
@@ -104,12 +112,18 @@ public class CheckoutSessionBean implements CheckoutSessionBeanRemote {
         }
         BookingOrderEntity createdBookingOrderEntity = this.bookingOrderEntityFacade.createAndReturnEntity(bookingOrderEntity);
         
-        // Bestelldetails anlegen
         Iterator<BookingOrderDetailEntity> iteratorBookingOrderDetailEntity = listBookingOrderDetailEntity.iterator();
         while(iteratorBookingOrderDetailEntity.hasNext()) {
+            // Bestelldetails anlegen
             BookingOrderDetailEntity bookingOrderDetailEntity = iteratorBookingOrderDetailEntity.next();
             bookingOrderDetailEntity.setFkBookingOrderId(createdBookingOrderEntity);
             this.bookingOrderDetailEntityFacade.create(bookingOrderDetailEntity);
+            
+            // Bestand ändern
+            BookEntity bookEntity = this.bookEntityFacade.find(bookingOrderDetailEntity.getFkBookId().getId());
+            int currentQuantity = bookEntity.getQuantity();
+            bookEntity.setQuantity(currentQuantity - bookingOrderDetailEntity.getQuantity());
+            this.bookEntityFacade.edit(bookEntity);
         }
     }
     
