@@ -71,8 +71,13 @@ public class BookManagedBean implements Serializable {
      * @return true wenn Objekt existiert, false sonst
      */
     public boolean isValid(){
-        BookEntity bookEntity= this.getBookEntity();
-        return bookEntity != null;    
+        try{
+            BookEntity bookEntity= this.getBookEntity();
+            return bookEntity != null;    
+        }catch (Exception ex){
+            return false;
+        }
+        
     }
 
 }

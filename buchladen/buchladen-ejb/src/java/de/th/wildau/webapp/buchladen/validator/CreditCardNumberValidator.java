@@ -55,11 +55,50 @@ public class CreditCardNumberValidator implements Validator{
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         matcher = pattern.matcher(value.toString());
-        if(!matcher.matches()) {
+        if(!matcher.matches()||!isLuhnValid(value.toString())) {
             FacesMessage facesMessage = new FacesMessage(component.getClientId());
             throw new ValidatorException(facesMessage);
         }
     }
+    
+    /**
+     * Wandelt Kreditkartennummer von Strin in Int-Array und ruft die luhnAlgorithm
+     * Funktion auf, liefert true, wenn Luhn-Algorithmus erfolgreich, false sonst.
+     * @param String creditCardNumber
+     * @return boolean isLuhnValid
+     */
+    private boolean isLuhnValid(String creditCardNumber){
+        boolean isValid = false;
+        int[] creditCardDigits = new int[(creditCardNumber.length())];
+        for(int i=0;i<creditCardDigits.length;i++){
+            creditCardDigits[i] = Character.getNumericValue(creditCardNumber.charAt(i));           
+        }
+        isValid = this.luhnAlgorithm(creditCardDigits);
+        return isValid;
+    }
+    
+    /**
+     * Implementierung des Luhn-Algorithmus. Liefert true, wenn letzte Zahl
+     * (Prüfzahl) mit restlicher Zahlenkombination übereinstimmt.
+     * @param int[] digits
+     * @return boolean true or false
+     */
+    private boolean luhnAlgorithm(int[] digits) {
+       int sum = 0;
+       int length = digits.length;
+       for (int i = 0; i < length; i++) {
+ 
+           // get digits in reverse order
+           int digit = digits[length - i - 1];
+ 
+           // every 2nd number multiply with 2
+           if (i % 2 == 1) {
+               digit *= 2;
+           }
+           sum += digit > 9 ? digit - 9 : digit;
+       }
+       return sum % 10 == 0;
+   }
     
 }
 
