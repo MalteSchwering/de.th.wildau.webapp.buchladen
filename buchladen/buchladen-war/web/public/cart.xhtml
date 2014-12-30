@@ -27,7 +27,6 @@
                         <f:validator validatorId="InventoryValidator"></f:validator>
                     </h:inputHidden>
                     <h:commandButton action="#{cartManagedBean.setQuantityPlusOne(cartItem.fkBookId.id)}" value="+" alt="Anzahl erhöhen" title="Anzahl erhöhen">
-                        <f:ajax render="cartLink cartTable cartSumTable"></f:ajax>
                     </h:commandButton>
                 </h:form>    
                 <h:form>
@@ -37,7 +36,6 @@
                         <f:validator validatorId="InventoryValidator"></f:validator>
                     </h:inputHidden>
                     <h:commandButton action="#{cartManagedBean.setQuantityMinusOne(cartItem.fkBookId.id)}" value="&minus;" alt="Anzahl verringern" title="Anzahl verringern">
-                        <f:ajax render="cartLink cartTable cartSumTable"></f:ajax>
                     </h:commandButton>
                 </h:form>
             </h:column>
