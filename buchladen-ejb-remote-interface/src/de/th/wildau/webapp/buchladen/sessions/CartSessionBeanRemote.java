@@ -16,10 +16,8 @@ import javax.ejb.Remote;
 @Remote
 public interface CartSessionBeanRemote {
     
-    void addBook(int id);
-    
     void removeBook(int id);
-    
+        
     List<BookingOrderDetailEntity> getContent();
     
     int count();

@@ -24,7 +24,7 @@ public class CartManagedBean implements Serializable {
      * @param id ID des Buches
      */
     public void addBook(int id) {
-        this.cartSessionBean.addBook(id);
+        this.cartSessionBean.setQuantity(id, 1);
     }
     
     /**

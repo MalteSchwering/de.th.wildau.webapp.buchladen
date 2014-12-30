@@ -56,53 +56,7 @@ public class CartSessionBean implements CartSessionBeanRemote {
         }
         return false;
     }
-
-    /**
-     * Fügt ein Buch zum Warenkorb hinzu.
-     * @param id ID des Buches
-     */
-    @Override
-    public void addBook(int id) {
-        BookEntity bookEntity = this.bookEntityFacade.find(id);
-        if(bookEntity != null) {
-            Iterator<BookingOrderDetailEntity> iteratorBookingOrderDetailEntity = this.cart.iterator();
-            if(this.isBookInTheCart(bookEntity)) {
-                while(iteratorBookingOrderDetailEntity.hasNext()) {
-                    BookingOrderDetailEntity next = iteratorBookingOrderDetailEntity.next();
-                    if(next.getFkBookId().equals(bookEntity)) {
-                        next.setQuantity(next.getQuantity() + 1);
-                    }
-                }
-            }
-            else {
-                BookingOrderDetailEntity bookOrderDetailEntity = new BookingOrderDetailEntity();
-                bookOrderDetailEntity.setFkBookId(bookEntity);
-                bookOrderDetailEntity.setQuantity(1);
-                this.cart.add(bookOrderDetailEntity);
-            }
-        }
-    }
-
-    /**
-     * Löscht ein Buch aus dem Warenkorb.
-     * @param id ID des Buches
-     */
-    @Override
-    public void removeBook(int id) {
-        BookEntity bookEntity = this.bookEntityFacade.find(id);
-        if(bookEntity != null) {
-            Iterator<BookingOrderDetailEntity> iteratorBookingOrderDetailEntity = this.cart.iterator();
-            if(this.isBookInTheCart(bookEntity)) {
-                while(iteratorBookingOrderDetailEntity.hasNext()) {
-                    BookingOrderDetailEntity next = iteratorBookingOrderDetailEntity.next();
-                    if(next.getFkBookId().equals(bookEntity)) {
-                        iteratorBookingOrderDetailEntity.remove();
-                    }
-                }
-            }
-        }
-    }
-
+    
     /**
      * Liefert den Inhalt vom Warenkorb zurück.
      * @return Liste vom Typ BookingOrderDetailEntity
@@ -153,6 +107,18 @@ public class CartSessionBean implements CartSessionBeanRemote {
         }
         return total;
     }
+    
+    /**
+     * Löscht ein Buch komplett aus dem Warenkorb.
+     * @param id ID des Buches
+     */
+    @Override
+    public void removeBook(int id) {
+        if(this.isBookInTheCart(new BookEntity(id))) {
+            int index = this.getCartIdFromBookId(id);
+            this.cart.remove(index);
+        }
+    }
 
     /**
      * Setzt die Anzahl eines Buches im Warenkorb.
@@ -161,20 +127,38 @@ public class CartSessionBean implements CartSessionBeanRemote {
      */
     @Override
     public void setQuantity(int id, int quantity) {
-        if(quantity < 1) {
-            this.removeBook(id);
-        }
-        else {
-            BookEntity bookEntity = this.bookEntityFacade.find(id);
-            if(bookEntity != null) {
-                Iterator<BookingOrderDetailEntity> iteratorBookingOrderDetailEntity = this.cart.iterator();
-                if(this.isBookInTheCart(bookEntity)) {
-                    while(iteratorBookingOrderDetailEntity.hasNext()) {
-                        BookingOrderDetailEntity next = iteratorBookingOrderDetailEntity.next();
-                        if(next.getFkBookId().equals(bookEntity)) {
-                            next.setQuantity(quantity);
-                        }
+        BookEntity bookEntity = this.bookEntityFacade.find(id);
+        // Buch existiert
+        if(bookEntity != null) {
+            // Buch ist im Warenkorb
+            if(this.isBookInTheCart(bookEntity)) {
+                int cartId = this.getCartIdFromBookId(id);
+                // Buch im Warenkorb gefunden
+                if(cartId >= 0) {
+                    BookingOrderDetailEntity bookingOrdnerDetailEntity = this.cart.get(cartId);
+                    System.out.println(cartId);
+                    // nur 1 Exemplar des Buches im Warenkorb und die Anzahl soll verringert werden
+                    if(bookingOrdnerDetailEntity.getQuantity() <= 1 && quantity < 0) {
+                        this.removeBook(id);
+                        System.out.println("nur 1 Exemplar des Buches im Warenkorb und die Anzahl soll verringert werden");
                     }
+                    // es sind mehr als 1 Exemplar des Buches im Warenkorb
+                    else {
+                        BookingOrderDetailEntity bookingOrderDetailEntity = this.cart.get(cartId);
+                        int currentQuantity = bookingOrderDetailEntity.getQuantity();
+                        bookingOrderDetailEntity.setQuantity(currentQuantity + quantity);
+                        System.out.println("es sind mehr als 1 Exemplar des Buches im Warenkorb");
+                    }
+                }
+            }
+            // Buch ist nicht im Warenkorb
+            else {
+                // Anzahl ist nicht negativ
+                if(quantity > 0) {
+                    BookingOrderDetailEntity bookingOrderDetailEntity = new BookingOrderDetailEntity();
+                    bookingOrderDetailEntity.setFkBookId(bookEntity);
+                    bookingOrderDetailEntity.setQuantity(quantity);
+                    this.cart.add(bookingOrderDetailEntity);
                 }
             }
         }
@@ -186,7 +170,7 @@ public class CartSessionBean implements CartSessionBeanRemote {
      */
     @Override
     public void setQuantityPlusOne(int id) {
-        this.addBook(id);
+        this.setQuantity(id, 1);
     }
 
     /**
@@ -195,16 +179,7 @@ public class CartSessionBean implements CartSessionBeanRemote {
      */
     @Override
     public void setQuantityMinusOne(int id) {
-        int cartId = this.getCartIdFromBookId(id);
-        if(cartId > -1) {
-            int quantityChange = this.cart.get(cartId).getQuantity() - 1;
-            if(quantityChange < 1) {
-                this.removeBook(id);
-            }
-            else {
-                this.cart.get(cartId).setQuantity(quantityChange);
-            }
-        }
+        this.setQuantity(id, -1);
     }
 
     /**
@@ -214,16 +189,14 @@ public class CartSessionBean implements CartSessionBeanRemote {
      */
     @Override
     public int getCartIdFromBookId(int id) {
-        BookEntity bookEntity = this.bookEntityFacade.find(id);
-        if(bookEntity == null || !this.isBookInTheCart(bookEntity)) {
-            return -1;
-        }
-        else {
-            Iterator<BookingOrderDetailEntity> iteratorBookingOrderDetailEntity = this.cart.iterator();
-            while(iteratorBookingOrderDetailEntity.hasNext()) {
-                BookingOrderDetailEntity next = iteratorBookingOrderDetailEntity.next();
-                return this.cart.indexOf(next);
+        Iterator<BookingOrderDetailEntity> iteratorBookingOrderDetailEntity = this.cart.iterator();
+        int index = 0;
+        while(iteratorBookingOrderDetailEntity.hasNext()) {
+            BookingOrderDetailEntity next = iteratorBookingOrderDetailEntity.next();
+            if(next.getFkBookId().getId() == id) {
+                return index;
             }
+            index++;
         }
         return -1; 
     }
