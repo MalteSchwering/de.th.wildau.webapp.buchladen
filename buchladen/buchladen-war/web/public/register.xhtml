@@ -15,6 +15,7 @@
                 <h:inputText id="email_address" value="#{registeredUserManagedBean.emailAddress}" validatorMessage="Bitte &uuml;berpr&uuml;fen Sie ihre E-Mail-Adresse.">
                     <f:validateRequired></f:validateRequired>
                     <f:validator validatorId="EmailAddressValidator"></f:validator>
+                    <f:validator validatorId="EmailAddressDuplicateValidator"></f:validator>
                 </h:inputText>
                 <h:message for="email_address" errorClass="errorMsg"></h:message>
                 
