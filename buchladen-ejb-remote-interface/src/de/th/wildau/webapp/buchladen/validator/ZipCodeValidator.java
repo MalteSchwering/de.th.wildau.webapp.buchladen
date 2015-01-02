@@ -13,14 +13,14 @@ import javax.faces.validator.ValidatorException;
  * @author Malte Schwering
  * @version 0.1
  */
-public class HouseNumberValidator implements Validator {
+public class ZipCodeValidator implements Validator {
 
     /**
-     * Regulärer Ausdruck der Hausnummer.
-     * Er verbietet alles außer 0-4 Zahlen mit einem nachgestellten Buchstaben.
+     * Regulärer Ausdruck der Postleitzahl.
+     * Er verbietet alles außer eine Eingabe aus 0 bzw. maximal 5 Zahlen.
      */
-    private static final String HOUSENUMBER_REGEX = "\\d{0,4}[a-zA-Z]{0,1}";
-    
+    public static final String ZIPCODE_REGEX = "\\d{0,5}";
+
     /**
      * Kompilierte Repräsentation des regulären Ausdrucks.
      */
@@ -34,8 +34,8 @@ public class HouseNumberValidator implements Validator {
     /**
      * Konstruktor der den regulären Ausdruck kompiliert.
      */
-    public HouseNumberValidator() {
-        pattern = Pattern.compile(HOUSENUMBER_REGEX);
+    public ZipCodeValidator() {
+        pattern = Pattern.compile(ZIPCODE_REGEX);
     }
 
     /**

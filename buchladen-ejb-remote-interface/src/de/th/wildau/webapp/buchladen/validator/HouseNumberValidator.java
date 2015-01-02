@@ -13,14 +13,14 @@ import javax.faces.validator.ValidatorException;
  * @author Malte Schwering
  * @version 0.1
  */
-public class BICValidator implements Validator{
-    
-/**
-     * Regulärer Ausdruck der BIC.
-     * Er verbietet alles außer ein regelkonformes BIC.
-     */
-    private static final String BIC_REGEX = "([a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?)";
+public class HouseNumberValidator implements Validator {
 
+    /**
+     * Regulärer Ausdruck der Hausnummer.
+     * Er verbietet alles außer 0-4 Zahlen mit einem nachgestellten Buchstaben.
+     */
+    public static final String HOUSENUMBER_REGEX = "\\d{0,4}[a-zA-Z]{0,1}";
+    
     /**
      * Kompilierte Repräsentation des regulären Ausdrucks.
      */
@@ -34,8 +34,8 @@ public class BICValidator implements Validator{
     /**
      * Konstruktor der den regulären Ausdruck kompiliert.
      */
-    public BICValidator() {
-        pattern = Pattern.compile(BIC_REGEX);
+    public HouseNumberValidator() {
+        pattern = Pattern.compile(HOUSENUMBER_REGEX);
     }
 
     /**
@@ -55,4 +55,3 @@ public class BICValidator implements Validator{
     }
     
 }
-

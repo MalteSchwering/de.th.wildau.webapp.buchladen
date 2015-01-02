@@ -13,13 +13,24 @@ import javax.faces.validator.ValidatorException;
  * @author Malte Schwering
  * @version 0.1
  */
-public class ZipCodeValidator implements Validator {
+public class NameValidator implements Validator {
 
     /**
-     * Regulärer Ausdruck der Postleitzahl.
-     * Er verbietet alles außer eine Eingabe aus 0 bzw. maximal 5 Zahlen.
+     * Maximale Länge von Namen.
      */
-    private static final String ZIPCODE_REGEX = "\\d{0,5}";
+    private int maxLength = 255;
+
+    /**
+     * Regulärer Ausdruck vom Namen.
+     * Er verbietet alles außer Groß-und Kleinbuchstaben bzw. die Sonderzeichen
+     * für eine Namenstrennung '&-
+     */
+    public static final String NAME_REGEX = "[a-zA-Z '&-äüöÄÜÖ]*[A-Za-z äüöÄÜÖ]{0,255}";
+
+    /**
+     * Nachricht die bei einem invaliden Wert angezeigt wird.
+     */
+    private String message = "";
 
     /**
      * Kompilierte Repräsentation des regulären Ausdrucks.
@@ -34,8 +45,8 @@ public class ZipCodeValidator implements Validator {
     /**
      * Konstruktor der den regulären Ausdruck kompiliert.
      */
-    public ZipCodeValidator() {
-        pattern = Pattern.compile(ZIPCODE_REGEX);
+    public NameValidator() {
+        pattern = Pattern.compile(NAME_REGEX);
     }
 
     /**
@@ -49,7 +60,13 @@ public class ZipCodeValidator implements Validator {
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         matcher = pattern.matcher(value.toString());
         if(!matcher.matches()) {
-            FacesMessage facesMessage = new FacesMessage(component.getClientId());
+            message += "Wert beinhaltet ungültige Zeichen, es sind nur Groß-/Kleinbuchstaben, Bindestriche und Leerzeichen erlaubt";
+        }
+        if(value.toString().length() > maxLength) {
+            message += ", Wert ist zu lang";
+        }
+        if(!message.isEmpty()) {
+            FacesMessage facesMessage = new FacesMessage(component.getClientId() + ": Überprüfungsfehler: " + message);
             throw new ValidatorException(facesMessage);
         }
     }

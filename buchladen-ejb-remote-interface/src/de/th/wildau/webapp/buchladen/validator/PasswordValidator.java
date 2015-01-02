@@ -21,7 +21,7 @@ public class PasswordValidator implements Validator {
      * bestehend aus Großbuchstaben, Kleinbuchstaben, Zahlen und mindestens 
      * ein Sonderzeichen, wie zum Beispiel @#$%
      */
-    private static final String PASSWORD_REGEX = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20})";
+    public static final String PASSWORD_REGEX = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20})";
 
     /**
      * Kompilierte Repräsentation des regulären Ausdrucks.
