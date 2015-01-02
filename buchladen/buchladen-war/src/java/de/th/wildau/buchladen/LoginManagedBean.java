@@ -44,7 +44,7 @@ public class LoginManagedBean implements Serializable {
             request.login(username, password);
         } catch (ServletException ex) {
             context.addMessage(null, new FacesMessage("Login failed."));
-            return "error";
+            return "login";
         }
         return "index";
     }
@@ -79,12 +79,17 @@ public class LoginManagedBean implements Serializable {
      */
     public void setPassword(String password) {
         RegisteredUserEntity registeredUserEntity = registeredUserEntityFacade.findByEmailAddress(this.username);
-        String salt = registeredUserEntity.getSalt();
-        String pepper = "DeR$uLtImAtIvE%pEpPeR";
-        String part1 = password.substring(0, 4);
-        String part2 = password.substring(4);
-        String passwordWithSaltAndPepper = part1.concat(pepper).concat(part2).concat(salt);
-        this.password = passwordWithSaltAndPepper;
+        if(registeredUserEntity != null) {
+            String salt = registeredUserEntity.getSalt();
+            String pepper = "DeR$uLtImAtIvE%pEpPeR";
+            String part1 = password.substring(0, 4);
+            String part2 = password.substring(4);
+            String passwordWithSaltAndPepper = part1.concat(pepper).concat(part2).concat(salt);
+            this.password = passwordWithSaltAndPepper;
+        }
+        else {
+            this.password = password;
+        }
     }
     
 }
