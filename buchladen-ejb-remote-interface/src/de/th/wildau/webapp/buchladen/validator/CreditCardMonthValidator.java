@@ -19,7 +19,7 @@ public class CreditCardMonthValidator implements Validator{
      * Regulärer Ausdruck vom Kreditkarten Ablauf-Monat.
      * Er verbietet alles außer einen Monat.
      */
-    private static final String MONTH_REGEX = "^([1-9]|[0-1][0-2])$";
+    public static final String MONTH_REGEX = "^([1-9]|[0-1][0-2])$";
 
     /**
      * Kompilierte Repräsentation des regulären Ausdrucks.

@@ -5,6 +5,9 @@
  */
 package de.th.wildau.webapp.buchladen.entities;
 
+import de.th.wildau.webapp.buchladen.validator.CreditCardNumberValidator;
+import de.th.wildau.webapp.buchladen.validator.CreditCardValidationCodeValidator;
+import de.th.wildau.webapp.buchladen.validator.NameValidator;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -19,6 +22,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -47,12 +52,18 @@ public class PaymentCreditCardEntity implements Serializable {
     private Integer id;
     @Size(max = 16)
     @Column(name = "CREDIT_CARD_NUMBER")
+    @NotNull
+    @Pattern(regexp = CreditCardNumberValidator.CREDITCARDNUMBER_REGEX)
     private String creditCardNumber;
     @Size(max = 4)
     @Column(name = "CARD_VALIDATION_CODE")
+    @NotNull
+    @Pattern(regexp = CreditCardValidationCodeValidator.CVV_REGEX)
     private String cardValidationCode;
     @Size(max = 255)
     @Column(name = "CARD_HOLDER")
+    @NotNull
+    @Pattern(regexp = NameValidator.NAME_REGEX)
     private String cardHolder;
     @Column(name = "EXPIRATION_MONTH")
     private Integer expirationMonth;

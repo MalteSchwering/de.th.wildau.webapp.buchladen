@@ -26,7 +26,7 @@ public class CreditCardValidationCodeValidator implements Validator{
      * Er verbietet alles außer einen gültigen Validation Code bestehend aus 3
      * oder 4 Zahlen.
      */
-    private static final String CVV_REGEX = "^[0-9]{3,4}$";
+    public static final String CVV_REGEX = "^[0-9]{3,4}$";
 
     /**
      * Kompilierte Repräsentation des regulären Ausdrucks.

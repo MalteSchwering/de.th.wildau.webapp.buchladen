@@ -19,7 +19,7 @@ public class CreditCardYearValidator implements Validator{
      * Regulärer Ausdruck vom Kreditkarten Ablauf-Jahr.
      * Er verbietet alles außer ein Jahr.
      */
-    private static final String YEAR_REGEX = "^\\d{4}$";
+    public static final String YEAR_REGEX = "^\\d{4}$";
 
     /**
      * Kompilierte Repräsentation des regulären Ausdrucks.

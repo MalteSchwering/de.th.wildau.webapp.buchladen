@@ -5,6 +5,9 @@
  */
 package de.th.wildau.webapp.buchladen.entities;
 
+import de.th.wildau.webapp.buchladen.validator.BICValidator;
+import de.th.wildau.webapp.buchladen.validator.IBANValidator;
+import de.th.wildau.webapp.buchladen.validator.NameValidator;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -19,6 +22,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -45,12 +50,18 @@ public class PaymentTransferEntity implements Serializable {
     private Integer id;
     @Size(max = 22)
     @Column(name = "IBAN")
+    @NotNull
+    @Pattern(regexp = IBANValidator.IBAN_REGEX)
     private String iban;
     @Size(max = 11)
     @Column(name = "BIC")
+    @NotNull
+    @Pattern(regexp = BICValidator.BIC_REGEX)
     private String bic;
     @Size(max = 255)
     @Column(name = "ACCOUNT_HOLDER")
+    @NotNull
+    @Pattern(regexp = NameValidator.NAME_REGEX)
     private String accountHolder;
     @OneToMany(mappedBy = "fkPaymentTransfer")
     private Collection<BookingOrderEntity> bookingOrderEntityCollection;

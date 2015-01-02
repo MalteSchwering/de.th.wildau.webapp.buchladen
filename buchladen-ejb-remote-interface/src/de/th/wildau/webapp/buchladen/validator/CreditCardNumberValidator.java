@@ -26,7 +26,7 @@ public class CreditCardNumberValidator implements Validator{
      * Er verbietet alles außer eine Kreditkartennummer aus den jeweiligen
      * Unternehmen.
      */
-    private static final String CREDITCARDNUMBER_REGEX = "[3-6]{1}\\d{3}[\\s-]?\\d{4}[\\s-]?\\d{4}[\\s-]?\\d{3,4}";
+    public static final String CREDITCARDNUMBER_REGEX = "[3-6]{1}\\d{3}[\\s-]?\\d{4}[\\s-]?\\d{4}[\\s-]?\\d{3,4}";
 
     /**
      * Kompilierte Repräsentation des regulären Ausdrucks.
