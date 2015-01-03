@@ -25,7 +25,7 @@ public class NameValidator implements Validator {
      * Er verbietet alles außer Groß-und Kleinbuchstaben bzw. die Sonderzeichen
      * für eine Namenstrennung '&-
      */
-    public static final String NAME_REGEX = "[a-zA-Z '&-äüöÄÜÖ]*[A-Za-z äüöÄÜÖ]{0,255}";
+    public static final String NAME_REGEX = "[a-zA-Z '&-äüöÄÜÖß]*[A-Za-z äüöÄÜÖß]{0,255}";
 
     /**
      * Nachricht die bei einem invaliden Wert angezeigt wird.

@@ -19,7 +19,7 @@ public class StreetNameValidator implements Validator{
      * Regulärer Ausdruck vom Straßennamen.
      * Er verbietet alles außer Groß- und Kleinbuchstaben.
      */
-    private static final String STREETNAME_REGEX = "[\\d\\w\\s-.]{0,255}";
+    private static final String STREETNAME_REGEX = "[\\d\\w\\s-.ßäüöÄÜÖ]{0,255}";
 
     /**
      * Kompilierte Repräsentation des regulären Ausdrucks.
