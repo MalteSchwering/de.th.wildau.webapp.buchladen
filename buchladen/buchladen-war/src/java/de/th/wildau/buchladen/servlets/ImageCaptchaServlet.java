@@ -16,7 +16,7 @@ import javax.imageio.ImageIO;
 /**
  * @author Jan Gabler
  * @author Malte Schwering
- * @version 0.1
+ * @version 0.3
  */
 public class ImageCaptchaServlet extends HttpServlet {
 

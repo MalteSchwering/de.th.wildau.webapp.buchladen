@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.th.wildau.webapp.buchladen.validator;
 
 import de.th.wildau.webapp.buchladen.facades.RegisteredUserEntityFacadeRemote;
@@ -20,7 +15,7 @@ import javax.naming.NamingException;
 /**
  * @author Jan Gabler
  * @author Malte Schwering
- * @version 0.1
+ * @version 0.3
  */
 public class EmailAddressDuplicateValidator implements Validator {
     

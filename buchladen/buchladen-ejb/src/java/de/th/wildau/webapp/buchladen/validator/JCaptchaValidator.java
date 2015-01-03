@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 /**
  * @author Jan Gabler
  * @author Malte Schwering
- * @version 0.1
+ * @version 0.3
  */
 public class JCaptchaValidator implements Validator {
 

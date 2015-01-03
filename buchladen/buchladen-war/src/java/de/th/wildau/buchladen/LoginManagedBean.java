@@ -8,12 +8,11 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  * @author Jan Gabler
  * @author Malte Schwering
- * @version 0.1
+ * @version 0.3
  */
 public class LoginManagedBean implements Serializable {
     

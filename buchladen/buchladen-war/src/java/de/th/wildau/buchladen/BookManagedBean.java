@@ -4,28 +4,36 @@ import de.th.wildau.webapp.buchladen.entities.BookEntity;
 import de.th.wildau.webapp.buchladen.facades.BookEntityFacadeRemote;
 import java.io.IOException;
 import java.io.Serializable;
-import java.lang.ProcessBuilder.Redirect;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 /**
  * @author Jan Gabler
  * @author Malte Schwering
- * @version 0.1
+ * @version 0.3
  */
 public class BookManagedBean implements Serializable {
     
+    /**
+     * ID des Buches
+     */
     private int id;
     
+    /**
+     * Setzt die ID.
+     * @param idValue ID des Buches
+     */
     public void setId(int idValue){
         this.id = idValue;
     }
     
+    /**
+     * Liefert die ID zurück.
+     * @return ID des Buches
+     */
     public int getId(){
         return this.id;
     }
