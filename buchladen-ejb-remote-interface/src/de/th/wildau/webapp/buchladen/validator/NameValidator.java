@@ -13,15 +13,24 @@ import javax.faces.validator.ValidatorException;
  * @author Malte Schwering
  * @version 0.1
  */
-public class PasswordValidator implements Validator {
+public class NameValidator implements Validator {
 
     /**
-     * Regulärer Ausdruck vom Passwort.
-     * Er verbietet alles außer ein Passwort aus mindestens 8 Buchstaben,
-     * bestehend aus Großbuchstaben, Kleinbuchstaben, Zahlen und mindestens 
-     * ein Sonderzeichen, wie zum Beispiel @#$%
+     * Maximale Länge von Namen.
      */
-    private static final String PASSWORD_REGEX = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20})";
+    private int maxLength = 255;
+
+    /**
+     * Regulärer Ausdruck vom Namen.
+     * Er verbietet alles außer Groß-und Kleinbuchstaben bzw. die Sonderzeichen
+     * für eine Namenstrennung '&-
+     */
+    public static final String NAME_REGEX = "[a-zA-Z '&-äüöÄÜÖ]*[A-Za-z äüöÄÜÖ]{0,255}";
+
+    /**
+     * Nachricht die bei einem invaliden Wert angezeigt wird.
+     */
+    private String message = "";
 
     /**
      * Kompilierte Repräsentation des regulären Ausdrucks.
@@ -36,8 +45,8 @@ public class PasswordValidator implements Validator {
     /**
      * Konstruktor der den regulären Ausdruck kompiliert.
      */
-    public PasswordValidator() {
-        pattern = Pattern.compile(PASSWORD_REGEX);
+    public NameValidator() {
+        pattern = Pattern.compile(NAME_REGEX);
     }
 
     /**
@@ -51,7 +60,13 @@ public class PasswordValidator implements Validator {
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         matcher = pattern.matcher(value.toString());
         if(!matcher.matches()) {
-            FacesMessage facesMessage = new FacesMessage(component.getClientId());
+            message += "Wert beinhaltet ungültige Zeichen, es sind nur Groß-/Kleinbuchstaben, Bindestriche und Leerzeichen erlaubt";
+        }
+        if(value.toString().length() > maxLength) {
+            message += ", Wert ist zu lang";
+        }
+        if(!message.isEmpty()) {
+            FacesMessage facesMessage = new FacesMessage(component.getClientId() + ": Überprüfungsfehler: " + message);
             throw new ValidatorException(facesMessage);
         }
     }

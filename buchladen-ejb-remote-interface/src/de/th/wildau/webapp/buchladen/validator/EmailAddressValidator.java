@@ -13,13 +13,13 @@ import javax.faces.validator.ValidatorException;
  * @author Malte Schwering
  * @version 0.1
  */
-public class CreditCardMonthValidator implements Validator{
-    
+public class EmailAddressValidator implements Validator {
+        
     /**
-     * Regulärer Ausdruck vom Kreditkarten Ablauf-Monat.
-     * Er verbietet alles außer einen Monat.
+     * Regulärer Ausdruck der E-Mail Adresse.
+     * Er verbietet alles außer einer normalen E-Mail-Adresse.
      */
-    private static final String MONTH_REGEX = "^([1-9]|[0-1][0-2])$";
+    public static final String EMAIL_ADDRESS_REGEX = "[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})";
 
     /**
      * Kompilierte Repräsentation des regulären Ausdrucks.
@@ -27,10 +27,15 @@ public class CreditCardMonthValidator implements Validator{
     private final Pattern pattern;
 
     /**
+     * Match Engine.
+     */
+    private Matcher matcher;
+
+    /**
      * Konstruktor der den regulären Ausdruck kompiliert.
      */
-    public CreditCardMonthValidator() {
-        pattern = Pattern.compile(MONTH_REGEX);
+    public EmailAddressValidator() {
+        pattern = Pattern.compile(EMAIL_ADDRESS_REGEX);
     }
 
     /**
@@ -42,12 +47,16 @@ public class CreditCardMonthValidator implements Validator{
      */
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-        Matcher matcher = pattern.matcher(value.toString());
+        matcher = pattern.matcher(value.toString());
         if(!matcher.matches()) {
+            FacesMessage facesMessage = new FacesMessage(component.getClientId());
+            throw new ValidatorException(facesMessage);
+        }
+        
+        if(value.toString().length() > 250) {
             FacesMessage facesMessage = new FacesMessage(component.getClientId());
             throw new ValidatorException(facesMessage);
         }
     }
     
 }
-

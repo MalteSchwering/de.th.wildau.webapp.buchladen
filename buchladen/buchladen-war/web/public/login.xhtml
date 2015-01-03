@@ -17,10 +17,15 @@
                 </h:inputText>
                 <h:message for="username" errorClass="errorMsg"></h:message>
                 <h:outputLabel for="password">Passwort: </h:outputLabel>
-                <h:inputSecret id="password" value="#{loginManagedBean.password}"></h:inputSecret>
+                <h:inputSecret id="password" value="#{loginManagedBean.password}" validatorMessage="Passwort entspricht nicht den min. Anforderungen.">
+                    <f:validateRequired></f:validateRequired>
+                    <f:validator validatorId="PasswordValidator"></f:validator>
+                </h:inputSecret>
+                <h:message for="password" errorClass="errorMsg"></h:message>
                 <h:commandButton value="Anmelden" action="#{loginManagedBean.login()}"></h:commandButton>
             </h:panelGrid>
         </h:form>
+        <h:messages class="errorMsg"></h:messages>
     </ui:define>
 
 </ui:composition>

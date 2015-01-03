@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package de.th.wildau.webapp.buchladen.validator;
 
 import java.util.regex.Matcher;
@@ -9,28 +14,19 @@ import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
 /**
+ *
  * @author Jan Gabler
  * @author Malte Schwering
  * @version 0.1
  */
-public class NameValidator implements Validator {
+public class CreditCardValidationCodeValidator implements Validator{
 
     /**
-     * Maximale Länge von Namen.
+     * Regulärer Ausdruck vom CVV.
+     * Er verbietet alles außer einen gültigen Validation Code bestehend aus 3
+     * oder 4 Zahlen.
      */
-    private int maxLength = 255;
-
-    /**
-     * Regulärer Ausdruck vom Namen.
-     * Er verbietet alles außer Groß-und Kleinbuchstaben bzw. die Sonderzeichen
-     * für eine Namenstrennung '&-
-     */
-    private static final String NAME_REGEX = "[a-zA-Z '&-äüöÄÜÖ]*[A-Za-z äüöÄÜÖ]{0,255}";
-
-    /**
-     * Nachricht die bei einem invaliden Wert angezeigt wird.
-     */
-    private String message = "";
+    public static final String CVV_REGEX = "^[0-9]{3,4}$";
 
     /**
      * Kompilierte Repräsentation des regulären Ausdrucks.
@@ -45,8 +41,8 @@ public class NameValidator implements Validator {
     /**
      * Konstruktor der den regulären Ausdruck kompiliert.
      */
-    public NameValidator() {
-        pattern = Pattern.compile(NAME_REGEX);
+    public CreditCardValidationCodeValidator() {
+        pattern = Pattern.compile(CVV_REGEX);
     }
 
     /**
@@ -60,15 +56,10 @@ public class NameValidator implements Validator {
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         matcher = pattern.matcher(value.toString());
         if(!matcher.matches()) {
-            message += "Wert beinhaltet ungültige Zeichen, es sind nur Groß-/Kleinbuchstaben, Bindestriche und Leerzeichen erlaubt";
-        }
-        if(value.toString().length() > maxLength) {
-            message += ", Wert ist zu lang";
-        }
-        if(!message.isEmpty()) {
-            FacesMessage facesMessage = new FacesMessage(component.getClientId() + ": Überprüfungsfehler: " + message);
+            FacesMessage facesMessage = new FacesMessage(component.getClientId());
             throw new ValidatorException(facesMessage);
         }
     }
     
 }
+

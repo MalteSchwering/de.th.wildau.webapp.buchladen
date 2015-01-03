@@ -13,29 +13,24 @@ import javax.faces.validator.ValidatorException;
  * @author Malte Schwering
  * @version 0.1
  */
-public class ZipCodeValidator implements Validator {
-
+public class CreditCardYearValidator implements Validator{
+    
     /**
-     * Regulärer Ausdruck der Postleitzahl.
-     * Er verbietet alles außer eine Eingabe aus 0 bzw. maximal 5 Zahlen.
+     * Regulärer Ausdruck vom Kreditkarten Ablauf-Jahr.
+     * Er verbietet alles außer ein Jahr.
      */
-    private static final String ZIPCODE_REGEX = "\\d{0,5}";
+    public static final String YEAR_REGEX = "^\\d{4}$";
 
     /**
      * Kompilierte Repräsentation des regulären Ausdrucks.
      */
-    private Pattern pattern;
-
-    /**
-     * Match Engine.
-     */
-    private Matcher matcher;
+    private final Pattern pattern;
 
     /**
      * Konstruktor der den regulären Ausdruck kompiliert.
      */
-    public ZipCodeValidator() {
-        pattern = Pattern.compile(ZIPCODE_REGEX);
+    public CreditCardYearValidator() {
+        pattern = Pattern.compile(YEAR_REGEX);
     }
 
     /**
@@ -47,7 +42,7 @@ public class ZipCodeValidator implements Validator {
      */
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-        matcher = pattern.matcher(value.toString());
+        Matcher matcher = pattern.matcher(value.toString());
         if(!matcher.matches()) {
             FacesMessage facesMessage = new FacesMessage(component.getClientId());
             throw new ValidatorException(facesMessage);
@@ -55,3 +50,4 @@ public class ZipCodeValidator implements Validator {
     }
     
 }
+

@@ -13,29 +13,24 @@ import javax.faces.validator.ValidatorException;
  * @author Malte Schwering
  * @version 0.1
  */
-public class BICValidator implements Validator{
+public class CreditCardMonthValidator implements Validator{
     
-/**
-     * Regulärer Ausdruck der BIC.
-     * Er verbietet alles außer ein regelkonformes BIC.
+    /**
+     * Regulärer Ausdruck vom Kreditkarten Ablauf-Monat.
+     * Er verbietet alles außer einen Monat.
      */
-    private static final String BIC_REGEX = "([a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?)";
+    public static final String MONTH_REGEX = "^([1-9]|[0-1][0-2])$";
 
     /**
      * Kompilierte Repräsentation des regulären Ausdrucks.
      */
-    private Pattern pattern;
-
-    /**
-     * Match Engine.
-     */
-    private Matcher matcher;
+    private final Pattern pattern;
 
     /**
      * Konstruktor der den regulären Ausdruck kompiliert.
      */
-    public BICValidator() {
-        pattern = Pattern.compile(BIC_REGEX);
+    public CreditCardMonthValidator() {
+        pattern = Pattern.compile(MONTH_REGEX);
     }
 
     /**
@@ -47,7 +42,7 @@ public class BICValidator implements Validator{
      */
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-        matcher = pattern.matcher(value.toString());
+        Matcher matcher = pattern.matcher(value.toString());
         if(!matcher.matches()) {
             FacesMessage facesMessage = new FacesMessage(component.getClientId());
             throw new ValidatorException(facesMessage);

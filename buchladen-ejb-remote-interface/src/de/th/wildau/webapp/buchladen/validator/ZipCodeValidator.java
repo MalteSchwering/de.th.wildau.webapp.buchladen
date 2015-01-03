@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.th.wildau.webapp.buchladen.validator;
 
 import java.util.regex.Matcher;
@@ -14,19 +9,17 @@ import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
 /**
- *
  * @author Jan Gabler
  * @author Malte Schwering
  * @version 0.1
  */
-public class CreditCardValidationCodeValidator implements Validator{
+public class ZipCodeValidator implements Validator {
 
     /**
-     * Regulärer Ausdruck vom CVV.
-     * Er verbietet alles außer einen gültigen Validation Code bestehend aus 3
-     * oder 4 Zahlen.
+     * Regulärer Ausdruck der Postleitzahl.
+     * Er verbietet alles außer eine Eingabe aus 0 bzw. maximal 5 Zahlen.
      */
-    private static final String CVV_REGEX = "^[0-9]{3,4}$";
+    public static final String ZIPCODE_REGEX = "\\d{0,5}";
 
     /**
      * Kompilierte Repräsentation des regulären Ausdrucks.
@@ -41,8 +34,8 @@ public class CreditCardValidationCodeValidator implements Validator{
     /**
      * Konstruktor der den regulären Ausdruck kompiliert.
      */
-    public CreditCardValidationCodeValidator() {
-        pattern = Pattern.compile(CVV_REGEX);
+    public ZipCodeValidator() {
+        pattern = Pattern.compile(ZIPCODE_REGEX);
     }
 
     /**
@@ -62,4 +55,3 @@ public class CreditCardValidationCodeValidator implements Validator{
     }
     
 }
-
