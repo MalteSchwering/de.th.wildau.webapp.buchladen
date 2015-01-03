@@ -19,6 +19,16 @@ import javax.faces.context.FacesContext;
  * @version 0.1
  */
 public class BookManagedBean implements Serializable {
+    
+    private int id;
+    
+    public void setId(int idValue){
+        this.id = idValue;
+    }
+    
+    public int getId(){
+        return this.id;
+    }
 
     /**
      * Enterprise Java Bean bookEntityFacade mit einem Remote Interface.
@@ -39,18 +49,7 @@ public class BookManagedBean implements Serializable {
      * @return BookEntity
      */
     public BookEntity getBookEntity() {
-        return bookEntityFacade.find(this.getId());
-    }
-
-    /**
-     * Liefert den Parameter 'id' des GET-Request zurück.
-     * @return GET-Request Parameter 'id'
-     */
-    public int getId() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        ExternalContext extContext = context.getExternalContext();
-        Map<String, String> params = extContext.getRequestParameterMap();
-        return Integer.parseInt(params.get("id"));
+        return bookEntityFacade.find(this.id);
     }
     
     /**
@@ -79,5 +78,12 @@ public class BookManagedBean implements Serializable {
         }
         
     }
-
+    
+    /**
+     *  Wird beim öffnen der Detail-Page aufgerufen
+     */
+    public void initDetailPage(){
+        System.out.println("BookManagedBean id is: "+this.id);
+        
+    }
 }
