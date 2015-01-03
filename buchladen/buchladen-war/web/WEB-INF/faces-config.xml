@@ -111,7 +111,7 @@
         <description></description>
         <display-name>BookIdValidator</display-name>
         <validator-id>BookIdValidator</validator-id>
-        <validator-class>de.th.wildau.webapp.buchladen.validator.BookIdValidatorValidator</validator-class>
+        <validator-class>de.th.wildau.webapp.buchladen.validator.BookIdValidator</validator-class>
     </validator>
     <validator>
         <description></description>
