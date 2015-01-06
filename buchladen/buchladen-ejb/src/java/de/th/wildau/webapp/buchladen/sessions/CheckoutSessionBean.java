@@ -17,6 +17,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
+import javax.ejb.PostActivate;
 import javax.ejb.Stateless;
 import javax.faces.context.FacesContext;
 
@@ -73,8 +74,7 @@ public class CheckoutSessionBean implements CheckoutSessionBeanRemote {
     /**
      * Initialisiert die Entität des registrierten Benutzers.
      */
-    @PostConstruct
-    public void init() {
+    public void initUser() {
         String username = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
         this.registeredUserEntity = this.registeredUserEntityFacade.findByEmailAddress(username);
     }
@@ -133,6 +133,7 @@ public class CheckoutSessionBean implements CheckoutSessionBeanRemote {
      */
     @Override
     public RegisteredUserEntity getRegisteredUserEntity() {
+        this.initUser();
         return registeredUserEntity;
     }
     
