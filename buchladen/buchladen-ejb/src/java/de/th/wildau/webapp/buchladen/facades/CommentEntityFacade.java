@@ -14,7 +14,7 @@ import javax.persistence.PersistenceContext;
 /**
  * @author Jan Gabler
  * @author Malte Schwering
- * @version 0.1
+ * @version 0.3
  */
 @Stateless
 public class CommentEntityFacade extends AbstractFacade<CommentEntity> implements de.th.wildau.webapp.buchladen.facades.CommentEntityFacadeRemote {

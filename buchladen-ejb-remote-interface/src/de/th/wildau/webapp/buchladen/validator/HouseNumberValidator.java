@@ -11,27 +11,16 @@ import javax.faces.validator.ValidatorException;
 /**
  * @author Jan Gabler
  * @author Malte Schwering
- * @version 0.1
+ * @version 0.3
  */
-public class NameValidator implements Validator {
+public class HouseNumberValidator implements Validator {
 
     /**
-     * Maximale Länge von Namen.
+     * Regulärer Ausdruck der Hausnummer.
+     * Er verbietet alles außer 0-4 Zahlen mit einem nachgestellten Buchstaben.
      */
-    private int maxLength = 255;
-
-    /**
-     * Regulärer Ausdruck vom Namen.
-     * Er verbietet alles außer Groß-und Kleinbuchstaben bzw. die Sonderzeichen
-     * für eine Namenstrennung '&-
-     */
-    private static final String NAME_REGEX = "[a-zA-Z '&-äüöÄÜÖ]*[A-Za-z äüöÄÜÖ]{0,255}";
-
-    /**
-     * Nachricht die bei einem invaliden Wert angezeigt wird.
-     */
-    private String message = "";
-
+    public static final String HOUSENUMBER_REGEX = "\\d{0,4}[a-zA-Z]{0,1}";
+    
     /**
      * Kompilierte Repräsentation des regulären Ausdrucks.
      */
@@ -45,8 +34,8 @@ public class NameValidator implements Validator {
     /**
      * Konstruktor der den regulären Ausdruck kompiliert.
      */
-    public NameValidator() {
-        pattern = Pattern.compile(NAME_REGEX);
+    public HouseNumberValidator() {
+        pattern = Pattern.compile(HOUSENUMBER_REGEX);
     }
 
     /**
@@ -60,13 +49,7 @@ public class NameValidator implements Validator {
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         matcher = pattern.matcher(value.toString());
         if(!matcher.matches()) {
-            message += "Wert beinhaltet ungültige Zeichen, es sind nur Groß-/Kleinbuchstaben, Bindestriche und Leerzeichen erlaubt";
-        }
-        if(value.toString().length() > maxLength) {
-            message += ", Wert ist zu lang";
-        }
-        if(!message.isEmpty()) {
-            FacesMessage facesMessage = new FacesMessage(component.getClientId() + ": Überprüfungsfehler: " + message);
+            FacesMessage facesMessage = new FacesMessage(component.getClientId());
             throw new ValidatorException(facesMessage);
         }
     }

@@ -14,7 +14,7 @@ import javax.faces.context.FacesContext;
 /**
  * @author Jan Gabler
  * @author Malte Schwering
- * @version 0.1
+ * @version 0.3
  */
 public class OrdersManagedBean implements Serializable {
     

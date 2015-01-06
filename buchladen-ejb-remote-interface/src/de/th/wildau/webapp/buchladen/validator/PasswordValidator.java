@@ -11,21 +11,22 @@ import javax.faces.validator.ValidatorException;
 /**
  * @author Jan Gabler
  * @author Malte Schwering
- * @version 0.1
+ * @version 0.3
  */
-public class CommentValidator implements Validator {
+public class PasswordValidator implements Validator {
 
     /**
-     * Regulärer Ausdruck vom Kommentar.
-     * Er verbietet alles außer ein Kommentar mit mindestens ein Wort, jedoch
-     * lediglich 250 Zeichen. Sonderzeichen die genutzt werden dürfen sind !.?-,
+     * Regulärer Ausdruck vom Passwort.
+     * Er verbietet alles außer ein Passwort aus mindestens 8 Buchstaben,
+     * bestehend aus Großbuchstaben, Kleinbuchstaben, Zahlen und mindestens 
+     * ein Sonderzeichen, wie zum Beispiel @#$%
      */
-    private static final String COMMENT_REGEX = "[\\d\\w\\säüöÄÜÖ?!,-.]{1,250}";
+    public static final String PASSWORD_REGEX = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20})";
 
     /**
      * Kompilierte Repräsentation des regulären Ausdrucks.
      */
-    private final Pattern pattern;
+    private Pattern pattern;
 
     /**
      * Match Engine.
@@ -35,8 +36,8 @@ public class CommentValidator implements Validator {
     /**
      * Konstruktor der den regulären Ausdruck kompiliert.
      */
-    public CommentValidator() {
-        pattern = Pattern.compile(COMMENT_REGEX);
+    public PasswordValidator() {
+        pattern = Pattern.compile(PASSWORD_REGEX);
     }
 
     /**

@@ -15,6 +15,7 @@
                 <h:inputText id="email_address" value="#{registeredUserManagedBean.emailAddress}" validatorMessage="Bitte &uuml;berpr&uuml;fen Sie ihre E-Mail-Adresse.">
                     <f:validateRequired></f:validateRequired>
                     <f:validator validatorId="EmailAddressValidator"></f:validator>
+                    <f:validator validatorId="EmailAddressDuplicateValidator"></f:validator>
                 </h:inputText>
                 <h:message for="email_address" errorClass="errorMsg"></h:message>
                 
@@ -25,14 +26,16 @@
                 </h:inputSecret>
                 <h:message for="password" errorClass="errorMsg"></h:message>
                 
-                <h:outputLabel value="Vorname: " for="first_name"></h:outputLabel>
-                <h:inputText id="first_name" value="#{registeredUserManagedBean.firstName}" validatorMessage="Es sind unerlaubte Zeichen im Vornamen enthalten. Bitte &uuml;berpr&uuml;fen Sie ihre Eingabe.">
+                <h:outputLabel value="Vorname*: " for="first_name"></h:outputLabel>
+                <h:inputText id="first_name" value="#{registeredUserManagedBean.firstName}" validatorMessage="Bitte &uuml;berpr&uuml;fen Sie ihre Eingabe. Sie haben keinen Vornamen eingegeben oder es sind unerlaubte Zeichen enthalten.">
+                    <f:validateRequired></f:validateRequired>
                     <f:validator validatorId="NameValidator"></f:validator>
                 </h:inputText>
                 <h:message for="first_name" errorClass="errorMsg"></h:message>
                 
-                <h:outputLabel value="Nachname " for="last_name"></h:outputLabel>
-                <h:inputText id="last_name" value="#{registeredUserManagedBean.lastName}" validatorMessage="Es sind unerlaubte Zeichen im Nachnamen enthalten. Bitte &uuml;berpr&uuml;fen Sie ihre Eingabe.">
+                <h:outputLabel value="Nachname*: " for="last_name"></h:outputLabel>
+                <h:inputText id="last_name" value="#{registeredUserManagedBean.lastName}" validatorMessage="Bitte &uuml;berpr&uuml;fen Sie ihre Eingabe. Sie haben keinen Nachnamen eingeben oder es sind unerlaubte Zeichen enthalten.">
+                    <f:validateRequired></f:validateRequired>
                     <f:validator validatorId="NameValidator"></f:validator>
                 </h:inputText>
                 <h:message for="last_name" errorClass="errorMsg"></h:message>

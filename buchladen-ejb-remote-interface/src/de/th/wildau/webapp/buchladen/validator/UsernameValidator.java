@@ -11,20 +11,20 @@ import javax.faces.validator.ValidatorException;
 /**
  * @author Jan Gabler
  * @author Malte Schwering
- * @version 0.1
+ * @version 0.3
  */
-public class BICValidator implements Validator{
+public class UsernameValidator implements Validator {
     
-/**
-     * Regulärer Ausdruck der BIC.
-     * Er verbietet alles außer ein regelkonformes BIC.
+    /**
+     * Regulärer Ausdruck vom Username.
+     * Er verbietet alles außer einer normalen E-Mail-Adresse.
      */
-    private static final String BIC_REGEX = "([a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?)";
+    private static final String USERNAME_REGEX = "[\\w|.|-]*@\\w*\\.[\\w|.]*";
 
     /**
      * Kompilierte Repräsentation des regulären Ausdrucks.
      */
-    private Pattern pattern;
+    private final Pattern pattern;
 
     /**
      * Match Engine.
@@ -34,8 +34,8 @@ public class BICValidator implements Validator{
     /**
      * Konstruktor der den regulären Ausdruck kompiliert.
      */
-    public BICValidator() {
-        pattern = Pattern.compile(BIC_REGEX);
+    public UsernameValidator() {
+        pattern = Pattern.compile(USERNAME_REGEX);
     }
 
     /**
@@ -52,7 +52,11 @@ public class BICValidator implements Validator{
             FacesMessage facesMessage = new FacesMessage(component.getClientId());
             throw new ValidatorException(facesMessage);
         }
+        
+        if(value.toString().length() > 250) {
+            FacesMessage facesMessage = new FacesMessage(component.getClientId());
+            throw new ValidatorException(facesMessage);
+        }
     }
     
 }
-

@@ -11,31 +11,26 @@ import javax.faces.validator.ValidatorException;
 /**
  * @author Jan Gabler
  * @author Malte Schwering
- * @version 0.1
+ * @version 0.3
  */
-public class StreetNameValidator implements Validator{
-
+public class CreditCardYearValidator implements Validator{
+    
     /**
-     * Regulärer Ausdruck vom Straßennamen.
-     * Er verbietet alles außer Groß- und Kleinbuchstaben.
+     * Regulärer Ausdruck vom Kreditkarten Ablauf-Jahr.
+     * Er verbietet alles außer ein Jahr.
      */
-    private static final String STREETNAME_REGEX = "[\\d\\w\\s-.]{0,255}";
+    public static final String YEAR_REGEX = "^\\d{4}$";
 
     /**
      * Kompilierte Repräsentation des regulären Ausdrucks.
      */
-    private Pattern pattern;
-
-    /**
-     * Match Engine.
-     */
-    private Matcher matcher;
+    private final Pattern pattern;
 
     /**
      * Konstruktor der den regulären Ausdruck kompiliert.
      */
-    public StreetNameValidator() {
-        pattern = Pattern.compile(STREETNAME_REGEX);
+    public CreditCardYearValidator() {
+        pattern = Pattern.compile(YEAR_REGEX);
     }
 
     /**
@@ -47,7 +42,7 @@ public class StreetNameValidator implements Validator{
      */
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-        matcher = pattern.matcher(value.toString());
+        Matcher matcher = pattern.matcher(value.toString());
         if(!matcher.matches()) {
             FacesMessage facesMessage = new FacesMessage(component.getClientId());
             throw new ValidatorException(facesMessage);
@@ -55,3 +50,4 @@ public class StreetNameValidator implements Validator{
     }
     
 }
+

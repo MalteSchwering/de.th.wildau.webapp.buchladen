@@ -11,32 +11,26 @@ import javax.faces.validator.ValidatorException;
 /**
  * @author Jan Gabler
  * @author Malte Schwering
- * @version 0.1
+ * @version 0.3
  */
-public class IBANValidator implements Validator{
-
+public class CreditCardMonthValidator implements Validator{
+    
     /**
-     * Regulärer Ausdruck des IBAN.
-     * Er verbietet alles außer eine IBAN-Nummer aus Deutschland und ohne
-     * Leerzeichen. 
+     * Regulärer Ausdruck vom Kreditkarten Ablauf-Monat.
+     * Er verbietet alles außer einen Monat.
      */
-    private static final String IBAN_REGEX = "\\w{2}\\d{2} ?\\d{4} ?\\d{4} ?\\d{4} ?\\d{4} ?\\d{2}";
+    public static final String MONTH_REGEX = "^([1-9]|[0-1][0-2])$";
 
     /**
      * Kompilierte Repräsentation des regulären Ausdrucks.
      */
-    private Pattern pattern;
-
-    /**
-     * Match Engine.
-     */
-    private Matcher matcher;
+    private final Pattern pattern;
 
     /**
      * Konstruktor der den regulären Ausdruck kompiliert.
      */
-    public IBANValidator() {
-        pattern = Pattern.compile(IBAN_REGEX);
+    public CreditCardMonthValidator() {
+        pattern = Pattern.compile(MONTH_REGEX);
     }
 
     /**
@@ -48,7 +42,7 @@ public class IBANValidator implements Validator{
      */
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-        matcher = pattern.matcher(value.toString());
+        Matcher matcher = pattern.matcher(value.toString());
         if(!matcher.matches()) {
             FacesMessage facesMessage = new FacesMessage(component.getClientId());
             throw new ValidatorException(facesMessage);

@@ -10,7 +10,7 @@ import javax.persistence.Query;
 /**
  * @author Jan Gabler
  * @author Malte Schwering
- * @version 0.1
+ * @version 0.3
  */
 @Stateless
 public class UserGroupEntityFacade extends AbstractFacade<UserGroupEntity> implements de.th.wildau.webapp.buchladen.facades.UserGroupEntityFacadeRemote {

@@ -2,9 +2,9 @@ package de.th.wildau.webapp.buchladen.validator;
 
 import de.th.wildau.webapp.buchladen.entities.BookEntity;
 import de.th.wildau.webapp.buchladen.facades.BookEntityFacadeRemote;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.Validator;
@@ -18,7 +18,7 @@ import javax.naming.NamingException;
  * @author Malte Schwering
  * @version 0.3
  */
-public class InventoryValidator implements Validator {
+public class BookIdValidator implements Validator {
     
     /**
      * Enterprise Java Bean bookEntityFacade.
@@ -34,20 +34,17 @@ public class InventoryValidator implements Validator {
      */
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-        int bookEntityId = (int) component.getAttributes().get("bookEntityId");
-        BookEntity bookEntity = this.bookEntityFacade.find(bookEntityId);
-        int bookInventory = bookEntity.getQuantity();
-        int quantityChange = Integer.parseInt(component.getAttributes().get("quantityChange").toString());
-        int quantityFromCart = Integer.parseInt(value.toString()) + quantityChange;
-        
-        if(bookEntity == null) {
-            FacesMessage facesMessage = new FacesMessage(component.getClientId() + ": Überprüfungsfehler: Buch existiert nicht");
-            throw new ValidatorException(facesMessage);
-        }
-        else if(quantityFromCart > bookInventory) {
-            String bookName = "\"" + bookEntity.getTitle() + " von " + bookEntity.getFkAuthorId().getFirstName() + " " + bookEntity.getFkAuthorId().getLastName() + "\"";
-            FacesMessage facesMessage = new FacesMessage("Der Lagerbestand von " + bookName + " ist zu niedrig, es sind max. " + bookInventory + " Bestellungen dieses Exemplars möglich");
-            throw new ValidatorException(facesMessage);
+        if (value != null) {
+            int bookEntityId = (int) value;
+            BookEntity bookEntity = this.bookEntityFacade.find(bookEntityId);
+
+            if (bookEntity == null) {
+                try {
+                    context.getExternalContext().redirect("404.xhtml");
+                } catch (IOException ex) {
+                    Logger.getLogger(BookIdValidator.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
     }
 
@@ -63,6 +60,5 @@ public class InventoryValidator implements Validator {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);
         }
-    }
-    
+    }    
 }

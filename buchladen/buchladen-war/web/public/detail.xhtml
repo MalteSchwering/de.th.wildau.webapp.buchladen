@@ -6,12 +6,17 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-
-    <ui:define name="content" >
-        <h:panelGroup rendered="#{!bookManagedBean.isValid()}">
-            <h2><h:outputText value="Das Buch mit der angegeben ID wurde nicht gefunden!" ></h:outputText></h2>
-        </h:panelGroup>
-        <h:panelGroup rendered="#{bookManagedBean.isValid()}">
+    
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:viewParam name="id" value="#{bookManagedBean.id}" required="#{not facesContext.postback}" requiredMessage="Anfrage konnt nicht bearbeitet werden. Bitte nutzen Sie eine Adresse aus dem Shop-System.">
+                <f:validator validatorId="BookIdValidator"></f:validator>
+            </f:viewParam>
+            <f:viewAction action="#{bookManagedBean.initDetailPage()}" />
+        </f:metadata>
+    </ui:define>
+    
+    <ui:define name="content" >       
             <h2><h:outputText value="#{bookManagedBean.bookEntity.title}"></h:outputText></h2>
             <h3><h:outputText value="von #{bookManagedBean.bookEntity.fkAuthorId.firstName} #{bookManagedBean.bookEntity.fkAuthorId.lastName}"></h:outputText></h3>
             <h:panelGrid columns="1">
@@ -63,7 +68,7 @@
             <p>
                 <h:form rendered="#{request.userPrincipal != null}">
                     <h3><i><h:outputText value="Kommentar (max. #{commentManagedBean.maxLengthOfCommentText} Zeichen)"></h:outputText></i></h3>
-                    <h:outputText id="commentLength" value="#{commentManagedBean.currentLengthOfCommentText}"></h:outputText>
+                        <h:outputText id="commentLength" value="#{commentManagedBean.currentLengthOfCommentText}"></h:outputText>
                     <br></br>
                     <h:inputTextarea id="comment" cols="80" rows="8" value="#{commentManagedBean.commentText}" validatorMessage="Der Kommentar enthält ungültige Zeichen. Bitte korrigieren Sie ihre Eingabe! Erlaubte Sonderzeichen sind: ?!,-.">
                         <f:ajax execute="comment" render="commentLength" event="keydown" listener="#{commentManagedBean.countLengthOfCommentText()}"></f:ajax>
@@ -94,8 +99,7 @@
                         <h:outputText value="#{comment.commentText}"></h:outputText>
                     </h:column>
                 </h:dataTable>
-            </p>
-        </h:panelGroup>
+            </p>      
     </ui:define>
 
 </ui:composition>

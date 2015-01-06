@@ -1,8 +1,5 @@
 package de.th.wildau.webapp.buchladen.validator;
 
-import de.th.wildau.webapp.buchladen.facades.RegisteredUserEntityFacadeRemote;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.faces.application.FacesMessage;
@@ -10,27 +7,19 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 
 /**
  * @author Jan Gabler
  * @author Malte Schwering
- * @version 0.1
+ * @version 0.3
  */
 public class EmailAddressValidator implements Validator {
-    
-    /**
-     * Enterprise Java Bean registeredUserEntityFacade.
-     */
-    RegisteredUserEntityFacadeRemote registeredUserEntityFacade = lookupRegisteredUserEntityFacadeRemote();
-    
+        
     /**
      * Regulärer Ausdruck der E-Mail Adresse.
      * Er verbietet alles außer einer normalen E-Mail-Adresse.
      */
-    private static final String EMAIL_ADDRESS_REGEX = "[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})";
+    public static final String EMAIL_ADDRESS_REGEX = "[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})";
 
     /**
      * Kompilierte Repräsentation des regulären Ausdrucks.
@@ -67,25 +56,6 @@ public class EmailAddressValidator implements Validator {
         if(value.toString().length() > 250) {
             FacesMessage facesMessage = new FacesMessage(component.getClientId());
             throw new ValidatorException(facesMessage);
-        }
-        
-        if(registeredUserEntityFacade.findByEmailAddress(value.toString()) != null) {
-            FacesMessage facesMessage = new FacesMessage(component.getClientId());
-            throw new ValidatorException(facesMessage);
-        }
-    }
-    
-    /**
-     * Liefert die Remote registeredUserEntityFacade zurück.
-     * @return registeredUserEntityFacade
-     */
-    private RegisteredUserEntityFacadeRemote lookupRegisteredUserEntityFacadeRemote() {
-        try {
-            Context c = new InitialContext();
-            return (RegisteredUserEntityFacadeRemote) c.lookup("java:global/buchladen/buchladen-ejb/RegisteredUserEntityFacade!de.th.wildau.webapp.buchladen.facades.RegisteredUserEntityFacadeRemote");
-        } catch (NamingException ne) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
-            throw new RuntimeException(ne);
         }
     }
     

@@ -6,7 +6,7 @@ import com.octo.captcha.service.image.DefaultManageableImageCaptchaService;
 /**
  * @author Jan Gabler
  * @author Malte Schwering
- * @version 0.1
+ * @version 0.3
  */
 public class CaptchaServiceSingleton {
 

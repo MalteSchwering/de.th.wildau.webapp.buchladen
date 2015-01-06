@@ -11,26 +11,31 @@ import javax.faces.validator.ValidatorException;
 /**
  * @author Jan Gabler
  * @author Malte Schwering
- * @version 0.1
+ * @version 0.3
  */
-public class CreditCardMonthValidator implements Validator{
-    
+public class StreetNameValidator implements Validator{
+
     /**
-     * Regulärer Ausdruck vom Kreditkarten Ablauf-Monat.
-     * Er verbietet alles außer einen Monat.
+     * Regulärer Ausdruck vom Straßennamen.
+     * Er verbietet alles außer Groß- und Kleinbuchstaben.
      */
-    private static final String MONTH_REGEX = "^([1-9]|[0-1][0-2])$";
+    private static final String STREETNAME_REGEX = "[\\d\\w\\s-.ßäüöÄÜÖ]{0,255}";
 
     /**
      * Kompilierte Repräsentation des regulären Ausdrucks.
      */
-    private final Pattern pattern;
+    private Pattern pattern;
+
+    /**
+     * Match Engine.
+     */
+    private Matcher matcher;
 
     /**
      * Konstruktor der den regulären Ausdruck kompiliert.
      */
-    public CreditCardMonthValidator() {
-        pattern = Pattern.compile(MONTH_REGEX);
+    public StreetNameValidator() {
+        pattern = Pattern.compile(STREETNAME_REGEX);
     }
 
     /**
@@ -42,7 +47,7 @@ public class CreditCardMonthValidator implements Validator{
      */
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-        Matcher matcher = pattern.matcher(value.toString());
+        matcher = pattern.matcher(value.toString());
         if(!matcher.matches()) {
             FacesMessage facesMessage = new FacesMessage(component.getClientId());
             throw new ValidatorException(facesMessage);
@@ -50,4 +55,3 @@ public class CreditCardMonthValidator implements Validator{
     }
     
 }
-

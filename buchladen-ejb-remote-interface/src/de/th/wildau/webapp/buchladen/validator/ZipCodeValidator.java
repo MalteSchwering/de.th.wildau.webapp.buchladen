@@ -11,20 +11,20 @@ import javax.faces.validator.ValidatorException;
 /**
  * @author Jan Gabler
  * @author Malte Schwering
- * @version 0.1
+ * @version 0.3
  */
-public class UsernameValidator implements Validator {
-    
+public class ZipCodeValidator implements Validator {
+
     /**
-     * Regulärer Ausdruck vom Username.
-     * Er verbietet alles außer einer normalen E-Mail-Adresse.
+     * Regulärer Ausdruck der Postleitzahl.
+     * Er verbietet alles außer eine Eingabe aus 0 bzw. maximal 5 Zahlen.
      */
-    private static final String USERNAME_REGEX = "[\\w|.|-]*@\\w*\\.[\\w|.]*";
+    public static final String ZIPCODE_REGEX = "\\d{0,5}";
 
     /**
      * Kompilierte Repräsentation des regulären Ausdrucks.
      */
-    private final Pattern pattern;
+    private Pattern pattern;
 
     /**
      * Match Engine.
@@ -34,8 +34,8 @@ public class UsernameValidator implements Validator {
     /**
      * Konstruktor der den regulären Ausdruck kompiliert.
      */
-    public UsernameValidator() {
-        pattern = Pattern.compile(USERNAME_REGEX);
+    public ZipCodeValidator() {
+        pattern = Pattern.compile(ZIPCODE_REGEX);
     }
 
     /**
@@ -49,11 +49,6 @@ public class UsernameValidator implements Validator {
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
         matcher = pattern.matcher(value.toString());
         if(!matcher.matches()) {
-            FacesMessage facesMessage = new FacesMessage(component.getClientId());
-            throw new ValidatorException(facesMessage);
-        }
-        
-        if(value.toString().length() > 250) {
             FacesMessage facesMessage = new FacesMessage(component.getClientId());
             throw new ValidatorException(facesMessage);
         }

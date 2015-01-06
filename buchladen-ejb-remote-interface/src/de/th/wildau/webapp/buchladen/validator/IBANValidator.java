@@ -11,26 +11,32 @@ import javax.faces.validator.ValidatorException;
 /**
  * @author Jan Gabler
  * @author Malte Schwering
- * @version 0.1
+ * @version 0.3
  */
-public class CreditCardYearValidator implements Validator{
-    
+public class IBANValidator implements Validator{
+
     /**
-     * Regulärer Ausdruck vom Kreditkarten Ablauf-Jahr.
-     * Er verbietet alles außer ein Jahr.
+     * Regulärer Ausdruck des IBAN.
+     * Er verbietet alles außer eine IBAN-Nummer aus Deutschland und ohne
+     * Leerzeichen. 
      */
-    private static final String YEAR_REGEX = "^\\d{4}$";
+    public static final String IBAN_REGEX = "\\w{2}\\d{2} ?\\d{4} ?\\d{4} ?\\d{4} ?\\d{4} ?\\d{2}";
 
     /**
      * Kompilierte Repräsentation des regulären Ausdrucks.
      */
-    private final Pattern pattern;
+    private Pattern pattern;
+
+    /**
+     * Match Engine.
+     */
+    private Matcher matcher;
 
     /**
      * Konstruktor der den regulären Ausdruck kompiliert.
      */
-    public CreditCardYearValidator() {
-        pattern = Pattern.compile(YEAR_REGEX);
+    public IBANValidator() {
+        pattern = Pattern.compile(IBAN_REGEX);
     }
 
     /**
@@ -42,7 +48,7 @@ public class CreditCardYearValidator implements Validator{
      */
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-        Matcher matcher = pattern.matcher(value.toString());
+        matcher = pattern.matcher(value.toString());
         if(!matcher.matches()) {
             FacesMessage facesMessage = new FacesMessage(component.getClientId());
             throw new ValidatorException(facesMessage);

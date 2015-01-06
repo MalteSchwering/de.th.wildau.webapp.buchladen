@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 /**
  * @author Jan Gabler
  * @author Malte Schwering
- * @version 0.1
+ * @version 0.3
  * @param <T> Entitäten Generic
  */
 public abstract class AbstractFacade<T> {

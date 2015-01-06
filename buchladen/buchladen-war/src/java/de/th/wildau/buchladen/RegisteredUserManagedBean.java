@@ -11,7 +11,7 @@ import javax.ejb.EJB;
 /**
  * @author Jan Gabler
  * @author Malte Schwering
- * @version 0.1
+ * @version 0.3
  */
 public class RegisteredUserManagedBean implements Serializable {
     
