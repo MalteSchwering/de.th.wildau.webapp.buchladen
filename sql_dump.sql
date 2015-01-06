@@ -110,7 +110,8 @@ left join user_group ug on rugm.fk_user_group_id = ug.id;
 insert into registered_user (email_address, password, salt, first_name, last_name, street, house_number, zip_code, city) values
 ('max.mustermann@beispiel.de', 'b6ec4a0c92fc390b8bb30be6efd16b94dd75fe4fd76bd89c8c44daf85295db98', 'Fy73', 'Max', 'Mustermann', 'Abc Str.', '1', '12345', 'Berlin'),
 ('jan.gabler@beispiel.de', 'c7490aebff95f18e81a97aa84072f8ce714efa893c6f30dee3eac4f560dbe681', 'Bx8N', 'Jan', 'Gabler', 'Def Str.', '2', '12345', 'Berlin'),
-('malte.schwering@beispiel.de', 'f178366558ec65e83430a2bdaf5ef0ecad51493d10427234ece1f404e632d223', '9Lr2', 'Malte', 'Schwering', 'Ghi Str.', '3', '12345', 'Berlin');
+('malte.schwering@beispiel.de', 'f178366558ec65e83430a2bdaf5ef0ecad51493d10427234ece1f404e632d223', '9Lr2', 'Malte', 'Schwering', 'Ghi Str.', '3', '12345', 'Berlin'),
+('christopher.schulze@beispiel.de', '6e94b4ca24b455bab76f036e11485a67d842ffbf7da4a436a836f09dbc7f33b6', 'kBSL', 'Christopher', 'Schulze', 'Jkl Str.', '4', '12345', 'Zossen');
 insert into user_group (group_name) values
 ('admin'),
 ('user');
